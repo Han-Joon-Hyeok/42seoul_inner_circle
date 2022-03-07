@@ -6,13 +6,13 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:50:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/07 17:55:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/07 23:55:52 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 static int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	else
 		return (0);
@@ -20,7 +20,7 @@ static int	ft_isdigit(int c)
 
 static int	ft_isupper(int c)
 {
-	if (c >= 65 && c <= 90)
+	if (c >= 'A' && c <= 'Z')
 		return (1);
 	else
 		return (0);
@@ -28,7 +28,7 @@ static int	ft_isupper(int c)
 
 static int	ft_islower(int c)
 {
-	if (c >= 97 && c <= 122)
+	if (c >= 'a' && c <= 'z')
 		return (1);
 	else
 		return (0);
