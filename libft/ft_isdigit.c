@@ -6,13 +6,13 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:24:24 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/07 17:42:56 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/07 23:51:17 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	else
 		return (0);
