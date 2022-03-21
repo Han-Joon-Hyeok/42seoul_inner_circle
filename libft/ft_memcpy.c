@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:57:24 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 15:16:21 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/21 15:41:07 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
 	size_t				i;
 	unsigned char		*dest_temp;
 	const unsigned char *src_temp;
-	
+
+	if (n == 0 || dest == src)
+		return (dest);
 	i = 0;
 	dest_temp = (unsigned char *)dest;
 	src_temp = (unsigned char *)src;
