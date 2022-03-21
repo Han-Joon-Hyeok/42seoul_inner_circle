@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:50:59 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 13:14:39 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/21 13:46:47 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	*ft_memset(void *ptr, int c, size_t len)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*temp;
 
 	i = 0;
@@ -36,7 +36,6 @@ int	main(void)
 
 	memset(str, -2, sizeof(str));
 	ft_memset(str2, -2, sizeof(str2));
-	
 	for (int i = 0; i < 20; i++)
 	{
 		printf("str: %d\n", *(str + i));
