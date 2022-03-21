@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:23:46 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 13:45:29 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/21 13:50:16 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	ft_bzero(void *dest, size_t n)
 {
 	size_t			i;
-	unsigned char	*temp;;
+	unsigned char	*temp;
 
 	temp = (unsigned char *)dest;
 	i = 0;
