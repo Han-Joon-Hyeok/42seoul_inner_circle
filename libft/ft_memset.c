@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:50:59 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/18 17:25:21 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/21 13:14:39 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@ void	*ft_memset(void *ptr, int c, size_t len)
 
 int	main(void)
 {
-	char	str[20];
-	char	str2[20];
+	int	str[20];
+	int	str2[20];
 
-	char	*strPtr;
-	char	*str2Ptr;
-
-	strPtr = memset(str, 'a', sizeof(str));
-	str2Ptr = ft_memset(str2, 'b', sizeof(str2));
-
-	printf("%s\n", strPtr);
-	printf("%s\n", str2Ptr);
-
+	memset(str, -2, sizeof(str));
+	ft_memset(str2, -2, sizeof(str2));
+	
+	for (int i = 0; i < 20; i++)
+	{
+		printf("str: %d\n", *(str + i));
+		printf("str2: %d\n", *(str2 + i));
+	}
 	return (0);
 }
