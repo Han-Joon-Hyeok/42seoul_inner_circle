@@ -6,69 +6,52 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:11:58 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 18:29:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/22 13:25:10 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-static void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	size_t				i;
 	unsigned char		*dest_temp;
 	const unsigned char	*src_temp;
 
-	if (n == 0 || dest == src)
-		return (dest);
-	if (src == NULL || dest == NULL)
-		return (NULL);
-	i = 0;
-	dest_temp = (unsigned char *)dest;
-	src_temp = (unsigned char *)src;
-	while (i < n)
-	{
-		*(dest_temp + i) = *(src_temp + i);
-		i += 1;
-	}
-	return (dest);
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t len)
-{
-	size_t			i;
-	unsigned char	*copy;
-
 	if (len == 0)
 		return (dest);
-	copy = malloc(sizeof(unsigned char) * len);
-	if (copy == NULL)
-		return (NULL);
-	ft_memcpy(copy, src, len);
-	i = 0;
-	while (i < len)
+	dest_temp = (unsigned char *)dest;
+	src_temp = (unsigned char *)src;
+	if (dest > src)
 	{
-		((unsigned char *)dest)[i] = ((unsigned char *)copy)[i];
-		i += 1;
+		dest_temp += len - 1;
+		src_temp += len - 1;
+		while (len-- > 0)
+			*(dest_temp--) = *(src_temp--);
+	}
+	else
+	{
+		while (len-- > 0)
+			*(dest_temp++) = *(src_temp++);
 	}
 	return (dest);
 }
 
 int	main(void)
 {
-	char	src[4] = "gun";
+	char	src[4] = "abc";
 	char	dest[4];
-	char	src2[4] = "gun";
+	char	src2[4] = "abc";
 	char	dest2[4];
-	int		size = 10;
+	int		size = 2;
 
-	ft_memmove(dest, src, sizeof(char) * size);
+	ft_memmove(src + 1, src, sizeof(char) * size);
 	for (int i = 0; i < 3; i++)
-		printf("ft_memmove: %c\n", *(dest + i));
-	memmove(dest2, src2, sizeof(char) * size);
+		printf("ft_memmove: %c\n", *(src + i));
+	
+	memmove(src2 + 1, src2, sizeof(char) * size);
 	for (int j = 0; j < 3; j++)
-		printf("memmove: %c\n", *(dest2 + j));
+		printf("memmove: %c\n", *(src2 + j));
 	return (0);
 }
