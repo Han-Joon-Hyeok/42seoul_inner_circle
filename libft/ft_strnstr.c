@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:09:42 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/23 17:56:56 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/24 11:44:16 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,46 +27,50 @@ static size_t	ft_strlen(char *src)
 char	*ft_strnstr(const char *big, const char *small, size_t len)
 {
 	size_t	i;
-	size_t	start;
-	size_t	count;
+	size_t	cnt;
 	size_t	small_len;
-	char	*find;
 
-	if (len == 0)
-		return (NULL);
 	small_len = ft_strlen((char *)small);
 	if (small_len == 0)
-		return ((char *)big);
+		return ((char *)(big));
 	i = 0;
-	start = 0;
-	count = 0;
-	find = NULL;
+	cnt = 0;
 	while (i < len)
 	{
-		if ((char *)(big + i) == (char *)(small + i))
+		while (*(big + i + cnt) == *(small + cnt) && *(big + i + cnt) != '\0')
 		{
-			start = i;
-		}
+			if (i + cnt == len)
+				break ;
+			cnt += 1;
+		}	
+		if (cnt == small_len)
+			break ;
 		i += 1;
+		cnt = 0;
 	}
-	if (count == small_len)
-		find = (char *)big;
-	return (find);
+	if (cnt != small_len)
+		return (NULL);
+	return ((char *)(big + i));
 }
 
 int	main(void)
 {
 	const char	*largestring = "Foo Bar Baz";
-	const char	*smallstring = "";
+	const char	*smallstring = "Fo";
 	char	*ptr;
-	size_t		size[8] = {0, 1, 6, 7, 12, 999, 1491212, 123123123};
+	char	*ft_ptr;
+	size_t		size[12] = {0, 1, 2, 3, 4, 5, 6, 7, 12, 999, 1491212, 123123123};
 	size_t		reps = sizeof(size) / sizeof(size_t);
 
-	printf("large: %s, small: %s\n\n", largestring, smallstring);
+	printf("🛠 large: %s, small: %s\n\n", largestring, smallstring);
 	for (size_t i = 0; i < reps; i++)
 	{
-		ptr = strnstr(largestring, smallstring, *(size + i));
+		ptr = strnstr(largestring, smallstring, *(size + i));	
+		ft_ptr = ft_strnstr(largestring, smallstring, *(size + i));
+		printf("✅ strnstr\n");
 		printf("size: %zu, ptr: %p, str: %s\n", *(size + i), ptr, ptr);
+		printf("✅ ft_strnstr\n");
+		printf("size: %zu, ptr: %p, str: %s\n\n", *(size + i), ft_ptr, ft_ptr);
 	}
 	return (0);
 }
