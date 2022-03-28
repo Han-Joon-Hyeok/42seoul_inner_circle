@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 09:31:43 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 09:55:59 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:09:28 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-
-static size_t	ft_strlen(char const *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(src + i) != '\0')
-		i += 1;
-	return (i);
-}
-
-static void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
-{
-	size_t				i;
-	unsigned char		*dest_temp;
-	const unsigned char	*src_temp;
-
-	if (n == 0 || dest == src)
-		return (dest);
-	if (src == NULL || dest == NULL)
-		return (NULL);
-	i = 0;
-	dest_temp = (unsigned char *)dest;
-	src_temp = (unsigned char *)src;
-	while (i < n)
-	{
-		*(dest_temp + i) = *(src_temp + i);
-		i += 1;
-	}
-	return (dest);
-}
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -64,17 +31,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-int	main(void)
-{
-	char	*prefix[] = {"Hello", "", "1234"};
-	char	*suffix[] = {"Wolrd", "", "5678"};
-	int		size = sizeof(prefix) / sizeof(char *);
+// int	main(void)
+// {
+// 	char	*prefix[] = {"Hello", "", "1234"};
+// 	char	*suffix[] = {"Wolrd", "", "5678"};
+// 	int		size = sizeof(prefix) / sizeof(char *);
 
-	for (int i = 0; i < size; i++)
-	{
-		printf("prefix: %s, suffix: %s\n", *(prefix + i), *(suffix + i));
-		printf("ft_strjoin: %s\n\n", ft_strjoin(*(prefix + i), *(suffix + i)));
-	}
+// 	for (int i = 0; i < size; i++)
+// 	{
+// 		printf("prefix: %s, suffix: %s\n", *(prefix + i), *(suffix + i));
+// 		printf("ft_strjoin: %s\n\n", ft_strjoin(*(prefix + i), *(suffix + i)));
+// 	}
 
-	return (0);
-}
+// 	return (0);
+// }
