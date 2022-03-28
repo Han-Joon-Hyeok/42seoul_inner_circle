@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:38:51 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/22 15:55:48 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:10:24 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <string.h>
-
-static size_t	ft_strlen(const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(src + i) != '\0')
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 size_t ft_strlcpy(char * restrict dest, const char * restrict src, size_t destsize)
 {
@@ -41,19 +29,19 @@ size_t ft_strlcpy(char * restrict dest, const char * restrict src, size_t destsi
 	return (src_len);	
 }
 
-int	main(void)
-{
-	char	src[4] = "abc";
-	char	dest[4] = "123";
-	size_t	result;	
+// int	main(void)
+// {
+// 	char	src[4] = "abc";
+// 	char	dest[4] = "123";
+// 	size_t	result;	
 
-	char	*src2 = NULL;
-	char	dest2[4] = "123";
-	size_t	result2;
-	size_t	size = 2;
+// 	char	*src2 = NULL;
+// 	char	dest2[4] = "123";
+// 	size_t	result2;
+// 	size_t	size = 2;
 
-	result = ft_strlcpy(dest, src, size);
-	result2 = strlcpy(dest2, src2, size);
+// 	result = ft_strlcpy(dest, src, size);
+// 	result2 = strlcpy(dest2, src2, size);
 	
-	return (0);
-}
+// 	return (0);
+// }
