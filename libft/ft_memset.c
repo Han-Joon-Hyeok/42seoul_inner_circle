@@ -6,13 +6,11 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:50:59 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 13:46:47 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:07:56 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stddef.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memset(void *ptr, int c, size_t len)
 {
@@ -29,17 +27,17 @@ void	*ft_memset(void *ptr, int c, size_t len)
 	return (temp);
 }
 
-int	main(void)
-{
-	int	str[20];
-	int	str2[20];
+// int	main(void)
+// {
+// 	int	str[20];
+// 	int	str2[20];
 
-	memset(str, -2, sizeof(str));
-	ft_memset(str2, -2, sizeof(str2));
-	for (int i = 0; i < 20; i++)
-	{
-		printf("str: %d\n", *(str + i));
-		printf("str2: %d\n", *(str2 + i));
-	}
-	return (0);
-}
+// 	memset(str, -2, sizeof(str));
+// 	ft_memset(str2, -2, sizeof(str2));
+// 	for (int i = 0; i < 20; i++)
+// 	{
+// 		printf("str: %d\n", *(str + i));
+// 		printf("str2: %d\n", *(str2 + i));
+// 	}
+// 	return (0);
+// }
