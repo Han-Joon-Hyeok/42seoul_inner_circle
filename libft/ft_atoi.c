@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:06:00 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/25 10:25:55 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:54:44 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdio.h>
+#include "libft.h"
 
 static int	is_whitespace(char c)
 {
@@ -70,16 +68,16 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int	main(void)
-{
-	char	src[23][12] = {"-2147483647", "-1000","-12a3b", "-1a2b3", "-100", "-10", "-1", "0", "1", "2", "10", "2147483647", "2147483648", "1a2b3", "12a3b", "123ab", " d_$@#-1123", "\t+ 456", " --+--+456", "\r+-4a56", "\f-45b6", "\v+456", "\r \t \f-456"};
-	size_t	size = sizeof(src) / sizeof(char) / 12;
+// int	main(void)
+// {
+// 	char	src[23][12] = {"-2147483647", "-1000","-12a3b", "-1a2b3", "-100", "-10", "-1", "0", "1", "2", "10", "2147483647", "2147483648", "1a2b3", "12a3b", "123ab", " d_$@#-1123", "\t+ 456", " --+--+456", "\r+-4a56", "\f-45b6", "\v+456", "\r \t \f-456"};
+// 	size_t	size = sizeof(src) / sizeof(char) / 12;
 
-	for (size_t i = 0; i < size; i++)
-	{
-		printf("src    : %s\n", *(src + i));
-		printf("atoi   : %d\n", atoi(*(src + i)));
-		printf("ft_atoi: %d\n\n", ft_atoi(*(src + i)));
-	}
-	return (0);
-}
+// 	for (size_t i = 0; i < size; i++)
+// 	{
+// 		printf("src    : %s\n", *(src + i));
+// 		printf("atoi   : %d\n", atoi(*(src + i)));
+// 		printf("ft_atoi: %d\n\n", ft_atoi(*(src + i)));
+// 	}
+// 	return (0);
+// }
