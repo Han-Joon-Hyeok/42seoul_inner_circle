@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:23:46 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 13:50:16 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:56:23 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void	ft_bzero(void *dest, size_t n)
 {
@@ -27,18 +26,18 @@ void	ft_bzero(void *dest, size_t n)
 	}
 }
 
-int	main(void)
-{
-	char	str[10];
-	char	str2[10];
+// int	main(void)
+// {
+// 	char	str[10];
+// 	char	str2[10];
 
-	ft_bzero(str, 10);
-	bzero(str2, 10);
-	for (int i = 0; i < 5; i++)
-	{
-		printf("ft_bzero: %d \n", *(str + i));
-		printf("bzero: %d \n", *(str2 + i));
-	}
+// 	ft_bzero(str, 10);
+// 	bzero(str2, 10);
+// 	for (int i = 0; i < 5; i++)
+// 	{
+// 		printf("ft_bzero: %d \n", *(str + i));
+// 		printf("bzero: %d \n", *(str2 + i));
+// 	}
 
-	return (0);
-}
+// 	return (0);
+// }
