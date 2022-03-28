@@ -6,13 +6,15 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:33:18 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/08 00:03:31 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:11:33 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const	char *s)
+#include "libft.h"
+
+size_t	ft_strlen(const	char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
