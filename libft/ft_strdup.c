@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:41:10 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/25 13:36:16 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:08:51 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-
-static size_t	ft_strlen(const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(src + i) != '\0')
-		i += 1;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strdup(const char *src)
 {
@@ -46,15 +34,15 @@ char	*ft_strdup(const char *src)
 	return (ptr);
 }
 
-int	main(void)
-{
-	char	*src = " H l e -20 2!21 \t";
-	char	*dest;
-	char	*ft_dest;
+// int	main(void)
+// {
+// 	char	*src = " H l e -20 2!21 \t";
+// 	char	*dest;
+// 	char	*ft_dest;
 
-	dest = strdup(src);
-	ft_dest = ft_strdup(src);
-	printf("dest   : %s\n", dest);
-	printf("ft_dest: %s\n", ft_dest);
-	return (0);
-}
+// 	dest = strdup(src);
+// 	ft_dest = ft_strdup(src);
+// 	printf("dest   : %s\n", dest);
+// 	printf("ft_dest: %s\n", ft_dest);
+// 	return (0);
+// }
