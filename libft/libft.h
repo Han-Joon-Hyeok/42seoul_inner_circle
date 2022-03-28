@@ -1,7 +1,25 @@
-#ifndef LIBFT
-# define LIBFT
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/28 16:59:36 by joonhan           #+#    #+#             */
+/*   Updated: 2022/03/28 16:59:42 by joonhan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBFT_H
+# define LIBFT_H
 # include <stdlib.h>
 # include <stddef.h>
+
+typedef struct		s_list
+{
+	void				*content;
+	struct s_list		*next;
+}
 
 int					ft_atoi(const char *s);
 void				ft_bzero(void *s, size_t n);
