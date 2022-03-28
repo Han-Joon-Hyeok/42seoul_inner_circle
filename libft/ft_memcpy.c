@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:57:24 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/21 15:54:35 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/28 17:06:48 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
 {
@@ -35,17 +33,17 @@ void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
 	return (dest);
 }
 
-int	main(void)
-{
-	char	src[4] = "gun";
-	char	*dest = NULL;
-	char	*src2 = NULL;
-	char	*dest2;
-	size_t	size = 4;
+// int	main(void)
+// {
+// 	char	src[4] = "gun";
+// 	char	*dest = NULL;
+// 	char	*src2 = NULL;
+// 	char	*dest2;
+// 	size_t	size = 4;
 
-	//memcpy(dest, src, size);
-	ft_memcpy(dest2, src2, size);
-	printf("memcpy: %s \n", dest);
-	printf("ft_memcpy: %s \n", dest2);
-	return (0);
-}
+// 	//memcpy(dest, src, size);
+// 	ft_memcpy(dest2, src2, size);
+// 	printf("memcpy: %s \n", dest);
+// 	printf("ft_memcpy: %s \n", dest2);
+// 	return (0);
+// }
