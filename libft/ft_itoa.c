@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:56:13 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/29 10:44:29 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/29 10:48:38 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*ft_itoa(int n)
 	int		size;
 
 	if (n == 0)
-		return (ft_strdup("0"));	
+		return (ft_strdup("0"));
 	sign = 1;
 	if (n < 0)
 		sign = -1;
@@ -121,7 +121,8 @@ int	main(void)
 
 	for (int i = 0; i < size; i++)
 	{
-		printf("src: %d, ft_itoa: %s\n", *(src + i), ft_itoa(*(src + i)));
+		printf("src    : %d\n", *(src + i));
+		printf("ft_itoa: %s\n\n", ft_itoa(*(src + i)));
 	}
 
 	return (0);
