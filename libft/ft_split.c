@@ -6,21 +6,31 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:18:29 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 16:04:33 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/29 09:45:35 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
-#include <stddef.h>
 #include <stdlib.h>
 
-static void	ft_bzero(void *dest, size_t n)
+size_t	ft_strlen(const	char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i += 1;
+	return (i);
+}
+
+void	ft_bzero(void *dest, size_t n)
 {
 	size_t			i;
 	unsigned char	*temp;
 
-	i = 0;
 	temp = (unsigned char *)dest;
+	i = 0;
 	while (i < n)
 	{
 		*(temp + i) = 0;
@@ -41,18 +51,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-static size_t	ft_strlen(const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(src + i) != '\0')
-		i += 1;
-	return (i);
-}
-
-
-
 static size_t	get_word_cnt(const char *src, char d)
 {
 	size_t	i;
@@ -72,9 +70,9 @@ static size_t	get_word_cnt(const char *src, char d)
 			i += 1;
 	}
 	return (cnt);
-
 }
-static void ft_strlcpy(char * restrict dest, const char * restrict src, size_t destsize)
+
+size_t	ft_strlcpy(char * restrict dest, const char * restrict src, size_t destsize)
 {
 	size_t	i;
 	size_t	src_len;
@@ -88,13 +86,12 @@ static void ft_strlcpy(char * restrict dest, const char * restrict src, size_t d
 	}
 	if (i < destsize)
 		*(dest + i) = '\0';
+	return (src_len);
 }
 
 static char	*dup_word(const char *src, char d)
 {
 	size_t	i;
-	size_t	src_len;
-	char	*temp;
 	char	*ptr;
 
 	i = 0;
@@ -121,6 +118,29 @@ static char	**free_all(char **s)
 	return (NULL);
 }
 
+static char	**split_by_char(char const *s, char d, char **arr, size_t cnt)
+{
+	size_t	arr_idx;
+	size_t	s_idx;
+
+	arr_idx = 0;
+	s_idx = 0;
+	while (*(s + s_idx) != '\0' && arr_idx < cnt)
+	{
+		if (*(s + s_idx) != d)
+		{
+			*(arr + arr_idx) = dup_word((s + s_idx), d);
+			if (*(arr + arr_idx++) == NULL)
+				return (free_all(arr));
+			while (*(s + s_idx) != '\0' && *(s + s_idx) != d)
+				s_idx += 1;
+		}
+		else
+			s_idx += 1;
+	}
+	return (arr);
+}
+
 char	**ft_split(char const *s, char d)
 {
 	char	**arr;
@@ -134,21 +154,7 @@ char	**ft_split(char const *s, char d)
 	arr = (char **)ft_calloc(word_cnt + 1, sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
-	arr_idx = 0;
-	s_idx = 0;
-	while (*(s + s_idx) != '\0' && arr_idx < word_cnt)
-	{
-		if (*(s + s_idx) != d)
-		{
-			*(arr + arr_idx) = dup_word(s + s_idx, d);
-			if (*(arr + arr_idx) == NULL)
-				return (free_all(arr));
-			while (*(s + s_idx) != '\0' && *(s + s_idx) != d)
-				s_idx += 1;
-		}
-		else
-			s_idx += 1;
-	}
+	arr = split_by_char(s, d, arr, word_cnt);
 	return (arr);
 }
 
@@ -160,17 +166,23 @@ int	main(void)
 	int		src_reps = sizeof(src) / sizeof(char *);
 	int		deli_reps = sizeof(deli) / sizeof(char);
 	int		i = 0;
-
-	for (int i = 0; i < src_reps; i++)
+	
+	arr = ft_split("Hello World", 'l');
+	for (int i = 0; i < 3; i++)
 	{
-		printf("✅ src: '%s'\n", *(src + i));
-		for (int j = 0; j < deli_reps; j++)
-		{
-			printf("delimiter: '%c'\n", *(deli + j));
-			arr = ft_split(*(src + i), *(deli + j));
-		}
-		printf("\n");
+		printf("%s\n", *(arr + i));
 	}
+
+//	for (int i = 0; i < src_reps; i++)
+//	{
+//		printf("✅ src: '%s'\n", *(src + i));
+//		for (int j = 0; j < deli_reps; j++)
+//		{
+//			printf("delimiter: '%c'\n", *(deli + j));
+//			arr = ft_split(*(src + i), *(deli + j));
+//		}
+//		printf("\n");
+//	}
 	
 	return (0);
 }
