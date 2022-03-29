@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:40:39 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/29 14:47:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:49:10 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	ft_putnbr_fd(int n, int fd)
 
 	str = ft_itoa(n);
 	len = ft_strlen(str);
-	write(fd, str, len);	
+	write(fd, str, len);
 }
