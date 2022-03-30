@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:32:07 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:09:54 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:43:29 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,3 @@ size_t	ft_strlcat(char *dest, const char *src, size_t destsize)
 	*(dest + dest_idx) = '\0';
 	return (dest_len + src_len);
 }
-
-// int	main(void)
-// {
-// 	char	src[4] = "abc";
-// 	char	dest[4] = "12";
-// 	char	src2[4] = "abc";
-// 	char	dest2[4] = "12";
-// 	int		size[5] = {0, 1, 2, 3, 4};
-// 	for (int i = 0; i < 5; i++)
-// 	{
-// 		int	result = strlcat(dest, src, size[i]);
-// 		printf("dest: %s, src: %s, strlcat: %d\n", dest, src, result);
-// 		int	result2 = ft_strlcat(dest2, src2, size[i]);
-// 		printf("dest2: %s, src2: %s, ft_strlcat: %d\n\n", dest2, src2, result2);
-// 	}
-// 	return (0);
-// }

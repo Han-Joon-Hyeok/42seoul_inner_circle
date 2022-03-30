@@ -2,13 +2,13 @@ NAME := libft.a
 
 SRCS := ft_atoi.c \
 		ft_bzero.c \
+		ft_calloc.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
-		ft_itoa.c \ 
-		ft_memccpy.c \
+		ft_itoa.c \
 		ft_memchr.c \
 		ft_memcmp.c \
 		ft_memcpy.c \
@@ -21,6 +21,7 @@ SRCS := ft_atoi.c \
 		ft_split.c \
 		ft_strchr.c \
 		ft_strdup.c \
+		ft_striter.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
@@ -36,15 +37,15 @@ SRCS := ft_atoi.c \
 
 OBJS := $(SRCS:%.c=%.o)
 
-BONUS_SRCS := ft_lstsize.c \
-			  ft_lstadd_back.c \
+BONUS_SRCS := ft_lstadd_back.c \
 			  ft_lstadd_front.c \
 			  ft_lstclear.c \
 			  ft_lstdelone.c \
 			  ft_lstiter.c \
 			  ft_lstlast.c \
 			  ft_lstmap.c \
-			  ft_lstnew.c
+			  ft_lstnew.c \
+			  ft_lstsize.c
 
 BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 

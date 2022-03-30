@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:41:10 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:08:51 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:42:35 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,3 @@ char	*ft_strdup(const char *src)
 	*(ptr + i) = '\0';
 	return (ptr);
 }
-
-// int	main(void)
-// {
-// 	char	*src = " H l e -20 2!21 \t";
-// 	char	*dest;
-// 	char	*ft_dest;
-
-// 	dest = strdup(src);
-// 	ft_dest = ft_strdup(src);
-// 	printf("dest   : %s\n", dest);
-// 	printf("ft_dest: %s\n", ft_dest);
-// 	return (0);
-// }
