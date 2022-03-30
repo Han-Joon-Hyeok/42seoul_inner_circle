@@ -58,7 +58,7 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
-bonus : ${NAME}
+bonus : $(NAME)
 	$(CC) $(CFLAGS) -c $(BONUS_SRCS) -I./
 	ar rc $(NAME) $(BONUS_OBJS)
 
@@ -70,4 +70,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus
