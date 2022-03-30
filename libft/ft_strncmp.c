@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:07:23 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:12:07 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:14:59 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	result = (int)(*(s1_temp + i) - *(s2_temp + i));
 	return (result);
 }
-
-// int	main(void)
-// {
-// 	char	src[4] = "abc";
-// 	char	compare[5][4] = {"abd", "abc", "abb", "ab", "ac"};
-// 	int	size = 4;
-
-// 	for (int i = 0; i < 5; i++)
-// 	{
-// 		printf("src: %s, compare: %s, size: %d, strncmp: %d\n", src, compare[i], size, strncmp(src, compare[i], size));
-// 		printf("src: %s, compare: %s, size: %d, ft_strncmp: %d\n\n", src, compare[i], size, ft_strncmp(src, compare[i], size));
-// 	}
-// 	return (0);
-// }

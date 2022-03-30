@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:54:24 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:14:55 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:11:45 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,3 @@ int	ft_tolower(int c)
 	else
 		return (c);
 }
-
-// int	main(void)
-// {
-// 	int	arr[11] = {-256, -127, -1, 0, 1, 65, 97, 127, 128, 256, 512};
-// 	int	size = 11;
-
-// 	printf("✅ Start\n\n");
-// 	for (int i = 0; i < size; i++)
-// 	{
-// 		printf("char: %c, tolower: %d\n", *(arr + i), tolower(*(arr + i)));
-// 		printf("char: %c, ft_tolower: %d\n\n", *(arr + i), ft_tolower(*(arr + i)));
-// 	}
-// 	return (0);
-// }

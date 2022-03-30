@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:41:51 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:13:49 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:15:13 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_strlcpy(ptr, s1 + front, back - front + 1);
 	return (ptr);
 }
-
-// int	main(void)
-// {
-// 	char	*src[] = {"bbbbaabbbb", "i am good man", "am good ma", "  ABC  ", "bbbb"};
-// 	char	*set[] = {"a", "good", "ma", " ", "b"};
-// 	int		size = sizeof(src) / sizeof(char *);
-
-// 	for (int i = 0; i < size; i++)
-// 	{
-// 		printf("src: '%s', set: '%s'\n", *(src + i), *(set + i));
-// 		printf("ft_strtrim: '%s'\n\n", ft_strtrim(*(src + i), *(set + i)));
-// 	}
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:11:58 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:07:28 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:13:11 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,3 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	}
 	return (dest);
 }
-
-// int	main(void)
-// {
-// 	char	src[4] = "abc";
-// 	char	dest[4];
-// 	char	src2[4] = "abc";
-// 	char	dest2[4];
-// 	int		size = 2;
-
-// 	ft_memmove(src + 1, src, sizeof(char) * size);
-// 	for (int i = 0; i < 3; i++)
-// 		printf("ft_memmove: %c\n", *(src + i));
-	
-// 	memmove(src2 + 1, src2, sizeof(char) * size);
-// 	for (int j = 0; j < 3; j++)
-// 		printf("memmove: %c\n", *(src2 + j));
-// 	return (0);
-// }

@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:56:13 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/29 10:48:38 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:13:03 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-size_t	ft_strlen(const	char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i += 1;
-	return (i);
-}
-
-char	*ft_strdup(const char *src)
-{
-	size_t	i;
-	size_t	src_len;
-	char	*temp;
-	char	*ptr;
-
-	i = 0;
-	src_len = ft_strlen(src);
-	temp = (char *)src;
-	ptr = (char *)malloc((src_len * sizeof(char)) + 1);
-	if (ptr == NULL)
-		return (NULL);
-	while (*(src + i) != '\0')
-	{
-		*(ptr + i) = *(src + i);
-		i += 1;
-	}
-	*(ptr + i) = '\0';
-	return (ptr);
-}
 
 static int	get_size(int n)
 {
@@ -57,33 +23,6 @@ static int	get_size(int n)
 		n /= 10;
 	}
 	return (i);
-}
-
-void	ft_bzero(void *dest, size_t n)
-{
-	size_t			i;
-	unsigned char	*temp;
-
-	temp = (unsigned char *)dest;
-	i = 0;
-	while (i < n)
-	{
-		*(temp + i) = 0;
-		i += 1;
-	}
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	size_t	total;
-	void	*ptr;
-
-	total = count * size;
-	ptr = (void *)malloc(total);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, total);
-	return (ptr);
 }
 
 char	*ft_itoa(int n)
@@ -113,18 +52,3 @@ char	*ft_itoa(int n)
 		*(ptr + size - 1) = '-';
 	return (ptr);
 }
-
-int	main(void)
-{
-	int	src[] = {0, 1, -1, 10, -10, 1234, -1234, 2147483647, -2147483648};
-	int	size = sizeof(src) / sizeof(int);
-
-	for (int i = 0; i < size; i++)
-	{
-		printf("src    : %d\n", *(src + i));
-		printf("ft_itoa: %s\n\n", ft_itoa(*(src + i)));
-	}
-
-	return (0);
-}
-

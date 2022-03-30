@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:17:05 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/28 17:03:29 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:13:08 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,3 @@ void	*ft_memchr(const void *src, int c, size_t n)
 	}
 	return (find);
 }
-
-// int	main(void)
-// {
-// 	char	src[6] = "abcde";
-// 	char	search[6] = "abcdf";
-// 	int		size = 3;
-
-// 	printf("✅ src: %s, size: %d\n\n", src, size);
-// 	for (int i = 0; i < 6; i++)
-// 	{
-// 		printf("i: %d, search: %c, memchr: %p\n", i, *(search + i), memchr(src, *(search + i), size));
-// 		printf("i: %d, search: %c, ft_memchr: %p\n\n", i, *(search + i), ft_memchr(src, *(search + i), size));
-// 	}
-// 	return (0);
-// }
