@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:18:29 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:14:10 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:51:58 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ char	**ft_split(char const *s, char d)
 {
 	char	**arr;
 	size_t	word_cnt;
-	size_t	arr_idx;
-	size_t	s_idx;
 
 	if (!s)
 		return (NULL);
