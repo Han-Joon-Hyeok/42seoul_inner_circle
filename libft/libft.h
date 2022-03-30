@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:59:36 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:50:26 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:55:15 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(char const *s, char d);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *src);
-void		*ft_striteri(char *s, void (*f)(unsigned int, char*));
+void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlcat(char *dest, const char *src, size_t destsize);
 size_t		ft_strlcpy(char *dest, const char *src, size_t destsize);
