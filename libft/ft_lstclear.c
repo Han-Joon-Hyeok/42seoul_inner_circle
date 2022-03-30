@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:36:49 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 13:08:02 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 13:14:34 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		ft_lstdelone(*lst, del);
 		*lst = curr;
 	}
+	*lst = NULL;
 }
