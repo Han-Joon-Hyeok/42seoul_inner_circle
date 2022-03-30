@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:42:34 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:15:23 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:56:22 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
+	src_len = ft_strlen(s);
 	ptr = (char *)malloc(sizeof(char) * (src_len + 1));
 	if (ptr == NULL)
 		return (NULL);
-	src_len = ft_strlen(s);
 	if (start >= src_len)
 	{
 		ptr = ft_strdup("");
