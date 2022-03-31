@@ -6,11 +6,9 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:31:39 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/31 09:28:02 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:52:23 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 static int	ft_islower(int c)
 {
