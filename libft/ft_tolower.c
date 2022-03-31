@@ -6,9 +6,11 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:54:24 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:11:45 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/03/31 09:27:43 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int	ft_isupper(int c)
 {
