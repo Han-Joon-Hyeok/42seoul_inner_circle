@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 13:20:32 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/29 13:34:22 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/01 14:33:24 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
-	size_t			size;
 
 	i = 0;
-	size = ft_strlen(s);
 	while (*(s + i) != '\0')
 	{
 		f(i, (s + i));
