@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:09:42 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/01 11:26:37 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/01 13:10:52 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char	*ft_strnstr(const char *big, const char *small, size_t len)
 		return (NULL);
 	return ((char *)(big + i));
 }
-
