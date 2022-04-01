@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:09:42 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:15:06 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/01 11:26:37 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strnstr(const char *big, const char *small, size_t len)
 		return ((char *)(big));
 	i = 0;
 	cnt = 0;
-	while (i < len)
+	while (i < len && *(big + i) != '\0')
 	{
 		while (*(big + i + cnt) == *(small + cnt) && *(big + i + cnt) != '\0')
 		{
@@ -40,3 +40,4 @@ char	*ft_strnstr(const char *big, const char *small, size_t len)
 		return (NULL);
 	return ((char *)(big + i));
 }
+
