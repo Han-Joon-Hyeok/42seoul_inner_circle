@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:27:51 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/29 14:33:36 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/04 16:21:04 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
 
+	if (s == NULL)
+		return ;
 	len = ft_strlen(s);
 	write(fd, s, len);
 }
