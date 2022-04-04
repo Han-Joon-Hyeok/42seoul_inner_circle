@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:40:39 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/01 14:49:12 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/04 10:12:46 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	ft_putnbr_fd(int n, int fd)
 		divisor = ((n / digits) * sign) + '0';
 		write(fd, &divisor, 1);
 		n %= digits;
-		if (n == 0 && digits >= 10)
-			break ;
 		digits /= 10;
 	}
 	while (digits > 0)
