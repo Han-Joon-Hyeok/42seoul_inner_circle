@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:11:58 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:13:11 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/04 12:57:58 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 
 	if (len == 0)
 		return (dest);
+	if (dest == NULL && src == NULL)
+		return (NULL);
 	dest_temp = (unsigned char *)dest;
 	src_temp = (unsigned char *)src;
 	if (dest > src)
