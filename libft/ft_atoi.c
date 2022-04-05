@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:06:00 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/05 11:18:30 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/05 11:32:55 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	is_numeric(char c)
 	return (0);
 }
 
-static long long calculate_result(const char *str, int i, int sign)
+static long long	calculate_result(const char *str, int i, int sign)
 {
 	long long	result;
 	long long	temp;
