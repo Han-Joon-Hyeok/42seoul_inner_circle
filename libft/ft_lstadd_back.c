@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 09:17:33 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 11:26:12 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/06 14:56:50 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*curr;
+	t_list	*last;
 
 	if (*lst == NULL)
 		*lst = new;
 	else
 	{	
-		curr = *lst;
-		while (curr->next != NULL)
-			curr = curr->next;
-		curr->next = new;
+		last = ft_lstlast(*lst);
+		last->next = new;
 	}
 }
