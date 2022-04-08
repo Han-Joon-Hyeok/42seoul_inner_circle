@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:36:49 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 13:14:34 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/08 09:55:39 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*curr;
+	t_list	*next;
 
 	if (*lst == NULL || del == NULL)
 		return ;
 	while (*lst != NULL)
 	{
-		curr = (*lst)->next;
+		next = (*lst)->next;
 		ft_lstdelone(*lst, del);
-		*lst = curr;
+		*lst = next;
 	}
 	*lst = NULL;
 }
