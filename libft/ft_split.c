@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:18:29 by joonhan           #+#    #+#             */
-/*   Updated: 2022/03/30 15:51:58 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/10 10:52:36 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@ static char	*dup_word(const char *src, char d)
 	i = 0;
 	while (*(src + i) != '\0' && *(src + i) != d)
 		i += 1;
-	ptr = (char *)ft_calloc(i + 1, sizeof(char));
+	ptr = (char *)malloc(sizeof(char) * (i + 1));
 	if (ptr == NULL)
 		return (NULL);
 	ft_strlcpy(ptr, src, i + 1);
 	return (ptr);
 }
 
-static char	**free_all(char **s)
+static char	**free_all(char **arr)
 {
 	size_t	i;
 
 	i = 0;
-	while (*(s + i) != NULL)
+	while (*(arr + i) != NULL)
 	{
-		free(*(s + i));
+		free(*(arr + i));
 		i += 1;
 	}
-	free(s);
+	free(arr);
 	return (NULL);
 }
 
@@ -93,7 +93,7 @@ char	**ft_split(char const *s, char d)
 	if (!s)
 		return (NULL);
 	word_cnt = get_word_cnt(s, d);
-	arr = (char **)ft_calloc(word_cnt + 1, sizeof(char *));
+	arr = (char **)malloc(word_cnt * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
 	arr = split_by_char(s, d, arr, word_cnt);
