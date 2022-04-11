@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 10:55:03 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/08 11:31:28 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:14:12 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	total;
 	void	*ptr;
 
+	if (count == 0 || size == 0)
+		return ((void *)malloc(0));
 	total = count * size;
 	if (total / size != count)
 		return (NULL);
