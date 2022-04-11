@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:41:10 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/01 14:32:42 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/11 13:01:22 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *src)
 
 	i = 0;
 	src_len = ft_strlen(src);
-	ptr = (char *)malloc((src_len * sizeof(char)) + 1);
+	ptr = (char *)malloc((src_len + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	while (*(src + i) != '\0')
