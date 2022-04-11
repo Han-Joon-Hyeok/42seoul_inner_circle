@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:18:29 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/10 10:52:36 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:38:08 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	get_word_cnt(const char *src, char d)
 	return (cnt);
 }
 
-static char	*dup_word(const char *src, char d)
+static char	*duplicate_word(const char *src, char d)
 {
 	size_t	i;
 	char	*ptr;
@@ -41,7 +41,7 @@ static char	*dup_word(const char *src, char d)
 	i = 0;
 	while (*(src + i) != '\0' && *(src + i) != d)
 		i += 1;
-	ptr = (char *)malloc(sizeof(char) * (i + 1));
+	ptr = (char *)malloc((i + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	ft_strlcpy(ptr, src, i + 1);
@@ -73,7 +73,7 @@ static char	**split_by_char(char const *s, char d, char **arr, size_t cnt)
 	{
 		if (*(s + s_idx) != d)
 		{
-			*(arr + arr_idx) = dup_word((s + s_idx), d);
+			*(arr + arr_idx) = duplicate_word((s + s_idx), d);
 			if (*(arr + arr_idx++) == NULL)
 				return (free_all(arr));
 			while (*(s + s_idx) != '\0' && *(s + s_idx) != d)
@@ -93,9 +93,10 @@ char	**ft_split(char const *s, char d)
 	if (!s)
 		return (NULL);
 	word_cnt = get_word_cnt(s, d);
-	arr = (char **)malloc(word_cnt * sizeof(char *));
+	arr = (char **)malloc((word_cnt + 1) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
 	arr = split_by_char(s, d, arr, word_cnt);
+	arr[word_cnt] = 0;
 	return (arr);
 }
