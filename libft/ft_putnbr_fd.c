@@ -6,13 +6,13 @@
 /*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:40:39 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/04 10:12:46 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/04/11 13:55:00 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_sign(int n)
+static int	check_sign(int n)
 {
 	if (n >= 0)
 		return (1);
@@ -20,7 +20,7 @@ int	check_sign(int n)
 		return (-1);
 }
 
-int	get_digits(int n)
+static int	get_digits(int n)
 {
 	int	i;
 
