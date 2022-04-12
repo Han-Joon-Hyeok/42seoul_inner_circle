@@ -49,18 +49,23 @@ BONUS_SRCS := ft_lstadd_back.c \
 
 BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 
+ifdef WITH_BONUS
+	OBJS := $(OBJS) $(BONUS_OBJS)
+else
+	OBJS := $(OBJS)
+endif
+
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 
-$(NAME) : $(OBJS)
-			$(CC) $(CFLAGS) -c $(SRCS) -I./
-			ar rc $(NAME) $(OBJS)
-
 all : $(NAME)
 
-bonus : $(NAME)
-	$(CC) $(CFLAGS) -c $(BONUS_SRCS) -I./
-	ar rc $(NAME) $(BONUS_OBJS)
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) -c $(SRCS) -I./
+	ar rc $(NAME) $(OBJS)
+
+%.o : %.c
+	$(CC) $(CFLAG) -c $< -o $@
 
 clean :
 	rm -f $(OBJS) $(BONUS_OBJS)
@@ -70,4 +75,7 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+bonus : $(NAME)
+	make WITH_BONUS=1 all
+
+.PHONY : all bonus clean fclean re
