@@ -1,18 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
+/*   Updated: 2022/05/14 20:58:38 by joonhan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
+
+t_find	exists_new_line(char *buf)
+{
+	t_find	result;
+
+	result.index = 0;
+	result.found = FALSE;
+	while (buf[result.index] != '\0')
+	{
+		if (buf[result.index] == '\n')
+		{
+			result.found = TRUE;
+			break ;
+		}
+		result.index += 1;
+	}
+	return (result);
+}
 
 char	*get_next_line(int fd)
 {
-	int	len;
-	char	*buf;
+	int				len;
+	char			buf[BUFFER_SIZE + 1];
+	t_find			result;
+	static char		*backup;
 
-	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	if (buf == NULL)
+	if (fd < 0)
 		return (NULL);
 	len = read(fd, buf, BUFFER_SIZE);
 	if (len <= 0)
 		return (NULL);
-	return (buf);
+	result = exists_new_line(buf);
+	backup = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (backup == NULL)
+		return (NULL);
+	backup = buf;
+	if (result.found == FALSE)
+	{
+	}
+	return (backup);
 }
 
 int	main(void)
@@ -30,7 +70,9 @@ int	main(void)
 		buf = get_next_line(fd);
 		if (buf == NULL)
 			result = 0;
-		write(1, buf, BUFFER_SIZE);
+		printf("%s", buf);
 	}
+	close(fd);
+	// system("leaks a.out");
 	return (0);
 }
