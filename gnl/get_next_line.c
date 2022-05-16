@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/05/15 21:57:54 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/05/16 17:48:05 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,32 +87,7 @@ t_find	check_new_line(char *buf)
 	return (result);
 }
 
-char	*split_by_new_line(t_node *p_node, t_find result, char *buf)
-{
-	char	*temp;
-	char	*new_line;
-
-	if (found == TRUE)
-	{
-		temp = malloc(sizeof(char) * i);
-		ft_memcpy(temp, buf, i);
-		new_line = ft_strjoin(p_node->backup, temp);
-		free(temp);
-		free(p_node->backup);
-		p_node->backup = ft_strdup(buf + i + 1);
-		return (new_line);
-	}
-	else
-	{
-		new_line = ft_strdup(p_node->backup);
-		free(p_node->backup);
-		p_node->backup = ft_strjoin(new_line, buf);
-		free(new_line);
-		return (p_node->backup);
-	}
-}
-
-char	*save_backup(t_list *p_list, int fd, char *buf)
+t_node	*lstget_node(t_list *p_list, int fd)
 {
 	t_node	*current_node;
 
@@ -123,20 +98,51 @@ char	*save_backup(t_list *p_list, int fd, char *buf)
 			break ;
 		current_node = current_node->next;
 	}
+	return (current_node);
+}
+
+char	*split_by_newline(t_find result, t_list *p_list, int fd, char *buf)
+{
+	char	*temp;
+	char	*newline;
+	t_node	*current_node;
+
+	current_node = lstget_node(p_list, fd);
+	temp = malloc(sizeof(char) * (result.index + 1));
+	ft_memcpy(temp, buf, result.index);
+	temp[result.index] = '\0';
+	newline = ft_strjoin(current_node->backup, temp);
+	free(temp);
+	free(current_node->backup);
+	current_node->backup = ft_strdup(buf + result.index + 1);
+	return (newline);
+}
+
+void	save_backup(t_find result, t_list *p_list, int fd, char *buf)
+{
+	char	*temp;
+	char	*backup;
+	t_node	*current_node;
+
+	current_node = lstget_node(p_list, fd);
 	if (current_node == NULL)
 		current_node = lstadd_back(&p_list, fd, buf);
 	else
-		current_node->backup = split_by_new_line(current_node, buf);
-	if (current_node == NULL)
-		return (NULL);
-	return (current_node->backup);
+	{
+		temp = malloc(sizeof(char) * result.index);
+		ft_memcpy(temp, buf, result.index);
+		backup = ft_strdup(current_node->backup);
+		free(current_node->backup);
+		current_node->backup = ft_strjoin(backup, temp);
+		free(backup);
+		free(temp);
+	}
 }
 
 char	*get_next_line(int fd)
 {
 	int				len;
 	char			buf[BUFFER_SIZE + 1];
-	char			*backup;
 	t_find			result;
 	static t_list	*p_list;
 
@@ -149,37 +155,32 @@ char	*get_next_line(int fd)
 	{
 		buf[BUFFER_SIZE] = '\0';
 		result = check_new_line(buf);
-		backup = save_backup(p_list, fd, buf);
-		if (backup == NULL)
-			return (NULL);
+		if (result.found == TRUE)
+			return (split_by_newline(result, p_list, fd, buf));
+		save_backup(result, p_list, fd, buf);
 		len = read(fd, buf, BUFFER_SIZE);
 	}
-	if (len <= 0)
-	{
-		free_all(&p_list);
-		return (NULL);
-	}
-	return (backup);
+	free_all(&p_list);
+	return (NULL);
 }
 
 int	main(void)
 {
-	int	fd;
-	int	result;
+	int		fd;
 	char	*buf;
 
 	fd = open("hello", O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	result = 1;
-	while (result != 0)
+	while (TRUE)
 	{
 		buf = get_next_line(fd);
 		if (buf == NULL)
-			result = 0;
+			break ;
 		printf("%s", buf);
+		free(buf);
 	}
 	close(fd);
-	// system("leaks a.out");
+	system("leaks a.out");
 	return (0);
 }
