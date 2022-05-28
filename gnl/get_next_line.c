@@ -24,11 +24,11 @@ char	*split_newline(t_node *p_node, int i)
 	next = (char *)malloc(sizeof(char) * (BUFFER_SIZE - i + 1));
 	if (prev == NULL || next == NULL)
 		return (NULL);
-	prev = ft_memcpy(prev, p_node->buf, i);
+	prev = ft_memcpy(prev, p_node->buf, i + 1);
 	prev[i] = '\0';
 	newline = ft_strjoin(p_node->backup, prev);
 	free(prev);
-	next = ft_memcpy(next, &p_node->buf[i], BUFFER_SIZE - i);
+	next = ft_memcpy(next, &p_node->buf[i + 1], BUFFER_SIZE - i);
 	p_node->backup = next;
 	return (newline);
 }
