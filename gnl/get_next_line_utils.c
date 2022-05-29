@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:47:18 by joonhan           #+#    #+#             */
-/*   Updated: 2022/05/16 20:02:53 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/05/30 00:29:45 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ size_t	ft_strlen(char const *str)
 {
 	size_t	len;
 
-    len = 0;
+	len = 0;
 	if (str == NULL)
 		return (0);
-	else
-        while (str[len] != '\0')
-            len += 1;
+	while (str[len] != '\0')
+		len += 1;
 	return (len);
 }
 
@@ -60,6 +59,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_memcpy(ptr, s1, s1_len);
 	ft_memcpy(ptr + s1_len, s2, s2_len);
 	*(ptr + s1_len + s2_len) = '\0';
-    free(s1);
+	free(s1);
 	return (ptr);
 }
