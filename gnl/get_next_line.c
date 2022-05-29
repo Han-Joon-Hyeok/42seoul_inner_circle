@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/05/29 19:12:12 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/05/30 00:26:01 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,14 @@ char	*split_newline(t_node *p_node, int i)
 char	*check_newline_in_buf(t_node *p_node)
 {
 	int	i;
-	int	found;
 
 	i = 0;
-	found = FALSE;
 	while (p_node->buf[i] != '\0' && i < BUFFER_SIZE)
 	{
 		if (p_node->buf[i] == '\n')
-		{
-			found = TRUE;
-			break ;
-		}
+			return (split_newline(p_node, i));
 		i += 1;
 	}
-	if (found)
-		return (split_newline(p_node, i));
 	p_node->backup = ft_strjoin(p_node->backup, p_node->buf);
 	if (p_node->backup == NULL)
 		return (NULL);
@@ -73,34 +66,31 @@ void	free_all(t_node *p_head)
 	}
 }
 
-t_node	*find_fd(t_node *p_head, int fd)
+t_node	*find_fd(t_node *p_node, int fd)
 {
-	t_node	*find;
-
-	find = p_head;
-	if (find == NULL)
+	if (p_node == NULL)
 	{
-		find = (t_node *)malloc(sizeof(t_node));
-		find->next = NULL;
-		find->backup = NULL;
-		find->fd = fd;
-		return (find);
+		p_node = (t_node *)malloc(sizeof(t_node));
+		p_node->next = NULL;
+		p_node->backup = NULL;
+		p_node->fd = fd;
+		return (p_node);
 	}
-	while (find->next != NULL)
+	while (p_node != NULL)
 	{
-		if (find->fd == fd)
-			return (find);
-		find = find->next;
+		if (p_node->fd == fd)
+			return (p_node);
+		p_node = p_node->next;
 	}
-	if (find->next == NULL)
-		find->next = (t_node *)malloc(sizeof(t_node));
-	if (find->next != NULL)
+	if (p_node->next == NULL)
+		p_node->next = (t_node *)malloc(sizeof(t_node));
+	if (p_node->next != NULL)
 	{
-		find->next->next = NULL;
-		find->next->backup = NULL;
-		find->next->fd = fd;
+		p_node->next->next = NULL;
+		p_node->next->backup = NULL;
+		p_node->next->fd = fd;
 	}
-	return (find->next);
+	return (p_node->next);
 }
 
 char	*get_next_line(int fd)
@@ -109,17 +99,19 @@ char	*get_next_line(int fd)
 	t_node			*p_node;
 	static t_node	*p_head;
 	char			*newline;
-	
+
 	if (p_head == NULL)
 		p_head = find_fd(p_head, fd);
 	p_node = find_fd(p_head, fd);
 	len = read(fd, p_node->buf, BUFFER_SIZE);
-	if (BUFFER_SIZE <= 0 || fd < 0 || p_head == NULL || p_node == NULL || len <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || p_head == NULL || \
+		p_node == NULL || len <= 0)
 	{
 		free_all(p_head);
 		return (NULL);
 	}
-	while (len > 0) {
+	while (len > 0)
+	{
 		newline = check_newline_in_buf(p_node);
 		if (newline != NULL)
 			return (newline);
@@ -144,9 +136,8 @@ int	main(void)
 		if (buf == NULL)
 			break ;
 		printf("%s", buf);
-		free(buf);
 	}
 	close(fd);
-	// system("leaks a.out");
+	system("leaks a.out");
 	return (0);
 }
