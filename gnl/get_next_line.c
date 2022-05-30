@@ -36,7 +36,8 @@ char	*split_newline(t_node *p_node, int i)
 
 char	*check_newline_in_buf(t_node *p_node)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (p_node->buf[i] != '\0' && i < BUFFER_SIZE)
@@ -45,9 +46,16 @@ char	*check_newline_in_buf(t_node *p_node)
 			return (split_newline(p_node, i));
 		i += 1;
 	}
-	p_node->backup = ft_strjoin(p_node->backup, p_node->buf);
-	if (p_node->backup == NULL)
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (temp == NULL)
 		return (NULL);
+	temp = ft_memcpy(temp, p_node->buf, BUFFER_SIZE);
+	temp[BUFFER_SIZE] = '\0';
+	if (p_node->backup == NULL)
+		p_node->backup = ft_strdup(temp);
+	else
+		p_node->backup = ft_strjoin(p_node->backup, temp);
+	free(temp);
 	return (NULL);
 }
 
@@ -60,6 +68,7 @@ void	free_all(t_node *p_head)
 	while (curr != NULL)
 	{
 		next = curr->next;
+		free(curr->newline);
 		free(curr->backup);
 		free(curr);
 		curr = next;
@@ -74,6 +83,7 @@ t_node	*find_fd(t_node *p_node, int fd)
 		p_node->next = NULL;
 		p_node->backup = NULL;
 		p_node->fd = fd;
+		p_node->newline = NULL;
 		return (p_node);
 	}
 	while (p_node != NULL)
@@ -89,6 +99,7 @@ t_node	*find_fd(t_node *p_node, int fd)
 		p_node->next->next = NULL;
 		p_node->next->backup = NULL;
 		p_node->next->fd = fd;
+		p_node->newline = NULL;
 	}
 	return (p_node->next);
 }
@@ -103,9 +114,10 @@ char	*get_next_line(int fd)
 	if (p_head == NULL)
 		p_head = find_fd(p_head, fd);
 	p_node = find_fd(p_head, fd);
+	if (fd < 0 || BUFFER_SIZE <= 0 || p_head == NULL || p_node == NULL)
+		return (NULL);
 	len = read(fd, p_node->buf, BUFFER_SIZE);
-	if (BUFFER_SIZE <= 0 || fd < 0 || p_head == NULL || \
-		p_node == NULL || len <= 0)
+	if (len <= 0)
 	{
 		free_all(p_head);
 		return (NULL);
