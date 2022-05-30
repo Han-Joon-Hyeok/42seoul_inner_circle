@@ -62,3 +62,23 @@ char	*ft_strjoin(char *s1, char *s2)
 	free(s1);
 	return (ptr);
 }
+
+char	*ft_strdup(const char *src)
+{
+	size_t	i;
+	size_t	src_len;
+	char	*ptr;
+
+	i = 0;
+	src_len = ft_strlen(src);
+	ptr = (char *)malloc((src_len + 1) * sizeof(char));
+	if (ptr == NULL)
+		return (NULL);
+	while (*(src + i) != '\0')
+	{
+		*(ptr + i) = *(src + i);
+		i += 1;
+	}
+	*(ptr + i) = '\0';
+	return (ptr);
+}
