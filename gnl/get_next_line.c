@@ -25,7 +25,7 @@ char	*split_newline(t_node *p_node, int i)
 		return (NULL);
 	prev = ft_memcpy(prev, p_node->buf, i + 1);
 	prev[i + 1] = '\0';
-	p_node->newline = ft_strjoin(p_node->backup, prev);
+	p_node->newline = ft_strjoin(&p_node->backup, prev);
 	if (p_node->newline == NULL)
 		return (NULL);
 	free(prev);
@@ -61,17 +61,19 @@ char	*check_newline_in_buf(t_node *p_node, int len)
 	if (p_node->backup == NULL)
 		p_node->backup = ft_strdup(temp);
 	else
-		p_node->backup = ft_strjoin(p_node->backup, temp);
+		p_node->backup = ft_strjoin(&p_node->backup, temp);
 	free(temp);
 	return (NULL);
 }
 
 void	free_fd(t_node **p_head, int fd)
 {
+	t_node	*prev;
 	t_node	*curr;
 	t_node	*next;
 
-	curr = *p_head;
+	prev = (NULL);
+	curr = (*p_head)->next;
 	while (curr != NULL)
 	{
 		next = curr->next;
@@ -83,40 +85,69 @@ void	free_fd(t_node **p_head, int fd)
 				free(curr->backup);
 			}
 			free(curr);
-			*p_head = NULL;
+			if (prev != NULL)
+				prev->next = NULL;
+			if ((*p_head)->next == NULL)
+			{
+				free(*p_head);
+				*p_head = NULL;
+			}
 			return ;
 		}
+		prev = curr;
 		curr = next;
 	}
 }
 
-t_node	*find_fd(t_node *p_node, int fd)
+t_node	*create_new_node(t_node	*p_list, int fd)
 {
-	if (p_node == NULL)
+	t_node	*new_node;
+	t_node	*prev;
+	t_node	*curr;
+
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (new_node == NULL)
+		return (NULL);
+	new_node->fd = fd;
+	prev = NULL;
+	curr = p_list->next;
+	while (curr != NULL)
 	{
-		p_node = (t_node *)malloc(sizeof(t_node));
-		p_node->next = NULL;
-		p_node->backup = NULL;
-		p_node->fd = fd;
-		p_node->newline = NULL;
-		return (p_node);
+		prev = curr;
+		curr = curr->next;
 	}
-	while (p_node != NULL)
+	if (prev == NULL)
 	{
-		if (p_node->fd == fd)
-			return (p_node);
-		p_node = p_node->next;
+		p_list->next = new_node;
+		return (p_list->next);
 	}
-	if (p_node->next == NULL)
-		p_node->next = (t_node *)malloc(sizeof(t_node));
-	if (p_node->next != NULL)
+	else
 	{
-		p_node->next->next = NULL;
-		p_node->next->backup = NULL;
-		p_node->next->fd = fd;
-		p_node->newline = NULL;
+		curr = new_node;
+		prev->next = curr;
+		return (curr);
 	}
-	return (p_node->next);
+}
+
+t_node	*find_fd(t_node **p_list, int fd)
+{
+	t_node	*curr;
+
+	if (*p_list == NULL)
+	{
+		*p_list = (t_node *)malloc(sizeof(t_node));
+		if (*p_list == NULL)
+			return (NULL);
+		(*p_list)->next = NULL;
+	}
+	curr = (*p_list)->next;
+	while (curr != NULL)
+	{
+		if (curr->fd == fd)
+			return (curr);
+		curr = curr->next;
+	}
+	return (create_new_node(*p_list, fd));
 }
 
 char	*get_next_line(int fd)
@@ -152,13 +183,15 @@ char	*get_next_line(int fd)
 // 	int		fd;
 // 	char	*buf;
 
-// 	fd = open("hello", O_RDONLY);
-// 	if (fd == -1)
-// 		return (-1);
+// 	fd = open("empty", O_RDONLY);
 // 	buf = get_next_line(1000);
 // 	buf = get_next_line(-1);
 // 	close(fd);
+
+// 	fd = open("nl", O_RDONLY);
 // 	buf = get_next_line(fd);
-// 	system("leaks a.out");
+// 	buf = get_next_line(fd);
+// 	close(fd);
+// 	// system("leaks a.out");
 // 	return (0);
 // }
