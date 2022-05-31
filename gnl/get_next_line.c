@@ -66,21 +66,26 @@ char	*check_newline_in_buf(t_node *p_node, int len)
 	return (NULL);
 }
 
-void	free_all(t_node *p_head)
+void	free_fd(t_node **p_head, int fd)
 {
 	t_node	*curr;
 	t_node	*next;
 
-	curr = p_head;
+	curr = *p_head;
 	while (curr != NULL)
 	{
 		next = curr->next;
-		if (curr->newline != NULL && curr->backup != NULL)
+		if (curr->fd == fd)
 		{
-			free(curr->newline);
-			free(curr->backup);
+			if (curr->newline != NULL && curr->backup != NULL)
+			{
+				free(curr->newline);
+				free(curr->backup);
+			}
+			free(curr);
+			*p_head = NULL;
+			return ;
 		}
-		free(curr);
 		curr = next;
 	}
 }
@@ -129,7 +134,7 @@ char	*get_next_line(int fd)
 	len = read(fd, p_node->buf, BUFFER_SIZE);
 	if (BUFFER_SIZE <= 0 || p_head == NULL || p_node == NULL || len <= 0)
 	{
-		free_all(p_head);
+		free_fd(&p_head, fd);
 		return (NULL);
 	}
 	while (len >= 0)
@@ -150,14 +155,10 @@ char	*get_next_line(int fd)
 // 	fd = open("hello", O_RDONLY);
 // 	if (fd == -1)
 // 		return (-1);
-// 	while (TRUE)
-// 	{
-// 		buf = get_next_line(fd);
-// 		if (buf == NULL)
-// 			break ;
-// 		printf("%s", buf);
-// 	}
+// 	buf = get_next_line(1000);
+// 	buf = get_next_line(-1);
 // 	close(fd);
-// 	// system("leaks a.out");
+// 	buf = get_next_line(fd);
+// 	system("leaks a.out");
 // 	return (0);
 // }
