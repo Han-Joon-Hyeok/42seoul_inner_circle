@@ -21,8 +21,10 @@ char	*split_newline(t_node *p_node, int i)
 	prev = (char *)malloc(sizeof(char) * (i + 2));
 	if (prev == NULL)
 		return (NULL);
-	ft_strlcpy(prev, p_node->buf, i + 1);
+	ft_strlcpy(prev, p_node->buf, i + 2);
 	newline = ft_strjoin(p_node->backup, prev);
+	if (p_node->backup != NULL)
+		free(p_node->backup);
 	free(prev);
 	if (newline == NULL)
 		return (NULL);
@@ -54,11 +56,10 @@ char	*check_newline_in_buf(t_node *p_node, int len)
 	temp = (char *)malloc(sizeof(char) * (len + 1));
 	if (temp == NULL)
 		return (NULL);
-	ft_memcpy(temp, p_node->buf, len);
-	temp[len] = '\0';
+	ft_strlcpy(temp, p_node->buf, len + 1);
 	if (p_node->backup != NULL)
 		free(p_node->backup);
-	p_node->backup = ft_strdup(temp);
+	p_node->backup = ft_strjoin(p_node->backup, temp);
 	free(temp);
 	return (NULL);
 }
