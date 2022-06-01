@@ -21,7 +21,8 @@ char	*split_newline(t_node *p_node, int i)
 	prev = (char *)malloc(sizeof(char) * (i + 2));
 	if (prev == NULL)
 		return (NULL);
-	ft_strlcpy(prev, p_node->buf, i + 2);
+	ft_memcpy(prev, p_node->buf, i + 1);
+	prev[i + 1] = '\0';
 	newline = ft_strjoin(p_node->backup, prev);
 	if (p_node->backup != NULL)
 		free(p_node->backup);
@@ -43,10 +44,11 @@ char	*check_newline_in_buf(t_node *p_node, int len)
 {
 	int		i;
 	char	*temp;
+	char	*new_backup;
 
 	i = 0;
 	if (len == 0)
-		return (split_newline(p_node, i));
+		return (ft_strdup(p_node->backup));
 	while (i < len)
 	{
 		if (p_node->buf[i] == '\n')
@@ -57,10 +59,13 @@ char	*check_newline_in_buf(t_node *p_node, int len)
 	if (temp == NULL)
 		return (NULL);
 	ft_strlcpy(temp, p_node->buf, len + 1);
+	new_backup = ft_strjoin(p_node->backup, temp);
+	free(temp);
+	if (new_backup == NULL)
+		return (NULL);
 	if (p_node->backup != NULL)
 		free(p_node->backup);
-	p_node->backup = ft_strjoin(p_node->backup, temp);
-	free(temp);
+	p_node->backup = new_backup;
 	return (NULL);
 }
 
