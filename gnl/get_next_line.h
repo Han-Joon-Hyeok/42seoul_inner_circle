@@ -20,8 +20,9 @@ typedef struct s_node
 {
     int				fd;
     char            *backup;
-    char			buf[BUFFER_SIZE + 1];
+    char			buf[BUFFER_SIZE];
 	struct s_node	*next;
+    int             is_end;
 }	t_node;
 
 char	*get_next_line(int fd);

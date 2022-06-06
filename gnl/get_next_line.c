@@ -12,63 +12,6 @@
 
 #include "get_next_line.h"
 
-char	*split_newline(t_node *p_node, int i)
-{
-	char	*prev;
-	char	*next;
-	char	*newline;
-
-	prev = (char *)malloc(sizeof(char) * (i + 2));
-	if (prev == NULL)
-		return (NULL);
-	ft_memcpy(prev, p_node->buf, i + 1);
-	prev[i + 1] = '\0';
-	newline = ft_strjoin(p_node->backup, prev);
-	if (p_node->backup != NULL)
-		free(p_node->backup);
-	free(prev);
-	if (newline == NULL)
-		return (NULL);
-	next = (char *)malloc(sizeof(char) * (BUFFER_SIZE - i));
-	if (next == NULL)
-	{
-		free(newline);
-		return (NULL);
-	}
-	ft_strlcpy(next, &p_node->buf[i + 1], BUFFER_SIZE - i);
-	p_node->backup = next;
-	return (newline);
-}
-
-char	*check_newline_in_buf(t_node *p_node, int len)
-{
-	int		i;
-	char	*temp;
-	char	*new_backup;
-
-	i = 0;
-	if (len == 0)
-		return (ft_strdup(p_node->backup));
-	while (i < len)
-	{
-		if (p_node->buf[i] == '\n')
-			return (split_newline(p_node, i));
-		i += 1;
-	}
-	temp = (char *)malloc(sizeof(char) * (len + 1));
-	if (temp == NULL)
-		return (NULL);
-	ft_strlcpy(temp, p_node->buf, len + 1);
-	new_backup = ft_strjoin(p_node->backup, temp);
-	free(temp);
-	if (new_backup == NULL)
-		return (NULL);
-	if (p_node->backup != NULL)
-		free(p_node->backup);
-	p_node->backup = new_backup;
-	return (NULL);
-}
-
 void	free_fd(t_node **p_head, int fd)
 {
 	t_node	*prev;
@@ -85,6 +28,7 @@ void	free_fd(t_node **p_head, int fd)
 			curr->backup = NULL;
 			curr->next = NULL;
 			free(curr);
+			curr = NULL;
 			if (prev != NULL)
 				prev->next = NULL;
 			else
@@ -94,6 +38,45 @@ void	free_fd(t_node **p_head, int fd)
 		prev = curr;
 		curr = curr->next;
 	}
+}
+
+char	*split_newline(t_node *p_node, int i)
+{
+	int		backup_len;
+	char	*next;
+	char	*newline;
+
+	backup_len = ft_strlen(p_node->backup);
+	next = (char *)malloc(sizeof(char) * (backup_len - i));
+	if (next == NULL)
+		return (NULL);
+	ft_memcpy(next, &p_node->backup[i + 1], backup_len - i - 1);
+	next[backup_len - i - 1] = '\0';
+	newline = (char *)malloc(sizeof(char) * (i + 2));
+	if (newline == NULL)
+	{
+		free(next);
+		return (NULL);
+	}
+	ft_memcpy(newline, p_node->backup, i + 1);
+	newline[i + 1] = '\0';
+	free(p_node->backup);
+	p_node->backup = next;
+	return (newline);
+}
+
+char	*check_newline_in_backup(t_node *p_node, int len)
+{
+	int		i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (p_node->backup[i] == '\n')
+			return (split_newline(p_node, i));
+		i += 1;
+	}
+	return (NULL);
 }
 
 t_node	*find_fd(t_node **p_head, int fd)
@@ -117,11 +100,34 @@ t_node	*find_fd(t_node **p_head, int fd)
 	new_node->fd = fd;
 	new_node->backup = NULL;
 	new_node->next = NULL;
+	new_node->is_end = FALSE;
 	if (prev != NULL)
 		prev->next = new_node;
 	else
 		*p_head = new_node;
 	return (new_node);
+}
+
+void	save_in_backup(t_node *p_node, int len)
+{
+	char	*temp;
+	char	*buf;
+
+	buf = (char *)malloc(sizeof(char) * (len + 1));
+	if (buf == NULL)
+		return ;
+	ft_memcpy(buf, p_node->buf, len);
+	buf[len] = '\0';
+	if (p_node->backup != NULL)
+	{
+		temp = ft_strdup(p_node->backup);
+		free(p_node->backup);
+		p_node->backup = ft_strjoin(temp, buf);
+		free(temp);
+	}
+	else
+		p_node->backup = ft_strdup(buf);
+	free(buf);
 }
 
 char	*get_next_line(int fd)
@@ -134,15 +140,21 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	p_node = find_fd(&p_head, fd);
-	len = read(fd, p_node->buf, BUFFER_SIZE);
-	if (p_head == NULL || p_node == NULL || len <= 0)
+	if (p_head == NULL || p_node == NULL || p_node->is_end == TRUE)
 	{
 		free_fd(&p_head, fd);
 		return (NULL);
 	}
+	len = read(fd, p_node->buf, BUFFER_SIZE);
+	if (len == 0)
+	{
+		p_node->is_end = TRUE;
+		return (ft_strdup(p_node->backup));
+	}
 	while (len >= 0)
 	{
-		newline = check_newline_in_buf(p_node, len);
+		save_in_backup(p_node, len);
+		newline = check_newline_in_backup(p_node, len);
 		if (newline != NULL)
 			return (newline);
 		len = read(fd, p_node->buf, BUFFER_SIZE);
