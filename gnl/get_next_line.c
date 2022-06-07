@@ -6,13 +6,13 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/05/30 00:26:01 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:46:57 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	free_fd(t_node **p_head, int fd)
+void	*free_fd(t_node **p_head, int fd)
 {
 	t_node	*prev;
 	t_node	*curr;
@@ -33,35 +33,41 @@ void	free_fd(t_node **p_head, int fd)
 				prev->next = NULL;
 			else
 				*p_head = NULL;
-			return ;
+			break ;
 		}
 		prev = curr;
 		curr = curr->next;
 	}
+	return (NULL);
 }
 
 char	*split_newline(t_node *p_node, int i)
 {
-	int		backup_len;
 	char	*next;
 	char	*newline;
+	int		backup_len;
 
-	backup_len = ft_strlen(p_node->backup);
-	next = (char *)malloc(sizeof(char) * (backup_len - i));
-	if (next == NULL)
-		return (NULL);
-	ft_memcpy(next, &p_node->backup[i + 1], backup_len - i - 1);
-	next[backup_len - i - 1] = '\0';
 	newline = (char *)malloc(sizeof(char) * (i + 2));
 	if (newline == NULL)
-	{
-		free(next);
 		return (NULL);
-	}
 	ft_memcpy(newline, p_node->backup, i + 1);
 	newline[i + 1] = '\0';
-	free(p_node->backup);
-	p_node->backup = next;
+	backup_len = ft_strlen(p_node->backup);
+	if (backup_len - i > 1)
+	{
+		next = (char *)malloc(sizeof(char) * (backup_len - i));
+		if (next == NULL)
+			return (NULL);
+		ft_memcpy(next, &p_node->backup[i + 1], backup_len - i - 1);
+		next[backup_len - i - 1] = '\0';
+		free(p_node->backup);
+		p_node->backup = next;
+	}
+	else
+	{
+		free(p_node->backup);
+		p_node->backup = NULL;
+	}
 	return (newline);
 }
 
@@ -100,7 +106,6 @@ t_node	*find_fd(t_node **p_head, int fd)
 	new_node->fd = fd;
 	new_node->backup = NULL;
 	new_node->next = NULL;
-	new_node->is_end = FALSE;
 	if (prev != NULL)
 		prev->next = new_node;
 	else
@@ -108,26 +113,29 @@ t_node	*find_fd(t_node **p_head, int fd)
 	return (new_node);
 }
 
-void	save_in_backup(t_node *p_node, int len)
+int	save_in_backup(t_node *p_node, int len)
 {
-	char	*temp;
 	char	*buf;
+	char	*prev_backup;
 
+	if (len < 0)
+		return (-1);
 	buf = (char *)malloc(sizeof(char) * (len + 1));
 	if (buf == NULL)
-		return ;
+		return (-1);
 	ft_memcpy(buf, p_node->buf, len);
 	buf[len] = '\0';
 	if (p_node->backup != NULL)
 	{
-		temp = ft_strdup(p_node->backup);
+		prev_backup = ft_strdup(p_node->backup);
 		free(p_node->backup);
-		p_node->backup = ft_strjoin(temp, buf);
-		free(temp);
+		p_node->backup = ft_strjoin(prev_backup, buf);
+		free(prev_backup);
 	}
 	else
 		p_node->backup = ft_strdup(buf);
 	free(buf);
+	return (len);
 }
 
 char	*get_next_line(int fd)
@@ -140,20 +148,19 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	p_node = find_fd(&p_head, fd);
-	if (p_head == NULL || p_node == NULL || p_node->is_end == TRUE)
-	{
-		free_fd(&p_head, fd);
-		return (NULL);
-	}
-	len = read(fd, p_node->buf, BUFFER_SIZE);
-	if (len == 0)
-	{
-		p_node->is_end = TRUE;
-		return (ft_strdup(p_node->backup));
-	}
+	if (p_head == NULL || p_node == NULL)
+		return (free_fd(&p_head, fd));
+	len = save_in_backup(p_node, read(fd, p_node->buf, BUFFER_SIZE));
+	if (len <= 0)
+		return (free_fd(&p_head, fd));
 	while (len >= 0)
 	{
-		save_in_backup(p_node, len);
+		if (len == 0)
+		{
+			newline = ft_strdup(p_node->backup);
+			free_fd(&p_head, fd);
+			return (newline);
+		}
 		newline = check_newline_in_backup(p_node, len);
 		if (newline != NULL)
 			return (newline);
