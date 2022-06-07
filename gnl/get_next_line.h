@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:36:55 by joonhan           #+#    #+#             */
-/*   Updated: 2022/05/16 20:02:58 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/07 13:53:57 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_node
     char            *backup;
     char			buf[BUFFER_SIZE];
 	struct s_node	*next;
-    int             is_end;
 }	t_node;
 
 char	*get_next_line(int fd);
