@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:36:55 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/07 13:53:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/08 23:39:51 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ size_t	ft_strlen(char const *str);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *src);
-size_t	ft_strlcpy(char	*dest, const char *src, size_t destsize);
 
 #endif
 
@@ -37,6 +36,6 @@ size_t	ft_strlcpy(char	*dest, const char *src, size_t destsize);
 # define _COMMON_GNL_DEF_
 
 # define TRUE   1
-# define FALSE  0
+# define FALSE  -1
 
 #endif
