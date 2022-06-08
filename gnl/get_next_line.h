@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:36:55 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/08 23:39:51 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/09 01:11:25 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(char const *str);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *src);
 
 #endif
 
