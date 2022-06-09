@@ -6,11 +6,11 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:47:18 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/09 01:11:10 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/08 23:39:40 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(char const *str)
 {
@@ -35,13 +35,11 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	dest_temp = (unsigned char *)dest;
 	src_temp = (unsigned char *)src;
-	while (*(src_temp + i) != '\0' && i < n)
+	while (i < n)
 	{
 		*(dest_temp + i) = *(src_temp + i);
 		i += 1;
 	}
-	if (n != i)
-		*(dest_temp + i) = '\0';
 	return (dest);
 }
 
@@ -61,5 +59,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_memcpy(ptr, s1, s1_len);
 	ft_memcpy(ptr + s1_len, s2, s2_len);
 	*(ptr + s1_len + s2_len) = '\0';
+	return (ptr);
+}
+
+char	*ft_strdup(const char *src)
+{
+	size_t	i;
+	size_t	src_len;
+	char	*ptr;
+
+	i = 0;
+	src_len = ft_strlen(src);
+	ptr = (char *)malloc((src_len + 1) * sizeof(char));
+	if (ptr == NULL)
+		return (NULL);
+	while (i < src_len && *(src + i) != '\0')
+	{
+		*(ptr + i) = *(src + i);
+		i += 1;
+	}
+	*(ptr + i) = '\0';
 	return (ptr);
 }

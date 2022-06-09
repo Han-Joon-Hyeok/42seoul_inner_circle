@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/09 01:12:34 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/08 23:56:06 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,7 @@ void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 		p_node->backup = buf;
 	else
 	{
-		len = ft_strlen(p_node->backup);
-		prev_backup = (char *)malloc(sizeof(char) * (len + 1));
-		if (prev_backup == NULL)
-		{
-			free(buf);
-			return ;
-		}
-		prev_backup = ft_memcpy(prev_backup, p_node->backup, len);
-		prev_backup[len] = '\0';
+		prev_backup = ft_strdup(p_node->backup);
 		free(p_node->backup);
 		p_node->backup = ft_strjoin(prev_backup, buf);
 		free(prev_backup);
@@ -153,15 +145,10 @@ int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
 {
 	char	*newline;
-	size_t	backup_len;
 
 	if (p_node->backup == NULL)
 		return (free_fd(p_head, fd));
-	backup_len = ft_strlen(p_node->backup);
-	newline = (char *)malloc(sizeof(char) * (backup_len + 1));
-	if (newline == NULL)
-		return (free_fd(p_head, fd));
-	newline = ft_memcpy(newline, p_node->backup, backup_len);
+	newline = ft_strdup(p_node->backup);
 	free_fd(p_head, fd);
 	return (newline);
 }
