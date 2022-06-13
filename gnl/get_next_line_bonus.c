@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 15:09:01 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 15:18:20 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*split_newline(t_node *p_node, int i)
+char	*split_newline(t_node *p_node, int i)
 {
 	char	*next;
 	char	*newline;
@@ -40,7 +40,7 @@ static char	*split_newline(t_node *p_node, int i)
 	return (newline);
 }
 
-static void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
+void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 {
 	char	*buf;
 	char	*prev_backup;
@@ -69,7 +69,7 @@ static void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	}
 }
 
-static int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
+int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 {
 	int	i;
 	int	found;
@@ -92,7 +92,7 @@ static int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	return (i);
 }
 
-static char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
+char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
 {
 	char	*newline;
 	size_t	backup_len;
