@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 12:28:36 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 13:33:22 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*split_newline(t_node *p_node, int i)
 	if (newline == NULL)
 		return (NULL);
 	newline = ft_memcpy(newline, p_node->backup, i + 1);
-	newline[i + 1] = '\0';
 	backup_len = ft_strlen(p_node->backup);
 	if (backup_len - i > 1)
 	{
@@ -92,7 +91,6 @@ char	*split_newline(t_node *p_node, int i)
 		if (next == NULL)
 			return (NULL);
 		next = ft_memcpy(next, &p_node->backup[i + 1], backup_len - i - 1);
-		next[backup_len - i - 1] = '\0';
 		if (p_node->backup != NULL)
 			free(p_node->backup);
 		p_node->backup = next;
@@ -117,12 +115,19 @@ void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	if (buf == NULL)
 		free_fd(p_head, p_node->fd);
 	buf = ft_memcpy(buf, p_node->buf, len);
-	buf[len] = '\0';
 	if (p_node->backup == NULL)
 		p_node->backup = buf;
 	else
 	{
-		prev_backup = ft_strdup(p_node->backup);
+		len = ft_strlen(p_node->backup);
+		prev_backup = (char *)malloc(sizeof(char) * (len + 1));
+		if (prev_backup == NULL)
+		{
+			free(buf);
+			free_fd(p_head, p_node->fd);
+			return ;
+		}
+		prev_backup = ft_memcpy(prev_backup, p_node->backup, len);
 		free(p_node->backup);
 		p_node->backup = ft_strjoin(prev_backup, buf);
 		free(prev_backup);
@@ -155,10 +160,15 @@ int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
 {
 	char	*newline;
+	size_t	backup_len;
 
 	if (p_node->backup == NULL)
 		return (free_fd(p_head, fd));
-	newline = ft_strdup(p_node->backup);
+	backup_len = ft_strlen(p_node->backup);
+	newline = (char *)malloc(sizeof(char) * (backup_len + 1));
+	if (newline == NULL)
+		return (free_fd(p_head, fd));
+	newline = ft_memcpy(newline, p_node->backup, backup_len);
 	free_fd(p_head, fd);
 	return (newline);
 }

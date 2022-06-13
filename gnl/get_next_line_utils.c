@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:47:18 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/08 23:39:40 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 13:32:58 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		*(dest_temp + i) = *(src_temp + i);
 		i += 1;
 	}
+	*(dest_temp + i) = '\0';
 	return (dest);
 }
 
@@ -59,25 +60,5 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_memcpy(ptr, s1, s1_len);
 	ft_memcpy(ptr + s1_len, s2, s2_len);
 	*(ptr + s1_len + s2_len) = '\0';
-	return (ptr);
-}
-
-char	*ft_strdup(const char *src)
-{
-	size_t	i;
-	size_t	src_len;
-	char	*ptr;
-
-	i = 0;
-	src_len = ft_strlen(src);
-	ptr = (char *)malloc((src_len + 1) * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	while (i < src_len && *(src + i) != '\0')
-	{
-		*(ptr + i) = *(src + i);
-		i += 1;
-	}
-	*(ptr + i) = '\0';
 	return (ptr);
 }
