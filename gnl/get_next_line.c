@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 14:55:03 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 15:02:00 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	char	*buf;
 	char	*prev_backup;
 
-	if (len == 0)
-		return ;
 	buf = (char *)malloc(sizeof(char) * (len + 1));
 	if (buf == NULL)
 		free_fd(p_head, p_node->fd);
@@ -130,7 +128,8 @@ int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	int	i;
 	int	found;
 
-	save_in_backup(p_head, p_node, len);
+	if (len > 0)
+		save_in_backup(p_head, p_node, len);
 	i = 0;
 	found = FALSE;
 	while (p_node->backup != NULL && p_node->backup[i] != '\0')
