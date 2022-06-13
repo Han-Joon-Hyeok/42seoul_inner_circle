@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 14:21:05 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 14:55:03 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*split_newline(t_node *p_node, int i)
 	char	*newline;
 	size_t	backup_len;
 
+	next = NULL;
 	newline = (char *)malloc(sizeof(char) * (i + 2));
 	if (newline == NULL)
 		return (NULL);
@@ -83,16 +84,13 @@ char	*split_newline(t_node *p_node, int i)
 		if (next == NULL)
 			return (NULL);
 		next = ft_memcpy(next, &p_node->backup[i + 1], backup_len - i - 1);
-		if (p_node->backup != NULL)
-			free(p_node->backup);
+	}
+	if (p_node->backup != NULL)
+		free(p_node->backup);
+	if (next != NULL)
 		p_node->backup = next;
-	}
 	else
-	{
-		if (p_node->backup != NULL)
-			free(p_node->backup);
 		p_node->backup = NULL;
-	}
 	return (newline);
 }
 
