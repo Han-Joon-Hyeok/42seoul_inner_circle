@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/08 23:56:06 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 12:28:36 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,33 @@
 void	*free_fd(t_node **p_head, int fd)
 {
 	t_node	*prev;
+	t_node	*curr;
 
 	prev = NULL;
-	while ((*p_head) != NULL)
+	curr = *p_head;
+	while (curr != NULL)
 	{
-		if ((*p_head)->fd == fd)
+		if (curr->fd == fd)
 		{
-			if ((*p_head)->backup != NULL)
-				free((*p_head)->backup);
-			free(*p_head);
+			if (curr->backup != NULL)
+			{
+				free(curr->backup);
+				curr->backup = NULL;
+			}
 			if (prev != NULL)
 				prev->next = NULL;
-			else
+			else if (curr->next == NULL)
 				*p_head = NULL;
+			else
+			{
+				*p_head = curr->next;
+				curr->next = NULL;
+			}
+			free(curr);
 			break ;
 		}
-		prev = *p_head;
-		*p_head = (*p_head)->next;
+		prev = curr;
+		curr = curr->next;
 	}
 	return (NULL);
 }
