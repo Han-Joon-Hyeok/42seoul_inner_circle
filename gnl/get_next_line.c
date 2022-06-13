@@ -6,67 +6,13 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 15:02:00 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 15:09:01 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*free_fd(t_node **p_head, int fd)
-{
-	t_node	*prev;
-	t_node	*curr;
-
-	prev = NULL;
-	curr = *p_head;
-	while (curr != NULL)
-	{
-		if (curr->fd == fd)
-		{
-			if (curr->backup != NULL)
-				free(curr->backup);
-			if (prev == NULL)
-				*p_head = curr->next;
-			else
-				prev->next = curr->next;
-			free(curr);
-			break ;
-		}
-		prev = curr;
-		curr = curr->next;
-	}
-	return (NULL);
-}
-
-t_node	*find_fd(t_node **p_head, int fd)
-{
-	t_node	*new;
-	t_node	*curr;
-	t_node	*prev;
-
-	prev = NULL;
-	curr = *p_head;
-	while (curr != NULL)
-	{
-		if (curr->fd == fd)
-			return (curr);
-		prev = curr;
-		curr = curr->next;
-	}
-	new = (t_node *)malloc(sizeof(t_node));
-	if (new == NULL)
-		return (NULL);
-	new->backup = NULL;
-	new->fd = fd;
-	new->next = NULL;
-	if (*p_head == NULL)
-		*p_head = new;
-	else
-		prev->next = new;
-	return (new);
-}
-
-char	*split_newline(t_node *p_node, int i)
+static char	*split_newline(t_node *p_node, int i)
 {
 	char	*next;
 	char	*newline;
@@ -94,7 +40,7 @@ char	*split_newline(t_node *p_node, int i)
 	return (newline);
 }
 
-void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
+static void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 {
 	char	*buf;
 	char	*prev_backup;
@@ -123,7 +69,7 @@ void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	}
 }
 
-int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
+static int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 {
 	int	i;
 	int	found;
@@ -146,7 +92,7 @@ int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	return (i);
 }
 
-char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
+static char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
 {
 	char	*newline;
 	size_t	backup_len;
