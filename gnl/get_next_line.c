@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 13:33:22 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/13 14:21:05 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,11 @@ void	*free_fd(t_node **p_head, int fd)
 		if (curr->fd == fd)
 		{
 			if (curr->backup != NULL)
-			{
 				free(curr->backup);
-				curr->backup = NULL;
-			}
-			if (prev != NULL)
-				prev->next = NULL;
-			else if (curr->next == NULL)
-				*p_head = NULL;
-			else
-			{
+			if (prev == NULL)
 				*p_head = curr->next;
-				curr->next = NULL;
-			}
+			else
+				prev->next = curr->next;
 			free(curr);
 			break ;
 		}
