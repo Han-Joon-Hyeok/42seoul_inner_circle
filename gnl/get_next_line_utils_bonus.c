@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:47:18 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 15:07:30 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/14 16:18:43 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(char const *str)
+ssize_t	ft_strlen(char const *str)
 {
-	size_t	len;
+	ssize_t	len;
 
 	len = 0;
 	if (str == NULL)
@@ -24,9 +24,9 @@ size_t	ft_strlen(char const *str)
 	return (len);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, ssize_t n)
 {
-	size_t			i;
+	ssize_t			i;
 	unsigned char	*dest_temp;
 	unsigned char	*src_temp;
 
@@ -46,8 +46,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	ssize_t	s1_len;
+	ssize_t	s2_len;
 	char	*ptr;
 
 	if (s1 == NULL && s2 == NULL)

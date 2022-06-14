@@ -6,17 +6,17 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/13 15:18:20 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/14 16:20:07 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*split_newline(t_node *p_node, int i)
 {
 	char	*next;
 	char	*newline;
-	size_t	backup_len;
+	ssize_t	backup_len;
 
 	next = NULL;
 	newline = (char *)malloc(sizeof(char) * (i + 2));
@@ -95,7 +95,7 @@ int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 char	*clear_backup(t_node **p_head, t_node *p_node, int fd)
 {
 	char	*newline;
-	size_t	backup_len;
+	ssize_t	backup_len;
 
 	if (p_node->backup == NULL)
 		return (free_fd(p_head, fd));
