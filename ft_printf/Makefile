@@ -21,7 +21,7 @@ LIB := $(LIB_DIR)lib$(LIB_NAME).a
 all : $(NAME)
 
 $(NAME) : $(LIB) $(OBJS)
-	mv $(LIB) $(NAME)
+	cp $(LIB) $(NAME)
 	ar -rcs $(NAME) $(OBJS)
 
 $(LIB) :
