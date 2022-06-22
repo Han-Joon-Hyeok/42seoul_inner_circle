@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:27:51 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/04 16:21:04 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:21:01 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd, size_t *ret_len)
 {
 	size_t	len;
 
@@ -20,4 +20,5 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	len = ft_strlen(s);
 	write(fd, s, len);
+	*ret_len += len;
 }

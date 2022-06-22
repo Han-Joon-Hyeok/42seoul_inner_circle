@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:40:39 by joonhan           #+#    #+#             */
-/*   Updated: 2022/04/11 13:55:00 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:13:36 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_digits(int n)
 	return (i);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd, size_t *ret_len)
 {
 	int	sign;
 	int	digits;
@@ -42,17 +42,19 @@ void	ft_putnbr_fd(int n, int fd)
 	sign = check_sign(n);
 	digits = get_digits(n);
 	if (sign == -1)
-		write(fd, "-", 1);
+		ft_putstr_fd("-", 1, ret_len);
 	while (n > 0 || n < 0)
 	{
 		divisor = ((n / digits) * sign) + '0';
 		write(fd, &divisor, 1);
 		n %= digits;
 		digits /= 10;
+		*ret_len += 1;
 	}
 	while (digits > 0)
 	{
 		write(fd, "0", 1);
 		digits /= 10;
+		*ret_len += 1;
 	}
 }
