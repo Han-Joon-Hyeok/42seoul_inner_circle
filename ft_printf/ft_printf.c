@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 static void	ft_printf_args(char format, size_t *idx, size_t *ret, va_list ap)
 {
