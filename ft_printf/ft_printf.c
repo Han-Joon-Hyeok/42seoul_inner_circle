@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:26:20 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/22 16:26:40 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/06/24 21:51:27 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	ft_printf_args(char format, size_t *idx, size_t *ret, va_list ap)
 	else if (format == 'd' || format == 'i')
 		ft_printf_va_d((int)va_arg(ap, int), ret);
 	else if (format == 'u')
-		ft_printf_va_u((unsigned int)va_arg(ap, unsigned int), ret);
+		ft_printf_va_u((unsigned int)va_arg(ap, int), ret);
 	else if (format == 'x')
-		ft_printf_va_x((unsigned int)va_arg(ap, unsigned int), 'x', ret);
+		ft_printf_va_x((unsigned int)va_arg(ap, int), 'x', ret);
 	else if (format == 'X')
-		ft_printf_va_x((unsigned int)va_arg(ap, unsigned int), 'X', ret);
+		ft_printf_va_x((unsigned int)va_arg(ap, int), 'X', ret);
 	else if (format == '%')
 	{
 		write(1, "%", 1);
