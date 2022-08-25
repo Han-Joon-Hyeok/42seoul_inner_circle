@@ -1,8 +1,11 @@
 NAME := so_long
 
-SRC_NAME := main.c
-OBJ_NAME := $(SRC_NAME:.c=.o)
-OBJ := $(OBJ_NAME)
+SRCS := main.c \
+		init.c \
+		utils.c \
+		check_map.c
+
+OBJS := $(SRCS:.c=.o)
 
 MLX_NAME := mlx
 MLX_DIR := ./mlx/
@@ -21,13 +24,14 @@ INCLUDE := -I ./mlx -I $(LIB_DIR)
 all : $(NAME)
 
 clean :
-	rm -f $(OBJ)
+	rm -f $(OBJS)
 
-$(NAME) : $(LIB) $(OBJ)
+$(NAME) : $(LIB) $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDE) -Lmlx -lmlx -framework OpenGL -framework AppKit -L$(LIB_DIR) -l$(LIB_NAME) -o $@ $^
+
+%.o : %.c
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(LIB) :
 	make -C $(LIB_DIR) all
 
-# %.o : %.c
-# 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
