@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
+/*   Updated: 2022/08/25 17:49:41 by joonhan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 
 # include "./mlx/mlx.h"
@@ -17,6 +29,7 @@
 
 # define WINDOW_WIDTH		128
 # define WINDOW_HEIGHT		128
+
 typedef struct s_pos
 {
 	int		x;
@@ -38,6 +51,16 @@ typedef struct s_game
 	void	*collectible;
 	void	*door;
 	void	*fire;
+	char	*map;
+	size_t	width;
+	size_t	height;
+	size_t	map_size;
 }	t_game;
+
+void	print_error(char *msg);
+void	is_valid_map(char *map_file, t_game *game);
+void	init_pos(t_pos *pos);
+void	init_mlx(t_mlx *mlx);
+void	init_images(t_mlx *mlx, t_game *game);
 
 #endif
