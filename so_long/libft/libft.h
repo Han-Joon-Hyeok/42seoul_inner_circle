@@ -6,14 +6,28 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:59:36 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/24 21:02:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/25 16:49:08 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
+
 # define LIBFT_H
+# define TRUE   		1
+# define FALSE  		0
+# define ERROR			-1
+# define BUFFER_SIZE   100
+
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_node
+{
+	int				fd;
+	char			*backup;
+	char			buf[BUFFER_SIZE];
+	struct s_node	*next;
+}	t_node;
 
 int			ft_atoi(const char *str);
 void		ft_bzero(void *dest, size_t size);
@@ -50,25 +64,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 
-#endif
-
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# define TRUE   		1
-# define FALSE  		-1
-# define BUFFER_SIZE   100
-
-typedef struct s_node
-{
-	int				fd;
-	char			*backup;
-	char			buf[BUFFER_SIZE];
-	struct s_node	*next;
-}	t_node;
-
-char	*get_next_line(int fd);
-t_node	*find_fd(t_node **p_head, int fd);
-void	*free_fd(t_node **p_head, int fd);
+char		*get_next_line(int fd);
+t_node		*find_fd(t_node **p_head, int fd);
+void		*free_fd(t_node **p_head, int fd);
 
 #endif

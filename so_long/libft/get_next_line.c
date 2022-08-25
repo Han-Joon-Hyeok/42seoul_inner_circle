@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:35:57 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/24 21:01:04 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/25 17:00:24 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static void	save_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
 	}
 }
 
-static int	check_newline_in_backup(t_node **p_head, t_node *p_node, ssize_t len)
+static int	check_newline_in_backup(t_node **p_head, t_node *p_node, \
+									ssize_t len)
 {
 	int	i;
 	int	found;
