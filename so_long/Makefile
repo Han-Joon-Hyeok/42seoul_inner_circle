@@ -3,7 +3,8 @@ NAME := so_long
 SRCS := main.c \
 		init.c \
 		utils.c \
-		check_map.c
+		maps.c \
+		hooks.c
 
 OBJS := $(SRCS:.c=.o)
 
