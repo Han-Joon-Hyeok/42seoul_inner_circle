@@ -6,60 +6,45 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:33:31 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/25 20:55:23 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/27 15:01:10 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	key_press(int key_code, t_pos *pos)
+void	get_player_idx(t_game *game)
 {
-	if (key_code == KEY_W)
-		pos->y -= 1;
-	else if (key_code == KEY_A)
-		pos->x -= 1;
-	else if (key_code == KEY_S)
-		pos->y += 1;
-	else if (key_code == KEY_D)
-		pos->x += 1;
-	else if (key_code == KEY_ESC)
-	{
-		printf("✅ Exit the game. Bye! 👋 \n");
-		exit(0);
-	}
-	if (key_code == KEY_W || key_code == KEY_A || \
-		key_code == KEY_S || key_code == KEY_D)
-	{
-		pos->moves += 1;
-		printf("x: %d, y: %d, moves: %zd\n", pos->x, pos->y, pos->moves);
-	}
-	return (0);
+	char	*current_player_idx;
+
+	current_player_idx = ft_strchr(game->map, 'P');
+	game->player_idx = current_player_idx - game->map;
 }
 
-// void	draw_map(t_mlx *mlx, t_game *game, t_pos *pos)
-// {
-	
-// }
+void	init_offset(t_game *game)
+{
+	game->offset[KEY_W] = -((ssize_t)game->map_width);
+	game->offset[KEY_A] = -1;
+	game->offset[KEY_S] = ((ssize_t)game->map_width);
+	game->offset[KEY_D] = 1;
+}
 
 int	main(int argc, char *argv[])
 {
-	t_mlx	mlx;
-	t_pos	pos;
 	t_game	game;
 
-	if (argc == 2)
-	{
-		is_valid_map(argv[1], &game);
-		init_mlx(&mlx);
-		init_pos(&pos);
-		init_images(&mlx, &game);
-		// draw_map(&mlx, &game, &pos);
-		mlx_hook(mlx.win_ptr, X_EVENT_KEY_RELEASE, 0, &key_press, &pos);
-		mlx_loop(mlx.mlx_ptr);
-	}
-	else
-	{
-		print_error("❌ ERROR: Invalid Number of Arguments.");
-	}
+	if (argc != 2)
+		print_error("❌ ERROR: Enter ./so_long [map_file.ber]", NULL);
+	save_map(argv[1], &game);
+	is_valid_map(&game);
+	init_window_size(&game);
+	init_mlx(&game);
+	init_pos(&game);
+	init_images(&game);
+	init_offset(&game);
+	draw_map(&game);
+	get_player_idx(&game);
+	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &exit_hook, &game);
+	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, &main_loop_hook, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
