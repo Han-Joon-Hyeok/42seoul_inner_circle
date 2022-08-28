@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/28 15:16:40 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/28 21:37:33 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
+# include <string.h>
+# include <errno.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -59,17 +61,19 @@ typedef struct s_game
 
 void	print_msg(char *msg);
 void	print_error(char *msg, void *game);
-void	ft_strjoin_without_newline(t_game *game, char *line, size_t width);
+
 void	save_map(char *map_file, t_game *game);
 void	is_valid_map(t_game *game);
+void	get_map_info(t_game *game);
+
 void	init_window_size(t_game *game);
 void	init_moves(t_game *game);
 void	init_mlx(t_game *game);
 void	init_images(t_game *game);
+void	init_offset(t_game *game);
+
 void	draw_map(t_game *game);
 int		main_loop_hook(int key_code, t_game *game);
 int		exit_hook(t_game *game);
-void	ft_put_image_to_16(t_game *game, void *obj, \
-						size_t count, size_t height);
 
 #endif
