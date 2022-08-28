@@ -6,11 +6,28 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:33:31 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/27 15:01:10 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/28 14:38:21 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	get_total_collect_count(t_game *game)
+{
+	size_t	count;
+	size_t	idx;
+
+	count = 0;
+	idx = 0;
+	while (idx < game->map_size)
+	{
+		if (game->map[idx] == 'C')
+			count++;
+		idx++;
+	}
+	game->total_collect_count = count;
+	game->curr_collect_count = 0;
+}
 
 void	get_player_idx(t_game *game)
 {
@@ -36,9 +53,10 @@ int	main(int argc, char *argv[])
 		print_error("❌ ERROR: Enter ./so_long [map_file.ber]", NULL);
 	save_map(argv[1], &game);
 	is_valid_map(&game);
+	get_total_collect_count(&game);
 	init_window_size(&game);
 	init_mlx(&game);
-	init_pos(&game);
+	init_moves(&game);
 	init_images(&game);
 	init_offset(&game);
 	draw_map(&game);
