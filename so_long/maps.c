@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:20:41 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/27 10:41:33 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/28 15:06:34 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	save_map(char *map_file, t_game *game)
 	game->map_width = 0;
 	game->map_height = 0;
 	game->map = NULL;
+	game->fd = fd;
 	if (fd < 0)
 		print_error("❌ ERROR: Opening map file failed.", game);
 	line = get_next_line(fd);
@@ -81,7 +82,7 @@ static void	check_map_size(t_game *game)
 
 	map_size = ft_strlen(game->map);
 	player_pos = ft_strchr(game->map, 'P');
-	if (map_size < 15 || (game->map_height < 3 && game->map_width < 3))
+	if (map_size < 15 || (game->map_height < 3 || game->map_width < 3))
 		print_error("❌ ERROR: Map size should be more than 15.", game);
 	if (map_size != game->map_height * game->map_width)
 		print_error("❌ ERROR: Map should be in a rectangle shape.", game);
