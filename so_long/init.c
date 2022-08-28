@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:33:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/27 13:57:42 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:06 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,15 @@ void	draw_map(t_game *game)
 		count = 0;
 		while (count < game->map_width)
 		{
-			mlx_put_image_to_window(game->mlx, game->win, game->land, \
-					count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+			ft_put_image_to_16(game, game->land, count, height);
 			if (game->map[idx] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, game->wall, \
-						count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+				ft_put_image_to_16(game, game->wall, count, height);
 			else if (game->map[idx] == 'P')
-				mlx_put_image_to_window(game->mlx, game->win, game->chr, \
-						count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+				ft_put_image_to_16(game, game->chr, count, height);
 			else if (game->map[idx] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win, \
-				game->collectible, count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+				ft_put_image_to_16(game, game->collectible, count, height);
 			else if (game->map[idx] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, game->door, \
-						count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+				ft_put_image_to_16(game, game->door, count, height);
 			idx += 1;
 			count += 1;
 		}
@@ -52,15 +47,9 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	init_pos(t_game *game)
+void	init_moves(t_game *game)
 {
-	t_pos	*pos;
-
-	pos = malloc(sizeof(t_pos));
-	pos->x = 0;
-	pos->y = 0;
-	pos->moves = 0;
-	game->pos = pos;
+	game->moves = 0;
 }
 
 void	init_mlx(t_game *game)
@@ -85,6 +74,4 @@ void	init_images(t_game *game)
 					"./images/cat_1.xpm", &img_width, &img_height);
 	game->door = mlx_xpm_file_to_image(game->mlx, \
 					"./images/door.xpm", &img_width, &img_height);
-	game->fire = mlx_xpm_file_to_image(game->mlx, \
-					"./images/fire.xpm", &img_width, &img_height);
 }
