@@ -3,7 +3,10 @@ NAME := so_long
 SRCS := main.c \
 		init.c \
 		utils.c \
-		maps.c \
+		save_map.c \
+		is_valid_map.c \
+		get_map_info.c \
+		draw_map.c \
 		hooks.c
 
 OBJS := $(SRCS:.c=.o)
@@ -20,9 +23,6 @@ LIB_FLAGS := -L $(LIB_DIR) -l$(LIB_NAME)
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
-
-AR := ar
-ARFLAGS := rcus
 
 .PHONY : all clean fclean re
 
