@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/08/28 15:44:49 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/08/28 21:33:45 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	key_release_hook(int key_code, t_game *game)
 	else if (!is_object(key_code, game, 'E') && \
 		(game->curr_collect_count == game->total_collect_count))
 	{
-		print_msg("👍 Good job");
+		print_msg("🎁 Thanks for playing!");
 		exit_hook(game);
 	}
 	game->map[game->player_idx] = '0';
