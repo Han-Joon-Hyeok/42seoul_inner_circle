@@ -6,7 +6,7 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/01 14:35:24 by joonhan           #+#    #+#              #
-#    Updated: 2022/09/01 17:05:56 by joonhan          ###   ########.fr        #
+#    Updated: 2022/09/01 18:08:23 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,9 @@ bonus :
 	make WITH_BONUS=1 all
 
 norm :
+	@echo $(GREEN)🔮 MANDATORY NORMINETTE $(RESET) '\n'
 	norminette $(SRCS) $(INC_DIR)$(NAME).h
+	@echo '\n'$(GREEN)🎁 BONUS NORMINETTE $(RESET) '\n'
 	norminette $(BONUSES) $(INC_BONUS_DIR)$(NAME)_bonus.h
 
 $(NAME) : $(OBJS)
@@ -91,3 +93,8 @@ $(NAME) : $(OBJS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# COLOR
+GREEN	:=	"\033[32m"
+RESET	:=	"\033[0m"
+CUT		:=	"\033[K"
