@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:33:31 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 17:36:37 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/01 17:55:27 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main(int argc, char *argv[])
 		print_error("❌ ERROR: Enter ./so_long [map_file.ber]", NULL);
 	save_map(argv[1], &game);
 	is_valid_map(&game);
-	get_map_info(&game);
 	init_setting(&game);
+	get_map_info(&game);
 	draw_map(&game);
 	draw_moves(&game);
 	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &exit_hook, &game);
