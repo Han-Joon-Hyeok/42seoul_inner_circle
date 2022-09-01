@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 17:45:30 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/01 17:56:37 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_enemy_node
 
 typedef struct s_enemy
 {
-	size_t			*count;
+	size_t			count;
 	t_enemy_node	*head;
 	t_enemy_node	*tail;
 }	t_enemy;
