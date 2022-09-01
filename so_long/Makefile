@@ -1,35 +1,72 @@
-NAME := so_long
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/01 14:35:24 by joonhan           #+#    #+#              #
+#    Updated: 2022/09/01 17:05:56 by joonhan          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS := main.c \
-		init.c \
-		utils.c \
-		save_map.c \
-		is_valid_map.c \
-		get_map_info.c \
-		draw_map.c \
-		hooks.c
+NAME				:=	so_long
 
-OBJS := $(SRCS:.c=.o)
+SRC_DIR				:=	./src/
+SRC_NAME			:=	main.c \
+						init.c \
+						utils.c \
+						save_map.c \
+						is_valid_map.c \
+						get_map_info.c \
+						draw_map.c \
+						hooks.c
+SRCS				:=	$(addprefix $(SRC_DIR),$(SRC_NAME))
+OBJS				:=	$(SRCS:%.c=%.o)
 
-MLX_NAME := mlx
-MLX_DIR := ./mlx/
-MLX := $(MLX_DIR)lib$(MLX_NAME).a
-MLX_FLAGS := -lmlx -framework OpenGL -framework Appkit
+BONUS_DIR			:= ./src_bonus/
+BONUS_SRCS			:=	main_bonus.c \
+						init_bonus.c \
+						utils_bonus.c \
+						save_map_bonus.c \
+						is_valid_map_bonus.c \
+						get_map_info_bonus.c \
+						draw_map_bonus.c \
+						draw_moves_bonus.c \
+						enemy.c \
+						hooks_bonus.c
+BONUSES				:=	$(addprefix $(BONUS_DIR),$(BONUS_SRCS))
+BONUS_OBJS			:=	$(BONUSES:%.c=%.o)
 
-LIB_NAME := ft
-LIB_DIR := ./libft/
-LIB := $(LIB_DIR)lib$(LIB_NAME).a
-LIB_FLAGS := -L $(LIB_DIR) -l$(LIB_NAME)
+ifdef WITH_BONUS
+	OBJS			:=	$(BONUS_OBJS)
+	INCLUDE			:=	$(INC_BONUS_DIR)
+else
+	INCLUDE			:=	$(INC_DIR)
+endif
 
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+INC_DIR				:=	./include/
+INC_BONUS_DIR		:=	./include_bonus/
 
-.PHONY : all clean fclean re
+MLX_NAME			:=	mlx
+MLX_DIR				:=	./mlx/
+MLX					:=	$(MLX_DIR)lib$(MLX_NAME).a
+MLX_FLAGS			:=	-lmlx -framework OpenGL -framework Appkit
+
+LIB_NAME			:=	ft
+LIB_DIR				:=	./libft/
+LIB					:=	$(LIB_DIR)lib$(LIB_NAME).a
+LIB_FLAGS			:=	-L $(LIB_DIR) -l$(LIB_NAME)
+
+CC					:=	gcc
+CFLAGS				:=	-Wall -Wextra -Werror -g
+
+.PHONY : all clean fclean re bonus
 
 all : $(NAME)
 
 clean :
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 	$(MAKE) clean -C $(LIB_DIR)
 	$(MAKE) clean -C $(MLX_DIR)
 
@@ -40,13 +77,17 @@ fclean : clean
 
 re : fclean all
 
+bonus :
+	make WITH_BONUS=1 all
+
 norm :
-	norminette $(SRCS) $(NAME).h
+	norminette $(SRCS) $(INC_DIR)$(NAME).h
+	norminette $(BONUSES) $(INC_BONUS_DIR)$(NAME)_bonus.h
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIB_DIR)
 	$(MAKE) -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) -L $(MLX_DIR) $(LIB_FLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(INCLUDE) $(MLX_FLAGS) -L $(MLX_DIR) $(LIB_FLAGS) -o $@ $^
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
