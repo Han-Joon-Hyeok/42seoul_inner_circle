@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 13:06:28 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:49:48 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	exit_hook(t_game *game)
 	mlx_destroy_window(game->mlx, game->win);
 	free(game->map);
 	free_all_enemy(game);
+	free(game->collect_lst);
 	close(game->fd);
 	print_msg("👋 Exit the game. So long!");
 	exit(0);
@@ -49,12 +50,12 @@ static void	process_move(int key_code, t_game *game)
 	if (!is_object(key_code, game, '1'))
 		return ;
 	if (!is_object(key_code, game, 'C'))
-		game->curr_collect_count += 1;
+		free_collect(game, game->player_idx + game->offset[key_code]);
 	if (!is_object(key_code, game, 'E') && \
-		(game->curr_collect_count < game->total_collect_count))
+		(game->collect_lst->count > 0))
 		return ;
 	else if (!is_object(key_code, game, 'E') && \
-		(game->curr_collect_count == game->total_collect_count))
+		(game->collect_lst->count == 0))
 	{
 		print_msg("🎁 Thanks for playing!");
 		exit_hook(game);
@@ -68,6 +69,7 @@ static void	process_move(int key_code, t_game *game)
 	game->player_idx += game->offset[key_code];
 	game->map[game->player_idx] = 'P';
 	game->moves += 1;
+	draw_map(game);
 	printf("moves: %zd\n", game->moves);
 }
 
@@ -81,46 +83,10 @@ int	key_release_hook(int key_code, t_game *game)
 	return (0);
 }
 
-void	move_enemy(t_game *game, t_enemy_node *curr, int direction)
-{
-	game->map[curr->idx] = '0';
-	game->map[curr->idx + direction] = 'F';
-	curr->idx += direction;
-	curr->next_dir = -direction;
-}
-
-void	draw_enemy(t_game *game)
-{
-	t_enemy_node	*curr;
-
-	if (game->fps % 100 == 0)
-	{
-		curr = game->enemy_component->head;
-		while (curr != NULL)
-		{
-			if (curr->next_dir == -1 && \
-				game->map[curr->idx + curr->next_dir] != '1')
-				move_enemy(game, curr, -1);
-			else if (curr->next_dir == 1 && \
-				game->map[curr->idx + curr->next_dir] != '1')
-				move_enemy(game, curr, 1);
-			curr = curr->next;
-		}
-	}
-}
-
-void	count_fps(t_game *game)
-{
-	game->fps += 1;
-	if (game->fps >= 100)
-		game->fps = 0;
-}
-
 int	main_loop_hook(t_game *game)
 {
-	draw_map(game);
 	draw_enemy(game);
-	draw_moves(game);
+	draw_move_count(game);
 	count_fps(game);
 	return (0);
 }

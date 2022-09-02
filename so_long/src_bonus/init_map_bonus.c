@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:14:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 14:38:44 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 16:35:18 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include_bonus/so_long_bonus.h"
 
-void	draw_map(t_game *game)
+static void	draw_object(t_game *game, char object, size_t count, size_t height)
+{
+	if (object == '1')
+		ft_put_image_to_16(game, game->wall, count, height);
+	else if (object == 'P')
+	{
+		game->character_pos = &game->map[((game->map_width * height) + count) \
+								- (size_t)game->map];
+		ft_put_image_to_16(game, game->chr, count, height);
+	}
+	else if (object == 'C')
+		ft_put_image_to_16(game, game->collectible, count, height);
+	else if (object == 'E')
+		ft_put_image_to_16(game, game->door, count, height);
+	else if (object == 'F')
+		ft_put_image_to_16(game, game->enemy, count, height);
+}	
+
+void	init_map(t_game *game)
 {
 	size_t	idx;
 	size_t	height;
@@ -26,14 +44,7 @@ void	draw_map(t_game *game)
 		while (count < game->map_width)
 		{
 			ft_put_image_to_16(game, game->land, count, height);
-			if (game->map[idx] == '1')
-				ft_put_image_to_16(game, game->wall, count, height);
-			else if (game->map[idx] == 'P')
-				ft_put_image_to_16(game, game->chr, count, height);
-			else if (game->map[idx] == 'C')
-				ft_put_image_to_16(game, game->collectible, count, height);
-			else if (game->map[idx] == 'E')
-				ft_put_image_to_16(game, game->door, count, height);
+			draw_object(game, game->map[idx], count, height);
 			idx += 1;
 			count += 1;
 		}

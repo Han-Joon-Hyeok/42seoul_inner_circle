@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:33:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 12:52:24 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 15:12:25 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ void	init_window_size(t_game *game)
 {
 	game->window_width = game->map_width * IMAGE_WIDTH;
 	game->window_height = game->map_height * IMAGE_HEIGHT;
-}
-
-void	init_moves(t_game *game)
-{
-	game->moves = 0;
 }
 
 void	init_mlx(t_game *game)

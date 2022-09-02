@@ -6,13 +6,13 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:14:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 14:42:15 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 15:15:44 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include_bonus/so_long_bonus.h"
 
-void	draw_moves(t_game *game)
+void	draw_move_count(t_game *game)
 {
 	char	*moves;
 

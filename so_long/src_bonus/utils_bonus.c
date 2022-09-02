@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:23:28 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 14:46:27 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 13:57:41 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ void	ft_put_image_to_16(t_game *game, void *obj, \
 {
 	mlx_put_image_to_window(game->mlx, game->win, obj, \
 			count * IMAGE_WIDTH, height * IMAGE_HEIGHT);
+}
+
+void	count_fps(t_game *game)
+{
+	game->fps += 1;
+	if (game->fps >= 100)
+		game->fps = 0;
 }
