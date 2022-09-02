@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 16:47:11 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:26:07 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct s_game
 	void		*door;
 	void		*score;
 	void		*enemy;
-	char		*character_pos;
 	char		*map;
 	int			fps;
 	size_t		map_width;
@@ -106,7 +105,6 @@ void	draw_move_count(t_game *game);
 void	init_enemy(t_game *game);
 void	free_all_enemy(t_game *game);
 void	create_enemy(t_game *game);
-void	move_enemy(t_game *game, t_enemy_node *curr, int direction);
 void	draw_enemy(t_game *game);
 
 // get_map_info.c
@@ -122,9 +120,6 @@ void	init_window_size(t_game *game);
 void	init_mlx(t_game *game);
 void	init_images(t_game *game);
 void	init_offset(t_game *game);
-
-// init_map_bonus.c
-void	init_map(t_game *game);
 
 // is_valid_map.c
 void	is_valid_map(t_game *game);
