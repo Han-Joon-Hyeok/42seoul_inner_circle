@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/01 17:56:37 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 13:01:32 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 typedef struct s_enemy_node
 {
 	size_t				idx;
+	int					next_dir;
 	struct s_enemy_node	*next;
 }	t_enemy_node;
 
@@ -63,7 +64,7 @@ typedef struct s_game
 	void		*score;
 	void		*enemy;
 	char		*map;
-	int			enemy_move;
+	int			fps;
 	size_t		map_width;
 	size_t		map_height;
 	size_t		map_size;
@@ -92,10 +93,12 @@ void	init_images(t_game *game);
 void	init_offset(t_game *game);
 
 void	init_enemy(t_game *game);
+void	free_all_enemy(t_game *game);
 
 void	draw_map(t_game *game);
 void	draw_moves(t_game *game);
-int		main_loop_hook(int key_code, t_game *game);
+int		main_loop_hook(t_game *game);
+int		key_release_hook(int key_code, t_game *game);
 int		exit_hook(t_game *game);
 
 #endif
