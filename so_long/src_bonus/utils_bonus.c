@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:23:28 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:24:54 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:33:26 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,10 @@ void	count_fps(t_game *game)
 	game->fps += 1;
 	if (game->fps >= 100)
 		game->fps = 0;
+}
+
+void	game_over_by_enemy(t_game *game)
+{
+	print_msg("👻 You lose the game. Try again!");
+	exit_hook(game);
 }

@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:20:05 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:32:52 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static void	process_move(int key_code, t_game *game)
 		exit_hook(game);
 	}
 	else if (!is_object(key_code, game, 'F'))
-	{
-		print_msg("👻 You lose the game. Try again!");
-		exit_hook(game);
-	}
+		game_over_by_enemy(game);
 	game->map[game->player_idx] = '0';
 	game->player_idx += game->offset[key_code];
 	game->map[game->player_idx] = 'P';
