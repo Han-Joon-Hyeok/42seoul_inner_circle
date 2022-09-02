@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:30:51 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 21:21:44 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,18 @@ static int	is_object(int key_code, t_game *game, char object)
 	return (TRUE);
 }
 
+static int	is_collect(int key_code, t_game *game)
+{
+	if (game->map[game->player_idx + game->offset[key_code]] == 'C')
+		return (TRUE);
+	return FALSE;
+}
+
 static void	process_move(int key_code, t_game *game)
 {
 	if (!is_object(key_code, game, '1'))
 		return ;
-	if (!is_object(key_code, game, 'C'))
+	if (!is_object(key_code, game, 'C') || is_collect(key_code, game))
 		free_collect(game, game->player_idx + game->offset[key_code]);
 	if (!is_object(key_code, game, 'E') && \
 		(game->collect_lst->count > 0))

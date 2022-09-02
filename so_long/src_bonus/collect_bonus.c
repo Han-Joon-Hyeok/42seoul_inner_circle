@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:33:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:02:06 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 21:18:13 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	draw_collect(t_game *game)
 	{
 		height = (curr->idx) / game->map_width;
 		count = (curr->idx) % game->map_width;
-		ft_put_image_to_16(game, game->collectible, count, height);
+		if (game->map[curr->idx] != 'F')
+			ft_put_image_to_16(game, game->collectible, count, height);
 		curr = curr->next;
 	}
 }
