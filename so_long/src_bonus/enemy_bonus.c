@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:06:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:17:14 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 22:12:50 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	create_enemy_node(t_game *game, char *curr_addr)
 	new_enemy->idx = curr_addr - game->map;
 	new_enemy->next = NULL;
 	new_enemy->prev = NULL;
-	new_enemy->next_dir = 1;
+	new_enemy->next_dir = RIGHT;
 	if (game->enemy_lst->count == 0)
 	{
 		game->enemy_lst->head = new_enemy;
