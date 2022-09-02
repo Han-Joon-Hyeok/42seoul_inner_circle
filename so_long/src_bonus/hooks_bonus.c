@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 16:49:48 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:20:05 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static void	process_move(int key_code, t_game *game)
 	game->player_idx += game->offset[key_code];
 	game->map[game->player_idx] = 'P';
 	game->moves += 1;
-	draw_map(game);
 	printf("moves: %zd\n", game->moves);
 }
 
@@ -85,6 +84,7 @@ int	key_release_hook(int key_code, t_game *game)
 
 int	main_loop_hook(t_game *game)
 {
+	draw_map(game);
 	draw_enemy(game);
 	draw_move_count(game);
 	count_fps(game);

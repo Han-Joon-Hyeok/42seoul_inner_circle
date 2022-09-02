@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:33:31 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 16:32:05 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:18:05 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	init_setting(t_game *game)
 	init_images(game);
 	init_offset(game);
 	init_collect_lst(game);
-	init_map(game);
 	init_enemy(game);
 	game->moves = 0;
 	game->fps = 0;
