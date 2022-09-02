@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:33:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 21:18:13 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 22:28:14 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ void	free_collect(t_game *game, size_t idx)
 		curr = curr->next;
 	}
 	if (prev == NULL)
-	{
-		game->collect_lst->head = NULL;
-		game->collect_lst->tail = NULL;
-	}
+		game->collect_lst->head = curr->next;
 	else if (curr->next == NULL)
 	{
 		prev->next = NULL;
