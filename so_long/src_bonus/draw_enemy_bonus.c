@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:17:20 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:27:59 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:30:52 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	move_enemy(t_game *game, t_enemy_node *curr, int direction)
 	curr->next_dir = -direction;
 }
 
+static void	game_over_by_enemy(t_game *game)
+{
+	print_msg("👻 You lose the game. Try again!");
+	exit_hook(game);
+}
+
 void	draw_enemy(t_game *game)
 {
 	t_enemy_node	*curr;
@@ -31,10 +37,7 @@ void	draw_enemy(t_game *game)
 	while (curr != NULL)
 	{
 		if (curr->idx == game->player_idx)
-		{
-			print_msg("👻 You lose the game. Try again!");
-			exit_hook(game);
-		}
+			game_over_by_enemy(game);
 		if (curr->next_dir == -1)
 		{
 			if (game->map[curr->idx + curr->next_dir] == '1')
