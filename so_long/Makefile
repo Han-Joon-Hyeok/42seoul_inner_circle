@@ -6,7 +6,7 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/01 14:35:24 by joonhan           #+#    #+#              #
-#    Updated: 2022/09/01 18:08:23 by joonhan          ###   ########.fr        #
+#    Updated: 2022/09/02 16:47:21 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,16 @@ OBJS				:=	$(SRCS:%.c=%.o)
 
 BONUS_DIR			:= ./src_bonus/
 BONUS_SRCS			:=	main_bonus.c \
+						collect_bonus.c \
 						init_bonus.c \
+						init_map_bonus.c \
 						utils_bonus.c \
 						save_map_bonus.c \
 						is_valid_map_bonus.c \
 						get_map_info_bonus.c \
+						draw_move_count_bonus.c \
 						draw_map_bonus.c \
-						draw_moves_bonus.c \
-						enemy.c \
+						enemy_bonus.c \
 						hooks_bonus.c
 BONUSES				:=	$(addprefix $(BONUS_DIR),$(BONUS_SRCS))
 BONUS_OBJS			:=	$(BONUSES:%.c=%.o)
