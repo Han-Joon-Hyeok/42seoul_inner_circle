@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:17:20 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:32:57 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 21:14:02 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ static void	move_enemy(t_game *game, t_enemy_node *curr, int direction)
 	curr->next_dir = -direction;
 }
 
+static int	is_movable(t_game *game, t_enemy_node *curr)
+{
+	if (game->map[curr->idx + curr->next_dir] == '1')
+		return (FALSE);
+	if (game->map[curr->idx + curr->next_dir] == 'E')
+		return (FALSE);
+	return (TRUE);
+}
+
 void	draw_enemy(t_game *game)
 {
 	t_enemy_node	*curr;
@@ -32,19 +41,19 @@ void	draw_enemy(t_game *game)
 	{
 		if (curr->idx == game->player_idx)
 			game_over_by_enemy(game);
-		if (curr->next_dir == -1)
+		if (curr->next_dir == LEFT)
 		{
-			if (game->map[curr->idx + curr->next_dir] == '1')
-				move_enemy(game, curr, 1);
+			if (is_movable(game, curr) == FALSE)
+				move_enemy(game, curr, RIGHT);
 			else
-				move_enemy(game, curr, -1);
+				move_enemy(game, curr, LEFT);
 		}
-		else if (curr->next_dir == 1)
+		else if (curr->next_dir == RIGHT)
 		{
-			if (game->map[curr->idx + curr->next_dir] == '1')
-				move_enemy(game, curr, -1);
+			if (is_movable(game, curr) == FALSE)
+				move_enemy(game, curr, LEFT);
 			else
-				move_enemy(game, curr, 1);
+				move_enemy(game, curr, RIGHT);
 		}
 		curr = curr->next;
 	}

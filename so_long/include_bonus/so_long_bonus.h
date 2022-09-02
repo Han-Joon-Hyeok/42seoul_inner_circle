@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:30:17 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 21:10:40 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define KEY_S		1
 # define KEY_D		2
 # define KEY_ESC	53
+
+# define LEFT	-1
+# define RIGHT	1
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
