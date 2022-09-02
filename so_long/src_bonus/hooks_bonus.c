@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 21:21:44 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 21:38:41 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,16 @@ static int	is_object(int key_code, t_game *game, char object)
 
 static int	is_collect(int key_code, t_game *game)
 {
-	if (game->map[game->player_idx + game->offset[key_code]] == 'C')
-		return (TRUE);
-	return FALSE;
+	t_collect_node	*curr;
+
+	curr = game->collect_lst->head;
+	while (curr != NULL)
+	{
+		if (game->player_idx + game->offset[key_code] == curr->idx)
+			return (TRUE);
+		curr = curr->next;
+	}
+	return (FALSE);
 }
 
 static void	process_move(int key_code, t_game *game)
