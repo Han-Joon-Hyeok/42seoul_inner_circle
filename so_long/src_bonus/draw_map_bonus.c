@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:14:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:22:23 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 19:24:13 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	draw_object(t_game *game, char object, size_t count, size_t height)
 		ft_put_image_to_16(game, game->wall, count, height);
 	else if (object == 'P')
 		ft_put_image_to_16(game, game->chr, count, height);
-	else if (object == 'C')
-		ft_put_image_to_16(game, game->collectible, count, height);
 	else if (object == 'E')
 		ft_put_image_to_16(game, game->door, count, height);
 	else if (object == 'F')

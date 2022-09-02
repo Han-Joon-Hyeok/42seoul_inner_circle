@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:33:19 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 20:09:05 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ typedef struct s_game
 void	init_collect_lst(t_game *game);
 void	create_collect_node(t_game *game, size_t idx);
 void	free_collect(t_game *game, size_t collect);
+void	draw_collect(t_game *game);
+
+// draw_enemy_bonus.c
+void	draw_enemy(t_game *game);
 
 // draw_map_bonus.c
 void	draw_map(t_game *game);
@@ -105,7 +109,6 @@ void	draw_move_count(t_game *game);
 void	init_enemy(t_game *game);
 void	free_all_enemy(t_game *game);
 void	create_enemy(t_game *game);
-void	draw_enemy(t_game *game);
 
 // get_map_info.c
 void	get_map_info(t_game *game);

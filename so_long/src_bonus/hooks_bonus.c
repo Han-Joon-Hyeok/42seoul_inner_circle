@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:32:52 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 20:07:09 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	key_release_hook(int key_code, t_game *game)
 int	main_loop_hook(t_game *game)
 {
 	draw_map(game);
+	draw_collect(game);
 	draw_enemy(game);
 	draw_move_count(game);
 	count_fps(game);
