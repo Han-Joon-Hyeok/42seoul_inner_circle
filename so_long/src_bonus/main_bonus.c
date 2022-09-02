@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:33:31 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:25:42 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/03 00:29:35 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char *argv[])
 	get_map_info(&game);
 	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &exit_hook, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, &key_release_hook, &game);
-	mlx_loop_hook(game.mlx, &main_loop_hook, &game);
+	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 21:10:40 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/03 00:30:31 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	create_enemy(t_game *game);
 void	get_map_info(t_game *game);
 
 // hooks_bonus.c
-int		main_loop_hook(t_game *game);
 int		key_release_hook(int key_code, t_game *game);
 int		exit_hook(t_game *game);
 
@@ -127,8 +126,11 @@ void	init_mlx(t_game *game);
 void	init_images(t_game *game);
 void	init_offset(t_game *game);
 
-// is_valid_map.c
+// is_valid_map_bonus.c
 void	is_valid_map(t_game *game);
+
+// loops_bonus.c
+int		main_loop(t_game *game);
 
 // save_map_bonus.c
 void	save_map(char *map_file, t_game *game);

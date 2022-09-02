@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 22:22:38 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/03 00:31:02 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,5 @@ int	key_release_hook(int key_code, t_game *game)
 		process_move(key_code, game);
 	else if (key_code == KEY_ESC)
 		exit_hook(game);
-	return (0);
-}
-
-int	main_loop_hook(t_game *game)
-{
-	draw_map(game);
-	draw_collect(game);
-	draw_enemy(game);
-	draw_move_count(game);
-	count_fps(game);
 	return (0);
 }
