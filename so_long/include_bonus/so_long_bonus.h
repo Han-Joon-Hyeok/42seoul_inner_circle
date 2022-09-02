@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 17:26:07 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 17:33:19 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ void	print_error(char *msg, void *game);
 void	ft_put_image_to_16(t_game *game, void *obj, \
 								size_t count, size_t height);
 void	count_fps(t_game *game);
+void	game_over_by_enemy(t_game *game);
 
 #endif
