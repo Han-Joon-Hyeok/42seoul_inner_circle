@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:33:01 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 15:12:25 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 20:29:25 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	init_offset(t_game *game)
 
 void	init_images(t_game *game)
 {
-	int	img_width;
-	int	img_height;
+	int		img_width;
+	int		img_height;
 
 	game->collectible = mlx_xpm_file_to_image(game->mlx, \
 					"./images/collectible.xpm", &img_width, &img_height);
@@ -44,8 +44,14 @@ void	init_images(t_game *game)
 					"./images/land.xpm", &img_width, &img_height);
 	game->wall = mlx_xpm_file_to_image(game->mlx, \
 					"./images/wall.xpm", &img_width, &img_height);
-	game->chr = mlx_xpm_file_to_image(game->mlx, \
+	game->sprites[0] = mlx_xpm_file_to_image(game->mlx, \
 					"./images/cat_1.xpm", &img_width, &img_height);
+	game->sprites[1] = mlx_xpm_file_to_image(game->mlx, \
+					"./images/cat_2.xpm", &img_width, &img_height);
+	game->sprites[2] = mlx_xpm_file_to_image(game->mlx, \
+					"./images/cat_3.xpm", &img_width, &img_height);
+	game->sprites[3] = mlx_xpm_file_to_image(game->mlx, \
+					"./images/cat_4.xpm", &img_width, &img_height);
 	game->door = mlx_xpm_file_to_image(game->mlx, \
 					"./images/door.xpm", &img_width, &img_height);
 	game->score = mlx_xpm_file_to_image(game->mlx, \

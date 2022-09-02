@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:46:52 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:09:05 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 20:30:17 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_game
 	void		*win;
 	void		*land;
 	void		*wall;
-	void		*chr;
+	char		*sprites[4];
 	void		*collectible;
 	void		*door;
 	void		*score;

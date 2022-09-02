@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 20:50:02 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 20:07:09 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/02 20:30:51 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	exit_hook(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->chr);
+	mlx_destroy_image(game->mlx, game->sprites[0]);
+	mlx_destroy_image(game->mlx, game->sprites[1]);
+	mlx_destroy_image(game->mlx, game->sprites[2]);
+	mlx_destroy_image(game->mlx, game->sprites[3]);
 	mlx_destroy_image(game->mlx, game->collectible);
 	mlx_destroy_image(game->mlx, game->wall);
 	mlx_destroy_image(game->mlx, game->land);

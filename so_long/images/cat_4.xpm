@@ -1,26 +1,26 @@
 /* XPM */
-static char *result[] = {
+static char *_fd3d960dfec4aa5c2145cbf8aa0aa30iEyZm6IigVepeqxl[] = {
 /* columns rows colors chars-per-pixel */
 "16 16 4 1 ",
-"  c #2F2F2E",
-". c gray71",
-"X c gray88",
-"o c None",
+"  c None",
+". c #2F2F2E",
+"X c gray71",
+"o c gray88",
 /* pixels */
-"oooooooooooooooo",
-"oooooooooooooooo",
-"ooooooo  oo  ooo",
-"  ooooo .    ooo",
-" X ooooo .XXX oo",
-"o X oooo .X .. o",
-"oo X ooo .XXXX o",
-"ooo      ..... o",
-"oo  XXXXXX  .   ",
-"o XXXXXXXXXX XX ",
-"o              o",
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo"
+"                ",
+"                ",
+"                ",
+"                ",
+"        ..  ..  ",
+"  ..    .X....  ",
+" .oo.   .Xooo.  ",
+"  ..o.  .Xo.XX. ",
+"   .o.  .Xoooo. ",
+"   ......XXXXX. ",
+"   .ooooooooo.  ",
+"   .o.ooo.oXo.  ",
+"    .X...o.o.   ",
+"    ...... ..   ",
+"                ",
+"                "
 };
