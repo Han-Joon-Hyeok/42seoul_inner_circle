@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/01 14:35:24 by joonhan           #+#    #+#              #
-#    Updated: 2022/09/02 17:17:40 by joonhan          ###   ########.fr        #
+#    Updated: 2022/09/03 00:30:51 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ BONUS_SRCS			:=	main_bonus.c \
 						draw_map_bonus.c \
 						draw_enemy_bonus.c \
 						enemy_bonus.c \
-						hooks_bonus.c
+						hooks_bonus.c \
+						loops_bonus.c
 BONUSES				:=	$(addprefix $(BONUS_DIR),$(BONUS_SRCS))
 BONUS_OBJS			:=	$(BONUSES:%.c=%.o)
 
