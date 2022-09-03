@@ -6,7 +6,7 @@
 /*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 17:17:20 by joonhan           #+#    #+#             */
-/*   Updated: 2022/09/02 22:21:25 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/03 14:26:55 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	is_movable(t_game *game, t_enemy_node *curr)
 	return (TRUE);
 }
 
-static void	move_enemy(t_game *game, t_enemy_node *curr, int direction)
+static void	move_enemy(t_game *game, t_enemy_node *curr)
 {
 	if (game->fps % 100 != 0)
 		return ;
 	if (curr->prev == NULL || curr->idx != curr->prev->idx)
 		game->map[curr->idx] = '0';
-	game->map[curr->idx + direction] = 'F';
-	curr->idx += direction;
+	game->map[curr->idx + curr->next_dir] = 'F';
+	curr->idx += curr->next_dir;
 	curr->next_dir = -curr->next_dir;
 }
 
@@ -43,20 +43,10 @@ void	draw_enemy(t_game *game)
 	{
 		if (curr->idx == game->player_idx)
 			game_over_by_enemy(game);
-		if (curr->next_dir == LEFT)
-		{
-			if (is_movable(game, curr) == FALSE)
-				move_enemy(game, curr, RIGHT);
-			else
-				move_enemy(game, curr, LEFT);
-		}
-		else if (curr->next_dir == RIGHT)
-		{
-			if (is_movable(game, curr) == FALSE)
-				move_enemy(game, curr, LEFT);
-			else
-				move_enemy(game, curr, RIGHT);
-		}
+		if (is_movable(game, curr) == TRUE)
+			move_enemy(game, curr);
+		else
+			curr->next_dir = -curr->next_dir;
 		curr = curr->next;
 	}
 }
