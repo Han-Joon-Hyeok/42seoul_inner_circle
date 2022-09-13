@@ -20,7 +20,6 @@ void	print_msg(char *msg)
 void	print_error(char *msg, void *game)
 {
 	perror(msg);
-	strerror(errno);
 	if (game != NULL)
 	{
 		close(((t_game *)game)->fd);
