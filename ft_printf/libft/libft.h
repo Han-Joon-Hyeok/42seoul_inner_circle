@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:59:36 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/22 16:27:23 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/17 11:48:39 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void		ft_putnbr_fd(int n, int fd, size_t *ret_len);
-void		ft_putstr_fd(char *s, int fd, size_t *ret_len);
+void		ft_putnbr_fd(int n, int fd);
+void		ft_putstr_fd(char *s, int fd);
 char		*ft_strchr(const char *s, int c);
 size_t		ft_strlen(const char *s);
 

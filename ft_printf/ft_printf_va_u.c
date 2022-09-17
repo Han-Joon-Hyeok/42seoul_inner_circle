@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_va_u.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:28 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/22 15:29:25 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/17 12:36:08 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-static void	ft_printf_recursive_va_u(unsigned int n, size_t *ret_len)
+static int	ft_printf_recursive_va_u(unsigned int n, int result)
 {
 	char	c;
 
 	if (n == 0)
-		return ;
-	ft_printf_recursive_va_u(n / 10, ret_len);
+		return (result);
+	result = ft_printf_recursive_va_u(n / 10, result);
 	c = (n % 10) + '0';
-	write(1, &c, 1);
-	*ret_len += 1;
+	return (result + write(1, &c, 1));
 }
 
-void	ft_printf_va_u(unsigned int n, size_t *ret_len)
+int	ft_printf_va_u(unsigned int n)
 {
+	int	result;
+
+	result = 0;
 	if (n == 0)
-	{
-		write(1, "0", 1);
-		*ret_len += 1;
-		return ;
-	}
-	ft_printf_recursive_va_u(n, ret_len);
+		return (write(1, "0", 1));
+	return (ft_printf_recursive_va_u(n, result));
 }

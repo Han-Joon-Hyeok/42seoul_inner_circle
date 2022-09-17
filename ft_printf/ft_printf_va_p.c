@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_va_p.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonhan <joonhan@studnet.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:27:28 by joonhan           #+#    #+#             */
-/*   Updated: 2022/06/22 15:57:52 by joonhan          ###   ########.fr       */
+/*   Updated: 2022/09/17 12:34:18 by joonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	print_recursive_hex(size_t addr, size_t *ret_len)
+static int	print_recursive_hex(size_t addr, int result)
 {
 	char	*hex;
 
 	hex = "0123456789abcdef";
 	if (addr == 0)
-		return ;
-	print_recursive_hex(addr / 16, ret_len);
-	write(1, &hex[addr % 16], 1);
-	*ret_len += 1;
+		return (result);
+	result = print_recursive_hex(addr / 16, result);
+	return (result + write(1, &hex[addr % 16], 1));
 }
 
-void	ft_printf_va_p(void *p, size_t *ret_len)
+int	ft_printf_va_p(void *p)
 {
+	int		result;
 	size_t	addr;
 
+	result = 0;
 	addr = *(size_t *)&p;
-	ft_putstr_fd("0x", 1, ret_len);
+	result += write(1, "0x", 2);
 	if (p == NULL)
-		ft_putstr_fd("0", 1, ret_len);
+		return (result + write(1, "0", 1));
 	else
-		print_recursive_hex(addr, ret_len);
+		return (print_recursive_hex(addr, result));
 }
