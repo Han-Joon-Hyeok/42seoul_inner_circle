@@ -6,7 +6,7 @@ void Contact::setContactIdx(int idx) { idx_ = idx; }
 
 void Contact::setFirstName(std::string input) { first_name_ = input; }
 
-void Contact::setUserData(int idx) {
+void Contact::setUserData(void) {
   std::string input;
 
   // while (true) {
@@ -38,8 +38,6 @@ void Contact::setUserData(int idx) {
   // std::getline(std::cin, input);
   // std::cout << std::endl;
   // setDarkestSecret(input);
-
-  setContactIdx(idx);
 }
 
 void Contact::displayUserData(void) {

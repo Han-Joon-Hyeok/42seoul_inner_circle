@@ -22,7 +22,7 @@ class Contact {
   void setContactIdx(int idx);
   int getContactIdx(void);
 
-  void setUserData(int idx);
+  void setUserData(void);
 
   void displayUserData(void);
 };
