@@ -1,12 +1,14 @@
 NAME 						:=	phonebook
 
 SRC_FILES				:=	main			\
-										PhoneBook
+										PhoneBook	\
+										Contact		\
+										utils
 
 SRCS						:=	$(addsuffix .cpp, $(SRC_FILES))
 
 OBJ_DIR					:=	obj/
-OBJS						:=	$(SRCS:%.c=$(OBJ_DIR)%.o)
+OBJS						:=	$(SRCS:%.cpp=$(OBJ_DIR)%.o)
 
 CXX							:=	c++
 CXXFLAGS 				:=	-Wall -Wextra -Werror -std=c++98 -pedantic
@@ -44,7 +46,7 @@ dsani : fclean
 $(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-$(OBJS): $(OBJ_DIR)%.o: %.c
+$(OBJS): $(OBJ_DIR)%.o: %.cpp
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
