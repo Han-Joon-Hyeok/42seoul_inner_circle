@@ -9,7 +9,7 @@ OBJ_DIR					:=	obj/
 OBJS						:=	$(SRCS:%.c=$(OBJ_DIR)%.o)
 
 CXX							:=	c++
-CXXFLAGS 				:=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS 				:=	-Wall -Wextra -Werror -std=c++98 -pedantic
 
 ifdef DEBUG_MODE
 	CXXFLAGS				:=	$(CXXFLAGS) -g
