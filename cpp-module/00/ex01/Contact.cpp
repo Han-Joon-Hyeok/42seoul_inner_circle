@@ -1,20 +1,50 @@
 #include "Contact.hpp"
+#include "utils.hpp"
 
-void Contact::getUserInput(std::string message,
-                            void (Contact::*setFunc)(std::string)) {
-  std::string input;
-
-  std::cout << message << ": ";
-  std::getline(std::cin, input);
-  std::cout << std::endl;
-  (this->*setFunc)(input);
+bool  isAllWhitespace(std::string str) {
+  for (int idx = 0; idx < static_cast<int>(str.length()); idx += 1) {
+    if (isspace(str[idx]) == false)
+      return (false);
+  }
+  return (true);
 }
+
+int Contact::getDataCount(void) { return (data_count_); }
+
+void Contact::setDataCount(int data_count) { data_count_ = data_count; }
 
 int Contact::getContactIdx(void) { return (idx_); }
 
 void Contact::setContactIdx(int idx) { idx_ = idx; }
 
 void Contact::setFirstName(std::string input) { first_name_ = input; }
+
+void Contact::getUserInput(std::string message,
+                            void (Contact::*setFunc)(std::string)) {
+  std::string input;
+
+  std::cout << message << ": ";
+  while (true) {
+    std::getline(std::cin, input);
+    if (std::cin.eof()) {
+      return ;
+    }
+
+    if (std::cin.fail()) {
+      printErrorMessage(FAILED_TO_READ, "");
+      exit(EXIT_FAILURE);
+    }
+
+    if (isAllWhitespace(input)) {
+      printWarnMessage("Empty value is not allowed", "");
+    }
+    else {
+      (this->*setFunc)(input);
+      setDataCount(getDataCount() + 1);
+      return ;
+    }
+  }
+}
 
 void Contact::setUserData(void) {
   std::string input;
