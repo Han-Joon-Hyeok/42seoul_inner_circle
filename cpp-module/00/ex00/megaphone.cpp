@@ -3,7 +3,7 @@
 #include <iostream>
 
 void print_str_to_uppercase(const std::string str) {
-  for (int idx = 0; idx < (int)str.length(); idx += 1) {
+  for (int idx = 0; idx < static_cast<int>(str.length()); idx += 1) {
     std::cout << static_cast<char>(toupper(str[idx]));
   }
 }
