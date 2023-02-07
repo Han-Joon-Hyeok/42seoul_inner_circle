@@ -6,6 +6,7 @@
 class Contact {
  private:
   int idx_;
+  int data_count_;
   std::string first_name_;
   std::string last_name_;
   std::string nickname_;
@@ -19,6 +20,9 @@ class Contact {
   void setPhoneNumber(std::string phone_number);
   void setDarkestSecret(std::string darkest_secret);
 
+  void setDataCount(int count);
+  int getDataCount(void);
+
   void setContactIdx(int idx);
   int getContactIdx(void);
 
@@ -27,6 +31,10 @@ class Contact {
   void getUserInput(std::string message, void (Contact::*setFunc)(std::string));
 
   void displayUserData(void);
+
+  Contact() {
+    data_count_ = 0;
+  }
 };
 
 void  getUserInput(std::string message, void (&setFunc)(std::string));
