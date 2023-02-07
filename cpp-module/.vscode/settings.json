@@ -1,6 +1,4 @@
 {
-  "C_Cpp.clang_format_style": "{ TabWidth: 4, ColumnLimit: 80, BasedOnStyle: Google, SpacesBeforeTrailingComments: 3 }",
-
   "files.associations": {
     "algorithm": "cpp",
     "__bit_reference": "cpp",
@@ -52,5 +50,7 @@
     "type_traits": "cpp",
     "typeinfo": "cpp",
     "utility": "cpp"
-  }
+  },
+  "C_Cpp.clang_format_style": "{ ColumnLimit: 80, BasedOnStyle: Google, SpacesBeforeTrailingComments: 3 }",
+  "editor.tabSize": 2
 }
