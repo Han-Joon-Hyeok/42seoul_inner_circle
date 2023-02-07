@@ -15,6 +15,9 @@ class PhoneBook {
   PhoneBook() {
     total_count_ = 0;
     save_idx_ = 0;
+    for (int idx = 0; idx < MAX_CONTACT_COUNT; idx += 1) {
+      contact_[idx].setContactIdx(idx);
+    }
   }
 
   int getTotalCount(void);

@@ -11,7 +11,6 @@ int PhoneBook::getSaveIdx(void) { return (save_idx_); }
 void PhoneBook::setSaveIdx(int idx) { save_idx_ = idx; }
 
 void PhoneBook::addNewContact(void) {
-  int save_idx;
   int curr_total_count;
 
   if (getSaveIdx() == MAX_CONTACT_COUNT - 1) {
@@ -20,8 +19,7 @@ void PhoneBook::addNewContact(void) {
     setSaveIdx(getSaveIdx() + 1);
   }
 
-  save_idx = getSaveIdx();
-  contact_[save_idx].setUserData(save_idx);
+  contact_[getSaveIdx()].setUserData();
   // contact_[save_idx].displayUserData();
 
   curr_total_count = getTotalCount();
