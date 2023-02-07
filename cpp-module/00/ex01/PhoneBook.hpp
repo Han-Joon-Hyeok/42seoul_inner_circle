@@ -1,19 +1,35 @@
 #ifndef PhoneBook_HPP
 #define PhoneBook_HPP
 
+#define MAX_CONTACT_COUNT 8
+
 #include "Contact.hpp"
 
 class PhoneBook {
-	private:
-		int count;
-		Contact contact[8];
+ private:
+  int save_idx_;
+  int total_count_;
+  Contact contact_[MAX_CONTACT_COUNT];
 
-	public:
-		PhoneBook() { count = 0; }
-		void show_count(void);// 테스트용
-		void add_new_contact(Contact contact);
-		void show_contacts(void);
-		void remove_last_contact(void);
+ public:
+  PhoneBook() {
+    total_count_ = 0;
+    save_idx_ = 0;
+  }
+
+  int getTotalCount(void);
+  void setTotalCount(int count);
+
+  int getSaveIdx(void);
+  void setSaveIdx(int idx);
+
+  void addNewContact(void);
+
+  void showContacts(void);
+
+  void removeOldestContact(int idx);
+
+  void showTotalCount(void);   // 테스트용
 };
 
 #endif
