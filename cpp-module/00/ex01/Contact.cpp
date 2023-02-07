@@ -1,5 +1,15 @@
 #include "Contact.hpp"
 
+void Contact::getUserInput(std::string message,
+                            void (Contact::*setFunc)(std::string)) {
+  std::string input;
+
+  std::cout << message << ": ";
+  std::getline(std::cin, input);
+  std::cout << std::endl;
+  (this->*setFunc)(input);
+}
+
 int Contact::getContactIdx(void) { return (idx_); }
 
 void Contact::setContactIdx(int idx) { idx_ = idx; }
@@ -13,12 +23,8 @@ void Contact::setUserData(void) {
   //   if (isInputAllWhitespace(input))
 
   // }
-  std::cout << "Input your first name: ";
-  std::getline(std::cin, input);
-  std::cout << "HELLO" << std::endl;
-  std::cout << std::endl;
-  setFirstName(input);
-
+  getUserInput("Input your first name", &Contact::setFirstName);
+  displayUserData();
   // std::cout << "Input your last name: ";
   // std::getline(std::cin, input);
   // std::cout << std::endl;

@@ -24,7 +24,11 @@ class Contact {
 
   void setUserData(void);
 
+  void getUserInput(std::string message, void (Contact::*setFunc)(std::string));
+
   void displayUserData(void);
 };
+
+void  getUserInput(std::string message, void (&setFunc)(std::string));
 
 #endif
