@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+
 #include "utils.hpp"
 
 void PhoneBook::showTotalCount(void) { std::cout << total_count_ << std::endl; }
@@ -30,10 +31,9 @@ void PhoneBook::addNewContact(void) {
     printErrorMessage("Not enough contact information.", "Please Try again.");
   } else {
     curr_total_count = getTotalCount();
-    if (curr_total_count != MAX_CONTACT_COUNT)
+    if (curr_total_count != MAX_CONTACT_COUNT) {
       setTotalCount(curr_total_count + 1);
-
+    }
     printColorMessage(1, BLUE_TEXT, "🚀 Successfully created a new contact!");
   }
-
 }

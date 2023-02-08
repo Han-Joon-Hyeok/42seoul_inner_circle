@@ -27,6 +27,8 @@ void Contact::getUserInput(std::string message,
   while (true) {
     std::getline(std::cin, input);
     if (std::cin.eof()) {
+      std::cin.clear();
+      std::clearerr(stdin);
       return ;
     }
 

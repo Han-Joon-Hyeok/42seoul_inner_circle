@@ -1,8 +1,9 @@
-#include "PhoneBook.hpp"
-#include "utils.hpp"
 #include <ios>
 #include <limits>
 #include <string>
+
+#include "PhoneBook.hpp"
+#include "utils.hpp"
 
 enum CommandType { ADD, SEARCH, EXIT, NONE };
 
@@ -13,7 +14,7 @@ CommandType getCommandType(std::string command) {
   return (NONE);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   std::string command;
   PhoneBook my_phone_book;
 
@@ -49,10 +50,5 @@ int main(int argc, char **argv) {
         printWarnMessage(INVALID_COMMAND, command);
         break;
     }
-  }
-
-  if (std::cin.eof()) {
-    printColorMessage(1, RED_TEXT, "HELLO");
-    std::clearerr(stdin);
   }
 }
