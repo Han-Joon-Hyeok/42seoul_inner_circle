@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
     showPrompt(COMMAND_PROMPT, command);
 
     if (std::cin.eof()) {
+      std::cout << std::endl;
       printColorMessage(BLUE_TEXT, "Goodbye!👋");
       break;
     }
