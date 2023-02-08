@@ -80,13 +80,26 @@ void PhoneBook::displayContacts(void) {
   }
 
   while (true) {
-    showPrompt("Enter search index [0 ~ 7]: ", user_input);
-    //TODO: ctrl + d 입력 시 무한반복 멈추기
+    showPrompt("Enter index [0 ~ 7]: ", user_input);
+
+    if (std::cin.eof()) {
+      std::cin.clear();
+      std::clearerr(stdin);
+      std::cout << std::endl;
+      return;
+    }
+
+    if (std::cin.fail()) {
+      printErrorMessage(FAILED_TO_READ, "");
+      exit(EXIT_FAILURE);
+    }
+
     search_idx = convertStringToInt(user_input);
     if (search_idx == ERROR) {
       printErrorMessage("You entered invalid index. Please try again.",
                         user_input);
     } else {
+      // TODO: 아직 자료가 입력되지 않은 인덱스인 경우 다시 입력 받도록 처리
       contact_[search_idx].displayUserData();
       break;
     }
