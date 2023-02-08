@@ -5,15 +5,6 @@
 #include "PhoneBook.hpp"
 #include "utils.hpp"
 
-enum CommandType { ADD, SEARCH, EXIT, NONE };
-
-CommandType getCommandType(std::string command) {
-  if (command == "ADD") return (ADD);
-  if (command == "SEARCH") return (SEARCH);
-  if (command == "EXIT") return (EXIT);
-  return (NONE);
-}
-
 int main(int argc, char** argv) {
   std::string command;
   PhoneBook my_phone_book;

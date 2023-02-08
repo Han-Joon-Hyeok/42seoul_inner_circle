@@ -21,6 +21,13 @@ void printWarnMessage(std::string message, std::string arg) {
             << std::endl;
 }
 
+CommandType getCommandType(std::string command) {
+  if (command == "ADD") return (ADD);
+  if (command == "SEARCH") return (SEARCH);
+  if (command == "EXIT") return (EXIT);
+  return (NONE);
+}
+
 std::string formatWidth(std::string str) {
   if (str.length() > WIDTH) {
     return (str.substr(0, WIDTH - 1) + ".");

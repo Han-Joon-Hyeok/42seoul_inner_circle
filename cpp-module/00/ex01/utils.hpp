@@ -19,10 +19,13 @@
 
 #include <string>
 
+enum CommandType { ADD, SEARCH, EXIT, NONE };
+
 void printErrorMessage(std::string message, std::string arg);
 void printWarnMessage(std::string message, std::string arg);
 void printColorMessage(std::string color, std::string message);
 void showPrompt(std::string message, std::string &input);
+CommandType getCommandType(std::string command);
 void displayTableRow(std::string first_name, std::string last_name,
 					std::string nickname, std::string phone_number,
 					std::string darkest_secret);
