@@ -29,7 +29,6 @@ class PhoneBook {
   void addNewContact(void);
 
   void displayContacts(void);
-  void displayContactsList(void);
 
   void removeOldestContact(int idx);
 };

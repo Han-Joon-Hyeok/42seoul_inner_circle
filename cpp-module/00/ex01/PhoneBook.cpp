@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+
 #include "utils.hpp"
 
 int PhoneBook::getTotalCount(void) { return (total_count_); }
@@ -33,21 +34,20 @@ void PhoneBook::addNewContact(void) {
   }
 }
 
-void PhoneBook::displayContactsList(void) {
+void PhoneBook::displayContacts(void) {
   int contact_count;
+  std::string search_idx;
 
   contact_count = getTotalCount();
   if (contact_count == 0) {
     printColorMessage(YELLOW_TEXT, "There is no contact 🥺");
   } else {
     displayTableRow("first name", "last name", "nick name", "phone num",
-                  "secret");
+                    "secret");
     for (int idx = 0; idx < contact_count; idx += 1) {
       contact_[idx].displayUserData();
     }
+    printColorMessage(GREEN_TEXT, "Enter search index [0 ~ 7]: ");
+    std::getline(std::cin, search_idx);
   }
-}
-
-void PhoneBook::displayContacts(void) {
-  displayContactsList();
 }
