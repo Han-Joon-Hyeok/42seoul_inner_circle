@@ -10,7 +10,7 @@
 #define ERROR_HEADER "[ERROR] "
 #define WARN_HEADER "[WARN] "
 
-#define COMMAND_PROMPT "ENTER COMMAND [ADD, SEARCH, EXIT]: "
+#define COMMAND_PROMPT "Enter command [ADD, SEARCH, EXIT]: "
 #define FAILED_TO_READ "Failed to read input"
 #define INVALID_EXECUTE_FORMAT "Please execute file: [./phonebook]"
 #define INVALID_COMMAND "Invalid command. Please try again."
