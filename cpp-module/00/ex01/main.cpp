@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     showPrompt(COMMAND_PROMPT, command);
 
     if (std::cin.eof()) {
-      printColorMessage(BLUE_TEXT, "Goodbye!👋");
+      printColorMessage(1, BLUE_TEXT, "Goodbye!👋");
       break;
     }
 
@@ -43,11 +43,16 @@ int main(int argc, char **argv) {
         my_phone_book.addNewContact();
         break;
       case EXIT:
-        printColorMessage(BLUE_TEXT, "Goodbye!👋");
+        printColorMessage(1, BLUE_TEXT, "Goodbye!👋");
         return (EXIT_SUCCESS);
       default:
         printWarnMessage(INVALID_COMMAND, command);
         break;
     }
+  }
+
+  if (std::cin.eof()) {
+    printColorMessage(1, RED_TEXT, "HELLO");
+    std::clearerr(stdin);
   }
 }

@@ -11,8 +11,18 @@ void showPrompt(std::string message, std::string &input) {
   std::getline(std::cin, input);
 }
 
-void printColorMessage(std::string color, std::string message) {
-  std::cout << color << message << CUT_TEXT << std::endl;
+void printColorMessage(int count, std::string color, ...) {
+  va_list     ap;
+  std::string str;
+
+  va_start(ap, color);
+  std::cout << color;
+  for (int idx = 0; idx < count; idx += 1) {
+    str = va_arg(ap, const char *);
+    std::cout << str;
+  }
+  std::cout << CUT_TEXT << std::endl;
+  va_end(ap);
 }
 
 void printWarnMessage(std::string message, std::string arg) {

@@ -19,7 +19,7 @@
 
 void printErrorMessage(std::string message, std::string arg);
 void printWarnMessage(std::string message, std::string arg);
-void printColorMessage(std::string color, std::string message);
+void printColorMessage(int count, std::string color, ...);
 void showPrompt(std::string message, std::string &input);
 
 #endif
