@@ -16,6 +16,7 @@
 #define INVALID_COMMAND "Invalid command. Please try again."
 
 #define WIDTH 10
+#define ERROR -1
 
 #include <string>
 

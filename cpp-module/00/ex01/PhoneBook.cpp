@@ -34,19 +34,61 @@ void PhoneBook::addNewContact(void) {
   }
 }
 
+/*
+  1. 음수는 무조건 받지 않는다.
+  2. int 범위를 벗어난 값이라면 오류 처리
+    - 오버플로우가 발생하는 순간부터 오류처리
+  3. + 기호는 받지 않는다.
+  4. 공백도 받지 않는다.
+
+  반환값이 음수라면 에러가 발생한 것으로 간주
+*/
+int  convertStringToInt(std::string user_input) {
+  int result = 0;
+
+  if (user_input.find('-') || user_input.find('+')) {
+    return (ERROR);
+  }
+  for (int idx = 0; idx < (int)user_input.length(); idx += 1) {
+    if (isdigit(user_input[idx])) {
+      result = (result * 10) + static_cast<int>(user_input[idx]);
+      if (result >= MAX_CONTACT_COUNT) {
+        return (ERROR);
+      }
+    } else {
+      return (ERROR);
+    }
+  }
+  return (result);
+}
+
 void PhoneBook::displayContacts(void) {
   int contact_count;
-  std::string search_idx;
+  int search_idx;
+  std::string user_input;
 
   contact_count = getTotalCount();
   if (contact_count == 0) {
     printColorMessage(YELLOW_TEXT, "There is no contact 🥺");
-  } else {
-    displayTableRow("first name", "last name", "nick name", "phone num",
-                    "secret");
-    for (int idx = 0; idx < contact_count; idx += 1) {
-      contact_[idx].displayUserData();
+    return;
+  }
+
+  displayTableRow("first name", "last name", "nick name", "phone num",
+                  "secret");
+  for (int idx = 0; idx < contact_count; idx += 1) {
+    contact_[idx].displayUserData();
+  }
+
+  while (true) {
+    showPrompt("Enter search index [0 ~ 7]: ", user_input);
+    //TODO: ctrl + d 입력 시 무한반복 멈추기
+    search_idx = convertStringToInt(user_input);
+    if (search_idx == ERROR) {
+      printErrorMessage("You entered invalid index. Please try again.",
+                        user_input);
+    } else {
+      contact_[search_idx].displayUserData();
+      break;
     }
-    showPrompt("Enter search index [0 ~ 7]: ", search_idx);
   }
 }
