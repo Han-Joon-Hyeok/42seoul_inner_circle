@@ -47,7 +47,6 @@ void PhoneBook::displayContacts(void) {
     for (int idx = 0; idx < contact_count; idx += 1) {
       contact_[idx].displayUserData();
     }
-    printColorMessage(GREEN_TEXT, "Enter search index [0 ~ 7]: ");
-    std::getline(std::cin, search_idx);
+    showPrompt("Enter search index [0 ~ 7]: ", search_idx);
   }
 }
