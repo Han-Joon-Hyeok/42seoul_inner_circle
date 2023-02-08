@@ -32,8 +32,6 @@ class PhoneBook {
   void displayContactsList(void);
 
   void removeOldestContact(int idx);
-
-  void showTotalCount(void);   // 테스트용
 };
 
 #endif

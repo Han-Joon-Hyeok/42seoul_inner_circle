@@ -1,8 +1,6 @@
 #include "PhoneBook.hpp"
 #include "utils.hpp"
 
-void PhoneBook::showTotalCount(void) { std::cout << total_count_ << std::endl; }
-
 int PhoneBook::getTotalCount(void) { return (total_count_); }
 
 void PhoneBook::setTotalCount(int count) { total_count_ = count; }
