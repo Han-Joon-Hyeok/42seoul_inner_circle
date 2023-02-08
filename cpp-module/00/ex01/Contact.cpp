@@ -1,10 +1,12 @@
 #include "Contact.hpp"
+
 #include "utils.hpp"
 
-bool  isAllWhitespace(std::string str) {
+bool isAllWhitespace(std::string str) {
   for (int idx = 0; idx < static_cast<int>(str.length()); idx += 1) {
-    if (isspace(str[idx]) == false)
+    if (isspace(str[idx]) == false) {
       return (false);
+    }
   }
   return (true);
 }
@@ -19,17 +21,28 @@ void Contact::setContactIdx(int idx) { idx_ = idx; }
 
 void Contact::setFirstName(std::string input) { first_name_ = input; }
 
+void Contact::setLastName(std::string input) { last_name_ = input; }
+
+void Contact::setNickname(std::string input) { nickname_ = input; }
+
+void Contact::setPhoneNumber(std::string input) { phone_number_ = input; }
+
+void Contact::setDarkestSecret(std::string input) { darkest_secret_ = input; }
+
 void Contact::getUserInput(std::string message,
                             void (Contact::*setFunc)(std::string)) {
   std::string input;
 
+  if (std::cin.eof()) {
+    return;
+  }
+
   while (true) {
     std::cout << message << ": ";
     std::getline(std::cin, input);
+
     if (std::cin.eof()) {
-      std::cin.clear();
-      std::clearerr(stdin);
-      return ;
+      return;
     }
 
     if (std::cin.fail()) {
@@ -38,12 +51,11 @@ void Contact::getUserInput(std::string message,
     }
 
     if (isAllWhitespace(input)) {
-      printWarnMessage("Empty value is not allowed", "");
-    }
-    else {
+      printWarnMessage("Empty value is not allowed", "Please try again.");
+    } else {
       (this->*setFunc)(input);
       setDataCount(getDataCount() + 1);
-      return ;
+      return;
     }
   }
 }
@@ -51,11 +63,15 @@ void Contact::getUserInput(std::string message,
 void Contact::setUserData(void) {
   std::string input;
 
-  // while (true) {
-  //   if (isInputAllWhitespace(input))
-
-  // }
   getUserInput("Input your first name", &Contact::setFirstName);
+  getUserInput("Input your last name", &Contact::setLastName);
+  getUserInput("Input your nickname", &Contact::setNickname);
+  getUserInput("Input your phone number", &Contact::setPhoneNumber);
+  getUserInput("Input your darkest secret", &Contact::setDarkestSecret);
+  if (std::cin.eof()) {
+    std::cin.clear();
+    std::clearerr(stdin);
+  }
   displayUserData();
   // std::cout << "Input your last name: ";
   // std::getline(std::cin, input);
@@ -80,4 +96,8 @@ void Contact::setUserData(void) {
 
 void Contact::displayUserData(void) {
   std::cout << "first_name_: " << first_name_ << std::endl;
+  std::cout << "last_name_: " << last_name_ << std::endl;
+  std::cout << "nickname_: " << nickname_ << std::endl;
+  std::cout << "phone_number_: " << phone_number_ << std::endl;
+  std::cout << "darkest_secret_: " << darkest_secret_ << std::endl;
 }
