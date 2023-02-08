@@ -34,6 +34,6 @@ void PhoneBook::addNewContact(void) {
     if (curr_total_count != MAX_CONTACT_COUNT) {
       setTotalCount(curr_total_count + 1);
     }
-    printColorMessage(1, BLUE_TEXT, "🚀 Successfully created a new contact!");
+    printColorMessage(BLUE_TEXT, "🚀 Successfully created a new contact!");
   }
 }
