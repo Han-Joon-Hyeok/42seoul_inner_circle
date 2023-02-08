@@ -13,8 +13,8 @@ class PhoneBook {
 
  public:
   PhoneBook() {
-    total_count_ = 0;
     save_idx_ = 0;
+    total_count_ = 0;
     for (int idx = 0; idx < MAX_CONTACT_COUNT; idx += 1) {
       contact_[idx].setContactIdx(idx);
     }
@@ -28,7 +28,8 @@ class PhoneBook {
 
   void addNewContact(void);
 
-  void showContacts(void);
+  void displayContacts(void);
+  void displayContactsList(void);
 
   void removeOldestContact(int idx);
 

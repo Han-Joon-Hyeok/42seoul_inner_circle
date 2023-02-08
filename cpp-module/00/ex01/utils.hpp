@@ -15,11 +15,16 @@
 #define INVALID_EXECUTE_FORMAT "Please execute file: [./phonebook]"
 #define INVALID_COMMAND "Invalid command. Please try again."
 
+#define WIDTH 10
+
 #include <string>
 
 void printErrorMessage(std::string message, std::string arg);
 void printWarnMessage(std::string message, std::string arg);
 void printColorMessage(std::string color, std::string message);
 void showPrompt(std::string message, std::string &input);
+void displayTableRow(std::string first_name, std::string last_name,
+					std::string nickname, std::string phone_number,
+					std::string darkest_secret);
 
 #endif

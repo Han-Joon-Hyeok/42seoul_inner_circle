@@ -15,10 +15,19 @@ class Contact {
 
  public:
   void setFirstName(std::string first_name);
+  std::string getFirstName(void);
+
   void setLastName(std::string last_name);
+  std::string getLastName(void);
+
   void setNickname(std::string nickname);
+  std::string getNickname(void);
+
   void setPhoneNumber(std::string phone_number);
+  std::string getPhoneNumber(void);
+
   void setDarkestSecret(std::string darkest_secret);
+  std::string getDarkestSecret(void);
 
   void setDataCount(int count);
   int getDataCount(void);

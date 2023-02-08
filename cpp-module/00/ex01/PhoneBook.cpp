@@ -1,5 +1,4 @@
 #include "PhoneBook.hpp"
-
 #include "utils.hpp"
 
 void PhoneBook::showTotalCount(void) { std::cout << total_count_ << std::endl; }
@@ -16,16 +15,12 @@ void PhoneBook::addNewContact(void) {
   int save_idx;
   int curr_total_count;
 
-  if (getSaveIdx() == MAX_CONTACT_COUNT - 1) {
+  if (getSaveIdx() == MAX_CONTACT_COUNT) {
     setSaveIdx(0);
-  } else {
-    setSaveIdx(getSaveIdx() + 1);
   }
 
   save_idx = getSaveIdx();
   contact_[save_idx].setUserData();
-  // TODO: 데이터가 모두 정상적으로 저장된 경우에만 데이터를 저장하기
-  //  - 입력 도중 EOF가 들어오면 COMMAND 입력을 다시 받도록 작동
 
   if (contact_[save_idx].getDataCount() != 5) {
     printErrorMessage("Not enough contact information.", "Please Try again.");
@@ -34,6 +29,26 @@ void PhoneBook::addNewContact(void) {
     if (curr_total_count != MAX_CONTACT_COUNT) {
       setTotalCount(curr_total_count + 1);
     }
+    setSaveIdx(save_idx + 1);
     printColorMessage(BLUE_TEXT, "🚀 Successfully created a new contact!");
   }
+}
+
+void PhoneBook::displayContactsList(void) {
+  int contact_count;
+
+  contact_count = getTotalCount();
+  if (contact_count == 0) {
+    printColorMessage(YELLOW_TEXT, "There is no contact 🥺");
+  } else {
+    displayTableRow("first name", "last name", "nick name", "phone num",
+                  "secret");
+    for (int idx = 0; idx < contact_count; idx += 1) {
+      contact_[idx].displayUserData();
+    }
+  }
+}
+
+void PhoneBook::displayContacts(void) {
+  displayContactsList();
 }

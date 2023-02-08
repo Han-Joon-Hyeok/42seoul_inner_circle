@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 
     switch (getCommandType(command)) {
       case SEARCH:
-        /* code */
+        my_phone_book.displayContacts();
         break;
       case ADD:
         my_phone_book.addNewContact();
