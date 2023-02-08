@@ -19,6 +19,7 @@ void PhoneBook::addNewContact(void) {
 
   save_idx = getSaveIdx();
   contact_[save_idx].setUserData();
+  contact_[save_idx].setContactIdx(save_idx);
 
   if (contact_[save_idx].getDataCount() != 5) {
     printErrorMessage("Not enough contact information.", "Please Try again.");
