@@ -23,8 +23,8 @@ void Contact::getUserInput(std::string message,
                             void (Contact::*setFunc)(std::string)) {
   std::string input;
 
-  std::cout << message << ": ";
   while (true) {
+    std::cout << message << ": ";
     std::getline(std::cin, input);
     if (std::cin.eof()) {
       std::cin.clear();
