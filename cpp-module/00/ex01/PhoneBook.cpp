@@ -43,15 +43,16 @@ void PhoneBook::addNewContact(void) {
 
   반환값이 음수라면 에러가 발생한 것으로 간주
 */
-int  convertStringToInt(std::string user_input) {
+int convertStringToInt(std::string user_input) {
   int result = 0;
 
-  if (user_input.find('-') || user_input.find('+')) {
+  if (user_input.find('-') != std::string::npos ||
+      user_input.find('+') != std::string::npos) {
     return (ERROR);
   }
   for (int idx = 0; idx < (int)user_input.length(); idx += 1) {
     if (isdigit(user_input[idx])) {
-      result = (result * 10) + static_cast<int>(user_input[idx]);
+      result = (result * 10) + static_cast<int>(user_input[idx]) - '0';
       if (result >= MAX_CONTACT_COUNT) {
         return (ERROR);
       }
@@ -98,8 +99,10 @@ void PhoneBook::displayContacts(void) {
     if (search_idx == ERROR) {
       printErrorMessage("You entered invalid index. Please try again.",
                         user_input);
+    } else if (search_idx >= contact_count) {
+      printErrorMessage("This index is not saved yet. Please try again.",
+                        user_input);
     } else {
-      // TODO: 아직 자료가 입력되지 않은 인덱스인 경우 다시 입력 받도록 처리
       contact_[search_idx].displayUserData();
       break;
     }
