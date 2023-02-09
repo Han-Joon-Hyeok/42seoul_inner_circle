@@ -3,7 +3,7 @@
 #include "utils.hpp"
 
 // Constructor
-Contact() {
+Contact::Contact() {
   data_count_ = 0;
 }
 
