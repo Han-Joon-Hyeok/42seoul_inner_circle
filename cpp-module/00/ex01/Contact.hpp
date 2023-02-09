@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+enum DisplayType { PER_LINE, ONE_LINE, INPUT_RESULT };
+
 class Contact {
  private:
   int idx_;
@@ -39,7 +41,7 @@ class Contact {
 
   void getUserInput(std::string message, void (Contact::*setFunc)(std::string));
 
-  void displayUserData(void);
+  void displayUserData(DisplayType type);
 
   Contact() {
     data_count_ = 0;

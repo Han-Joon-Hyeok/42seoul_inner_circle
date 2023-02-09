@@ -74,10 +74,9 @@ void PhoneBook::displayContacts(void) {
     return;
   }
 
-  displayTableRow("first name", "last name", "nick name", "phone num",
-                  "secret");
+  displayTableRow(4, HEADER, "idx", "first name", "last name", "nick name");
   for (int idx = 0; idx < contact_count; idx += 1) {
-    contact_[idx].displayUserData();
+    contact_[idx].displayUserData(ONE_LINE);
   }
 
   while (true) {
@@ -103,7 +102,7 @@ void PhoneBook::displayContacts(void) {
       printErrorMessage("This index is not saved yet. Please try again.",
                         user_input);
     } else {
-      contact_[search_idx].displayUserData();
+      contact_[search_idx].displayUserData(PER_LINE);
       break;
     }
   }

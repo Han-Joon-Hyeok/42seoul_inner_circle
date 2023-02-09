@@ -5,6 +5,7 @@
 #define GREEN_TEXT "\033[32m"
 #define YELLOW_TEXT "\033[33m"
 #define BLUE_TEXT "\033[34m"
+#define WHITE_TEXT "\033[37m"
 #define CUT_TEXT "\033[0m"
 
 #define ERROR_HEADER "[ERROR] "
@@ -17,6 +18,7 @@
 
 #define WIDTH 10
 #define ERROR -1
+#define HEADER -1
 
 #include <string>
 
@@ -27,8 +29,6 @@ void printWarnMessage(std::string message, std::string arg);
 void printColorMessage(std::string color, std::string message);
 void showPrompt(std::string message, std::string &input);
 CommandType getCommandType(std::string command);
-void displayTableRow(std::string first_name, std::string last_name,
-					std::string nickname, std::string phone_number,
-					std::string darkest_secret);
+void displayTableRow(int count, int idx, ...);
 
 #endif

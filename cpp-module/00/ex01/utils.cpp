@@ -1,6 +1,7 @@
 #include "utils.hpp"
-#include <iostream>
+
 #include <iomanip>
+#include <iostream>
 
 void printErrorMessage(std::string message, std::string arg) {
   std::cout << YELLOW_TEXT << ERROR_HEADER << CUT_TEXT << message << ": " << arg
@@ -35,14 +36,23 @@ std::string formatWidth(std::string str) {
   return (str);
 }
 
-void displayTableRow(std::string first_name, std::string last_name,
-                      std::string nickname, std::string phone_number,
-                      std::string darkest_secret) {
+void displayTableRow(int count, int idx, ...) {
+  va_list ap;
+  const char *str;
+
+  va_start(ap, idx);
   std::cout << "| ";
-  std::cout << std::setw(10) << std::right << formatWidth(first_name) << " | ";
-  std::cout << std::setw(10) << std::right << formatWidth(last_name) << " | ";
-  std::cout << std::setw(10) << std::right << formatWidth(nickname) << " | ";
-  std::cout << std::setw(10) << std::right << formatWidth(phone_number) << " | ";
-  std::cout << std::setw(10) << std::right << formatWidth(darkest_secret);
+  if (idx != HEADER) {
+    std::cout << std::setw(10) << std::right << idx << " | ";
+  }
+  for (int idx = 0; idx < count - 1; idx += 1) {
+    str = va_arg(ap, const char *);
+    std::cout << std::setw(10) << std::right
+              << std::string(str) << " | ";
+  }
+  str = va_arg(ap, const char *);
+  std::cout << std::setw(10) << std::right
+            << std::string(str);
   std::cout << " |" << std::endl;
+  va_end(ap);
 }
