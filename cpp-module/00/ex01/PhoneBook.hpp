@@ -12,13 +12,7 @@ class PhoneBook {
   Contact contact_[MAX_CONTACT_COUNT];
 
  public:
-  PhoneBook() {
-    save_idx_ = 0;
-    total_count_ = 0;
-    for (int idx = 0; idx < MAX_CONTACT_COUNT; idx += 1) {
-      contact_[idx].setContactIdx(idx);
-    }
-  }
+  PhoneBook();
 
   int getTotalCount(void);
   void setTotalCount(int count);

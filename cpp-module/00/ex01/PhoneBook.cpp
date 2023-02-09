@@ -2,6 +2,17 @@
 
 #include "utils.hpp"
 
+// Constructor
+PhoneBook::PhoneBook(void) {
+  save_idx_ = 0;
+  total_count_ = 0;
+  for (int idx = 0; idx < MAX_CONTACT_COUNT; idx += 1) {
+    contact_[idx].setContactIdx(idx);
+  }
+}
+
+// Member functions
+// - Getter and Setter
 int PhoneBook::getTotalCount(void) { return (total_count_); }
 
 void PhoneBook::setTotalCount(int count) { total_count_ = count; }
@@ -10,6 +21,8 @@ int PhoneBook::getSaveIdx(void) { return (save_idx_); }
 
 void PhoneBook::setSaveIdx(int idx) { save_idx_ = idx; }
 
+// Member functions
+// - Processing logic
 void PhoneBook::addNewContact(void) {
   int save_idx;
   int curr_total_count;
