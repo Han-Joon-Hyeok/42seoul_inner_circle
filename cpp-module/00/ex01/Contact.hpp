@@ -16,6 +16,8 @@ class Contact {
   std::string darkest_secret_;
 
  public:
+  Contact();
+
   void setFirstName(std::string first_name);
   std::string getFirstName(void);
 
@@ -42,10 +44,6 @@ class Contact {
   void getUserInput(std::string message, void (Contact::*setFunc)(std::string));
 
   void displayUserData(DisplayType type);
-
-  Contact() {
-    data_count_ = 0;
-  }
 };
 
 void  getUserInput(std::string message, void (&setFunc)(std::string));

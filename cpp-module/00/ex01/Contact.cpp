@@ -2,6 +2,12 @@
 
 #include "utils.hpp"
 
+// Constructor
+Contact() {
+  data_count_ = 0;
+}
+
+// Util function
 bool isAllWhitespace(std::string str) {
   for (int idx = 0; idx < static_cast<int>(str.length()); idx += 1) {
     if (isspace(str[idx]) == false) {
@@ -11,6 +17,8 @@ bool isAllWhitespace(std::string str) {
   return (true);
 }
 
+// Member functions
+// - Getter and Setter
 int Contact::getDataCount(void) { return (data_count_); }
 
 void Contact::setDataCount(int data_count) { data_count_ = data_count; }
@@ -34,6 +42,8 @@ std::string Contact::getPhoneNumber(void) { return (phone_number_); }
 void Contact::setDarkestSecret(std::string input) { darkest_secret_ = input; }
 std::string Contact::getDarkestSecret(void) { return (darkest_secret_); }
 
+// Member functions
+// - Processing logic
 void Contact::getUserInput(std::string message,
                             void (Contact::*setFunc)(std::string)) {
   std::string input;
