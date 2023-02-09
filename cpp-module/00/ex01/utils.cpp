@@ -48,11 +48,11 @@ void displayTableRow(int count, int idx, ...) {
   for (int idx = 0; idx < count - 1; idx += 1) {
     str = va_arg(ap, const char *);
     std::cout << std::setw(10) << std::right
-              << std::string(str) << " | ";
+              << formatWidth(std::string(str)) << " | ";
   }
   str = va_arg(ap, const char *);
   std::cout << std::setw(10) << std::right
-            << std::string(str);
+            << formatWidth(std::string(str));
   std::cout << " |" << std::endl;
   va_end(ap);
 }
