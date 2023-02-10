@@ -17,10 +17,13 @@ int main(int argc, char **argv) {
   std::cout << std::string(50, '=') << std::endl;
 
   Zombie *z1 = new Zombie("joon");
+  Zombie *z2 = new Zombie("han");
 
   z1->announce();
+  z2->announce(); // delete 를 수행하지 않으면 메모리 누수 발생
 
   delete z1;
+  // delete z2;
 
   std::cout << std::string(50, '=') << std::endl;
   std::cout << "THIS IS" << YELLOW_TEXT << " STACK " << CUT_TEXT
