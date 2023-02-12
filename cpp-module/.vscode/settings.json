@@ -50,8 +50,15 @@
     "type_traits": "cpp",
     "typeinfo": "cpp",
     "utility": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "__bits": "cpp",
+    "clocale": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp.clang_format_style": "{ ColumnLimit: 80, BasedOnStyle: Google, SpacesBeforeTrailingComments: 3 }",
+  "indentRainbow.ignoreErrorLanguages": ["*"],
+  "indentRainbow.colorOnWhiteSpaceOnly": true,
   "editor.tabSize": 2
 }
