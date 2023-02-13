@@ -16,8 +16,8 @@ int main(int argc, char **argv) {
             << "ALLOCATED ZOMBIES" << std::endl;
   std::cout << std::string(50, '=') << std::endl;
 
-  Zombie *z1 = new Zombie("joon");
-  Zombie *z2 = new Zombie("han");
+  Zombie *z1 = newZombie("joon");
+  Zombie *z2 = newZombie("han");
 
   z1->announce();
   z2->announce(); // delete 를 수행하지 않으면 메모리 누수 발생
@@ -33,7 +33,9 @@ int main(int argc, char **argv) {
   {
     Zombie z2("JOON");
     z2.announce();
-
+  }
+  
+  {
     randomChump("HAN");
   }
 
