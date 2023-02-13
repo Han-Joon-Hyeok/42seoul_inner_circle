@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
   if (infile.is_open() == false) {
     std::cout << YELLOW_TEXT << "[ERROR]" << CUT_TEXT
               << " cannot open file: " << argv[1] << std::endl;
+    exit(EXIT_FAILURE);
   }
 
   std::ofstream outfile;
