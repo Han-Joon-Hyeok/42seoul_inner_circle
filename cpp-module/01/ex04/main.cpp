@@ -33,12 +33,11 @@ int main(int argc, char **argv) {
   std::string file_name = argv[1] + std::string(".replace");
   outfile.open(file_name.c_str(), std::ofstream::out | std::ofstream::trunc);
   MyStd replacer(argv[2], argv[3]);
-  while (true) {
-    if (infile.eof() == true) break;
+  while (infile.eof() == false) {
     std::getline(infile, line);
     replaced = replacer.replace(line);
     outfile.write(replaced.c_str(), replaced.length());
-    if (replaced.empty() == false) {
+    if (infile.eof() == false) {
       outfile.write("\n", 1);
     }
   }
