@@ -33,14 +33,13 @@ void Harl::error(void) {
 }
 
 LevelType getLevelType(std::string level) {
-  for (int idx = 0; idx < (int)level.length(); idx += 1) {
-    level[idx] = std::tolower(level[idx]);
-  }
+  std::string levels[4] = {"debug", "info", "warning", "error"};
 
-  if (level == "debug") return (DEBUG);
-  if (level == "info") return (INFO);
-  if (level == "warning") return (WARNING);
-  if (level == "error") return (ERROR);
+  for (int idx = 0; idx < 4; idx += 1) {
+    if (levels[idx] == level) {
+      return (idx);
+    }
+  }
   return (NONE);
 }
 
@@ -58,6 +57,5 @@ void Harl::complain(std::string level) {
     default:
       std::cout << "[ Probably complaining about insignificant problems ]"
                 << std::endl;
-      break;
   }
 }
