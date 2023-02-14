@@ -11,14 +11,23 @@ MyStd::MyStd(const char *find, const char *change) {
 
 std::string MyStd::replace(std::string &line) {
   size_t pos;
+  size_t start;
   std::string result;
 
   pos = line.find(find_);
-  // When successfully found target string
-  if (pos != std::string::npos) {
-    result = line.substr(0, pos) + change_ +
-             line.substr(pos + find_len_, line.length());
-    return (result);
+  if (pos == std::string::npos) {
+    return (line);
   }
-  return (line);
+  start = pos + find_len_;
+  while (true) {
+    result += change_;
+    pos = line.find(find_, start);
+    if (pos == std::string::npos) {
+      result += line.substr(start, line.length() - start);
+      break ;
+    }
+    result += line.substr(start, pos - start);
+    start = pos + 1;
+  }
+  return (result);
 }

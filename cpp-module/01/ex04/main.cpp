@@ -1,3 +1,4 @@
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -28,17 +29,27 @@ int main(int argc, char **argv) {
   }
 
   std::ofstream outfile;
-  std::string replaced;
 
   std::string file_name = argv[1] + std::string(".replace");
   outfile.open(file_name.c_str(), std::ofstream::out | std::ofstream::trunc);
-  MyStd replacer(argv[2], argv[3]);
-  while (infile.eof() == false) {
-    std::getline(infile, line);
-    replaced = replacer.replace(line);
-    outfile.write(replaced.c_str(), replaced.length());
-    if (infile.eof() == false) {
-      outfile.write("\n", 1);
+  if (strlen(argv[2]) == 0) {
+    while (infile.eof() == false) {
+      std::getline(infile, line);
+      outfile.write(line.c_str(), line.length());
+      if (infile.eof() == false) {
+        outfile.write("\n", 1);
+      }
+    }
+  } else {
+    std::string replaced;
+    MyStd replacer(argv[2], argv[3]);
+    while (infile.eof() == false) {
+      std::getline(infile, line);
+      replaced = replacer.replace(line);
+      outfile.write(replaced.c_str(), replaced.length());
+      if (infile.eof() == false) {
+        outfile.write("\n", 1);
+      }
     }
   }
   infile.close();
