@@ -9,14 +9,6 @@
 #define BLUE_TEXT "\033[34m"
 #define CUT_TEXT "\033[0m"
 
-enum LevelType {
-  DEBUG,
-  INFO,
-  WARNING,
-  ERROR,
-  NONE
-};
-
 class Harl {
  private:
   void debug(void);
@@ -27,7 +19,5 @@ class Harl {
  public:
   void complain(std::string level);
 };
-
-LevelType getLevelType(std::string level);
 
 #endif

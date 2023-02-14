@@ -32,30 +32,17 @@ void Harl::error(void) {
             << std::endl;
 }
 
-LevelType getLevelType(std::string level) {
-  if (level == "debug") return (DEBUG);
-  if (level == "info") return (INFO);
-  if (level == "warning") return (WARNING);
-  if (level == "error") return (ERROR);
-  return (NONE);
-}
-
 void Harl::complain(std::string level) {
-  switch (getLevelType(level)) {
-    case DEBUG:
-      this->debug();
-      break;
-    case INFO:
-      this->info();
-      break;
-    case WARNING:
-      this->warning();
-      break;
-    case ERROR:
-      this->error();
-      break;
-    default:
-      std::cout << "[" << level << "] is invalid input." << std::endl;
-      break;
+  std::string levels[4] = {"debug", "info", "warning", "error"};
+  void (Harl::*funcs[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning,
+                                  &Harl::error};
+
+  for (int idx = 0; idx < 4; idx += 1) {
+    if (levels[idx] == level) {
+      (this->*funcs[idx])();
+      return;
+    }
   }
+
+  std::cout << "[" << level << "] is invalid input." << std::endl;
 }
