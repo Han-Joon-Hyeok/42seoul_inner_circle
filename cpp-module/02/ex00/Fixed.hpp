@@ -10,7 +10,7 @@
 class Fixed
 {
 	private:
-		int	value_;
+		int	raw_;
 		static const int bits_ = 8;
 
 	public:
