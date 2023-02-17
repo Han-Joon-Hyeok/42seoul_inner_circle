@@ -65,3 +65,45 @@ Fixed Fixed::operator/(const Fixed& rhs) const {
 Fixed Fixed::operator*(const Fixed& rhs) const {
   return (Fixed(this->toFloat() * rhs.toFloat()));
 }
+
+bool Fixed::operator>(const Fixed& rhs) const {
+  if (this->toFloat() > rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}
+
+bool Fixed::operator<(const Fixed& rhs) const {
+  if (this->toFloat() < rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}
+
+bool Fixed::operator>=(const Fixed& rhs) const {
+  if (this->toFloat() >= rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}
+
+bool Fixed::operator<=(const Fixed& rhs) const {
+  if (this->toFloat() <= rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}
+
+bool Fixed::operator==(const Fixed& rhs) const {
+  if (this->toFloat() == rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}
+
+bool Fixed::operator!=(const Fixed& rhs) const {
+  if (this->toFloat() != rhs.toFloat()) {
+    return (true);
+  }
+  return (false);
+}

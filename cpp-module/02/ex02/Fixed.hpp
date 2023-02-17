@@ -28,6 +28,13 @@ class Fixed
 		Fixed		operator*(const Fixed& rhs) const;
 		Fixed		operator/(const Fixed& rhs) const;
 
+		bool		operator>(const Fixed& rhs) const;
+		bool		operator<(const Fixed& rhs) const;
+		bool		operator>=(const Fixed& rhs) const;
+		bool		operator<=(const Fixed& rhs) const;
+		bool		operator==(const Fixed& rhs) const;
+		bool		operator!=(const Fixed& rhs) const;
+
 		Fixed(const int raw);
 		Fixed(const float raw);
 
