@@ -22,7 +22,12 @@ class Fixed
 
 		Fixed&	operator++(void); // prefix
 		Fixed		operator++(int);	// postfix
-		
+
+		Fixed		operator+(const Fixed& rhs) const;
+		Fixed		operator-(const Fixed& rhs) const;
+		Fixed		operator*(const Fixed& rhs) const;
+		Fixed		operator/(const Fixed& rhs) const;
+
 		Fixed(const int raw);
 		Fixed(const float raw);
 

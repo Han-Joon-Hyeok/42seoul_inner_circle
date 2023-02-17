@@ -46,3 +46,22 @@ Fixed Fixed::operator++(int) {
   setRawBits(getRawBits() + 1);
   return (prev);
 }
+
+Fixed Fixed::operator+(const Fixed& rhs) const {
+  return (Fixed(this->toFloat() + rhs.toFloat()));
+}
+
+Fixed Fixed::operator-(const Fixed& rhs) const {
+  return (Fixed(this->toFloat() - rhs.toFloat()));
+}
+
+Fixed Fixed::operator/(const Fixed& rhs) const {
+  if (rhs.toFloat() == 0) {
+    return (Fixed(0));
+  }
+  return (Fixed(this->toFloat() / rhs.toFloat()));
+}
+
+Fixed Fixed::operator*(const Fixed& rhs) const {
+  return (Fixed(this->toFloat() * rhs.toFloat()));
+}
