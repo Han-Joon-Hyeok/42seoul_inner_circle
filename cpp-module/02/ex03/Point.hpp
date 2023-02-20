@@ -5,8 +5,8 @@
 
 class Point {
  private:
-  const Fixed x_;
-  const Fixed y_;
+  Fixed const x_;
+  Fixed const y_;
 
  public:
   Point(void);
@@ -14,10 +14,12 @@ class Point {
   Point(const Point &rhs);
   Point &operator=(const Point &rhs);
 
-  Point(const float x, const float y);
+  Point(const Fixed x, const Fixed y);
 
-  Fixed &getX(void);
-  Fixed &getY(void);
+  Fixed getX(void) const;
+  Fixed getY(void) const;
 };
+
+bool  bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

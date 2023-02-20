@@ -1,58 +1,26 @@
 #include <iostream>
 
 #include "Fixed.hpp"
+#include "Point.hpp"
 
 int main(void) {
-  Fixed a;
-  Fixed a2(1.01f);
-  Fixed const b(Fixed(5.05f) * Fixed(2));
-  Fixed const c(Fixed(5.05f) + Fixed(2));
-  Fixed const d(Fixed(5.05f) - Fixed(2));
-  Fixed const e(Fixed(5.05f) / Fixed(2));
-  Fixed const f(Fixed(5.05f) / Fixed(0));
+  Point const p1(Fixed(0), Fixed(0));
+  Point const p2(Fixed(3.3f), Fixed(1.2f));
+  Point const p3(Fixed(2.1f), Fixed(3.4f));
 
-  std::cout << "a: " <<a << std::endl;
-  std::cout << "a: " << ++a << std::endl;
-  std::cout << "a: " << a << std::endl;
-  std::cout << "a: " << a++ << std::endl;
-  std::cout << "a: " << a << std::endl;
+  Point const target(Fixed(1.1f), Fixed(1.5f));
+  Point const target2(Fixed(-1.1f), Fixed(2.1f));
 
-  std::cout << "b: " << b << std::endl;
-  std::cout << "c: " << c << std::endl;
-  std::cout << "d: " << d << std::endl;
-  std::cout << "e: " << e << std::endl;
-  std::cout << "f: " << f << std::endl;
+  std::cout << "p1: (" << p1.getX() << ", " << p1.getY() << ")" << std::endl;
+  std::cout << "p2: (" << p2.getX() << ", " << p2.getY() << ")" << std::endl;
+  std::cout << "p3: (" << p3.getX() << ", " << p3.getY() << ")" << std::endl;
+  std::cout << "target: (" << target.getX() << ", " << target.getY() << ")" << std::endl;
+  std::cout << "target2: (" << target2.getX() << ", " << target2.getY() << ")" << std::endl;
 
-  std::cout << std::endl;
-  std::cout << "a: " << a << " / b: " << b << std::endl;
-  std::cout << "a > b: " << (a > b ? "true" : "false") << std::endl;
-  std::cout << "a < b: " << (a < b ? "true" : "false") << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "a: " << a << " / a: " << a << std::endl;
-  std::cout << "a >= a: " << (a >= a ? "true" : "false") << std::endl;
-  std::cout << "a <= a: " << (a <= a ? "true" : "false") << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "a: " << a << " / b: " << b << std::endl;
-  std::cout << "a == b: " << (a == b ? "true" : "false") << std::endl;
-  std::cout << "a != b: " << (a != b ? "true" : "false") << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "a: " << a << " / a2: " << a2 << std::endl;
-  std::cout << "min(a, a2): " << Fixed::min(a, a2) << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "b: " << b << " / c: " << c << std::endl;
-  std::cout << "min(b, c): " << Fixed::min(b, c) << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "a: " << a << " / a2: " << a2 << std::endl;
-  std::cout << "max(a, a2): " << Fixed::max(a, a2) << std::endl;
-
-  std::cout << std::endl;
-  std::cout << "b: " << b << " / c: " << c << std::endl;
-  std::cout << "max(b, c): " << Fixed::max(b, c) << std::endl;
+  std::cout << "bsp(p1, p2, p3, target): "
+            << (bsp(p1, p2, p3, target) ? "true" : "false") << std::endl;
+  std::cout << "bsp(p1, p2, p3, target2): "
+            << (bsp(p1, p2, p3, target2) ? "true" : "false") << std::endl;
 
   return (EXIT_SUCCESS);
 }

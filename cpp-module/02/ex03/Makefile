@@ -6,14 +6,16 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 09:19:10 by joonhan           #+#    #+#              #
-#    Updated: 2023/02/15 11:12:40 by joonhan          ###   ########.fr        #
+#    Updated: 2023/02/20 08:12:11 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 						:=	fixed
 
 SRC_FILES				:=	main				\
-										Fixed
+										Fixed				\
+										Point				\
+										bsp
 
 SRCS						:=	$(addsuffix .cpp, $(SRC_FILES))
 

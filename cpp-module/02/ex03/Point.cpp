@@ -1,22 +1,21 @@
 #include "Point.hpp"
 
-#include <cmath>
-#include <iostream>
-
 Point::Point(void) : x_(0), y_(0) {}
 
 Point::~Point(void) {}
 
-Point::Point(const Point& rhs) { *this = rhs; }
+Point::Point(const Point& rhs) : x_(rhs.getX()), y_(rhs.getY()) {}
 
 Point& Point::operator=(const Point& rhs) {
   if (this != &rhs) {
-    x_ = rhs.getX();
-    y_ = rhs.getY();
+    const_cast<Fixed&>(x_) = rhs.getX();
+    const_cast<Fixed&>(y_) = rhs.getY();
   }
   return (*this);
 }
 
-Fixed& Point::getX(void) { return (x_); }
+Point::Point(const Fixed x, const Fixed y) : x_(x), y_(y) {}
 
-Fixed& Point::getY(void) { return (y_); }
+Fixed Point::getX(void) const { return (x_); }
+
+Fixed Point::getY(void) const { return (y_); }
