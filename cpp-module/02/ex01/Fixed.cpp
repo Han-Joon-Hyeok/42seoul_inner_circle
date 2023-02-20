@@ -9,6 +9,7 @@ Fixed::Fixed(void): raw_(0) {
 
 Fixed::~Fixed(void) {
   std::cout << "Destructor called" << std::endl;
+  std::cout << this->toFloat() << std::endl;
 }
 
 Fixed::Fixed(const Fixed &rhs) {
