@@ -8,7 +8,7 @@ bool isPositive(Point const p1, Point const p2, Point const target) {
 	Fixed x = target.getX();
 	Fixed y = target.getY();
 
-	if ((y - y1) * (x2 - x1) - (y2 - y1) * (x - x1) >= 0) {
+	if ((y - y1) * (x2 - x1) - (y2 - y1) * (x - x1) > 0) {
 		return (true);
 	}
 	return (false);
