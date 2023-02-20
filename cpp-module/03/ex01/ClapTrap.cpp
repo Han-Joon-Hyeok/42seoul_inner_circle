@@ -12,15 +12,20 @@ ClapTrap::~ClapTrap(void) {
   std::cout << "[Destructor] Bye world, my name is: " << getName() << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& rhs) { *this = rhs; }
+ClapTrap::ClapTrap(const ClapTrap& rhs) {
+  std::cout << "[Copy constructor] Hello world, my name is: " << rhs.getName()
+            << std::endl;
+  *this = rhs;
+}
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& rhs) {
+  std::cout << "[Copy assignment operator] Hello world, my name is: "
+            << rhs.getName() << std::endl;
   if (this != &rhs) {
     this->setName(rhs.getName());
   }
   return (*this);
 }
-
 void ClapTrap::setName(std::string name) { name_ = name; }
 
 std::string ClapTrap::getName(void) const { return (name_); }
