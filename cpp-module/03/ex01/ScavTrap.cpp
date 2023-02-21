@@ -45,10 +45,11 @@ void ScavTrap::guardGate(void) {
     std::cout << "[ScavTrap] " << getName() << " is in Gate keeper mode."
               << std::endl;
   } else {
-    std::cout
-        << "[ScavTrap] " << getName()
-        << " can't be Gate keeper mode because of hit points or energy points"
-        << " (current energy point: " << current_energy_points << ","
-        << " current hit point: " << current_hit_points << ")" << std::endl;
+    std::cout << "[ScavTrap] " << getName()
+              << " can't be Gate keeper mode because of not enough hit points "
+                 "or energy points"
+              << " (current energy point: " << current_energy_points << ","
+              << " current hit point: " << current_hit_points << ")"
+              << std::endl;
   }
 }
