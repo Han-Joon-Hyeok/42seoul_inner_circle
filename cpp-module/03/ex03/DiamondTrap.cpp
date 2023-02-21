@@ -3,7 +3,6 @@
 #include <iostream>
 
 DiamondTrap::DiamondTrap(void) : ClapTrap(), ScavTrap(), FragTrap() {
-  setType("DiamondTrap");
   setHitPoints(100);
   setEnergyPoints(50);
   setAttackDamage(30);
@@ -13,7 +12,6 @@ DiamondTrap::DiamondTrap(void) : ClapTrap(), ScavTrap(), FragTrap() {
 
 DiamondTrap::DiamondTrap(std::string name)
     : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
-  setType("DiamondTrap");
   setHitPoints(100);
   setEnergyPoints(50);
   setAttackDamage(30);
@@ -38,7 +36,9 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& rhs) {
   return (*this);
 }
 
-void DiamondTrap::attack(std::string target) { ScavTrap::attack(target); }
+void DiamondTrap::attack(const std::string& target) {
+  ScavTrap::attack(target);
+}
 
 void DiamondTrap::whoAmI(void) {
   std::cout << "[DiamondTrap] Hello, I am DiamondTrap: " << getName()

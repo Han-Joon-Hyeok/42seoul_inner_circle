@@ -3,7 +3,6 @@
 #include <iostream>
 
 FragTrap::FragTrap(void) : ClapTrap() {
-  setType("FragTrap");
   setHitPoints(100);
   setEnergyPoints(100);
   setAttackDamage(30);
@@ -12,7 +11,6 @@ FragTrap::FragTrap(void) : ClapTrap() {
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-  setType("FragTrap");
   setHitPoints(100);
   setEnergyPoints(100);
   setAttackDamage(30);
