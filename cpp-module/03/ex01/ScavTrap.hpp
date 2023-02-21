@@ -4,9 +4,6 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap {
- private:
-  std::string type_;
-
  public:
   ScavTrap(void);
   ScavTrap(std::string name);

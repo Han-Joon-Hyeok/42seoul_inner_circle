@@ -4,9 +4,6 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
- private:
-  std::string type_;
-
  public:
   FragTrap(void);
   FragTrap(std::string name);
