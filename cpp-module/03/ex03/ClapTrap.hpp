@@ -8,12 +8,10 @@
 #include <string>
 
 class ClapTrap {
- private:
+ protected:
   unsigned int hit_points_;
   unsigned int energy_points_;
   unsigned int attack_damage_;
-
- protected:
   std::string name_;
 
  public:
