@@ -6,11 +6,11 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 09:19:10 by joonhan           #+#    #+#              #
-#    Updated: 2023/02/20 13:49:05 by joonhan          ###   ########.fr        #
+#    Updated: 2023/02/21 07:48:49 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						:=	clapTrap
+NAME 						:=	scavTrap
 
 SRC_FILES				:=	main				\
 										ClapTrap		\

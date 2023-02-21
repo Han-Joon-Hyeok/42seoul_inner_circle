@@ -3,11 +3,12 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : ClapTrap {
+class ScavTrap : public ClapTrap {
  private:
-  ScavTrap(void);
+  std::string type_;
 
  public:
+  ScavTrap(void);
   ScavTrap(std::string name);
   ~ScavTrap(void);
   ScavTrap(const ScavTrap& rhs);

@@ -9,18 +9,21 @@
 
 class ClapTrap {
  private:
+  std::string type_;
   std::string name_;
   unsigned int hit_points_;
   unsigned int energy_points_;
   unsigned int attack_damage_;
 
-	ClapTrap(void);
-
  public:
+	ClapTrap(void);
   ClapTrap(std::string name);
 	~ClapTrap(void);
   ClapTrap(const ClapTrap& rhs);
   ClapTrap& operator=(const ClapTrap& rhs);
+
+	void setType(std::string type);
+	std::string getType(void) const;
 
 	void setName(std::string name);
 	std::string getName(void) const;
