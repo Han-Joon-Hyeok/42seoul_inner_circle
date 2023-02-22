@@ -19,17 +19,12 @@ Brain& Brain::operator=(const Brain& rhs) {
   std::cout << "[Copy assignment operator] Brain" << std::endl;
   if (this != &rhs) {
     for (int idx = 0; idx < NUMBER_OF_IDEA; idx += 1) {
-      setIdea(idx, std::string(rhs.getIdea(idx)));
+      setIdea(idx, rhs.getIdea(idx));
     }
   }
   return (*this);
 }
 
-const std::string& Brain::getIdea(int idx) const {
-  return (ideas[idx]);
-}
+const std::string& Brain::getIdea(int idx) const { return (ideas[idx]); }
 
-void  Brain::setIdea(int idx, const std::string& idea) {
-  ideas[idx] = idea;
-}
-
+void Brain::setIdea(int idx, const std::string& idea) { ideas[idx] = idea; }
