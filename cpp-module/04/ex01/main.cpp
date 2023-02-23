@@ -83,24 +83,28 @@ int main(void) {
 
     dog1->makeIdea("Hello World");
 
-    std::cout << std::string(50, '=') << std::endl;
-    std::cout << YELLOW_TEXT << "BEFORE DEEP COPY" << CUT_TEXT << std::endl;
-
     Dog* dog2 = new Dog();
-    dog2->makeIdea("Bye world");
-    dog2->displayIdea();
-
     std::cout << std::string(50, '=') << std::endl;
     std::cout << YELLOW_TEXT << "DEEP COPY DOG1 TO DOG2" << CUT_TEXT
               << std::endl;
     *dog2 = *dog1;
+    dog2->displayIdea();
+
+    std::cout << std::string(50, '=') << std::endl;
+    std::cout << YELLOW_TEXT << "CHANGE DOG1 IDEA" << CUT_TEXT << std::endl;
+    std::cout << GREEN_TEXT << "Bye world" << CUT_TEXT << std::endl;
+    dog1->makeIdea("Bye world");
+
+    std::cout << std::string(50, '=') << std::endl;
+    std::cout << YELLOW_TEXT << "DISPLAY DOG2 IDEA" << CUT_TEXT << std::endl;
+    dog2->displayIdea();
 
     std::cout << std::string(50, '=') << std::endl;
     std::cout << YELLOW_TEXT << "DELETE DOG1" << CUT_TEXT << std::endl;
     delete dog1;
 
     std::cout << std::string(50, '=') << std::endl;
-    std::cout << YELLOW_TEXT << "AFTER DEEP COPY" << CUT_TEXT << std::endl;
+    std::cout << YELLOW_TEXT << "DISPLAY DOG2 IDEA" << CUT_TEXT << std::endl;
     dog2->displayIdea();
 
     std::cout << std::string(50, '=') << std::endl;
