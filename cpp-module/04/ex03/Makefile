@@ -6,18 +6,18 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 09:19:10 by joonhan           #+#    #+#              #
-#    Updated: 2023/02/24 16:28:55 by joonhan          ###   ########.fr        #
+#    Updated: 2023/02/26 15:07:28 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 						:=	materia
 
 SRC_FILES				:=	main						\
-										Amateria				\
+										AMateria				\
 										Character				\
-										MateriaSource		\
+										Cure						\
 										Ice							\
-										Cure
+										MateriaSource
 
 SRCS						:=	$(addsuffix .cpp, $(SRC_FILES))
 
@@ -28,7 +28,7 @@ CXX							:=	c++
 CXXFLAGS 				:=	-Wall -Wextra -Werror -std=c++98
 
 ifdef DEBUG_MODE
-	CXXFLAGS			:=	$(CXXFLAGS) -g
+	CXXFLAGS			:=	$(CXXFLAGS) -g3
 endif
 
 ifdef D_SANI
