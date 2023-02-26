@@ -40,13 +40,16 @@ void Character::setName(const std::string& name) { name_ = name; }
 std::string const& Character::getName(void) const { return (name_); }
 
 void Character::equip(AMateria* m) {
+  if (m == NULL) {
+    std::cout << "[" << getName() << "] Can't equip empty materia!" << std::endl;
+    return ;
+  }
   for (int idx = 0; idx < SLOT_SIZE; idx += 1) {
     if (inventory_[idx] == NULL) {
       inventory_[idx] = m;
       return;
     }
   }
-  std::cout << "[" << getName() << "] Can't equip materia!" << std::endl;
 }
 
 void Character::unequip(int idx) {
