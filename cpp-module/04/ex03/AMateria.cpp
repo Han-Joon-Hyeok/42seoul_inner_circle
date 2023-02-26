@@ -21,5 +21,6 @@ std::string const& AMateria::getType(void) const { return (type_); }
 void AMateria::setType(const std::string& type) { type_ = type; }
 
 void AMateria::use(ICharacter& target) {
+  (void)target;
   std::cout << "This an abstract use." << std::endl;
 }
