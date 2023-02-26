@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
 
 #include <iostream>
 
@@ -8,7 +9,7 @@ Character::Character(const std::string& name) : name_(name) {
   }
 }
 
-Character::Character(const Character& src) {}
+Character::Character(const Character& src) { *this = src; }
 
 Character::~Character(void) {
   for (int idx = 0; idx < SLOT_SIZE; idx += 1) {
