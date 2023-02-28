@@ -33,7 +33,7 @@ class Bureaucrat
 		private:
 			Bureaucrat(void);
 			int	grade_;
-			std::string	name_;
+			const std::string	name_;
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& rhs);
