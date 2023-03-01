@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string& name, int grade): name_(name) {
+#include <iostream>
+
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name_(name) {
   if (grade < 1) {
     throw GradeTooHighException();
   } else if (grade > 150) {
@@ -10,12 +12,20 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade): name_(name) {
   }
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& src) { *this = src; }
+Bureaucrat::Bureaucrat(const Bureaucrat& src)
+    : name_(src.getName()), grade_(src.getGrade()) {}
 
 Bureaucrat::~Bureaucrat(void) {}
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs) {
   if (this != &rhs) {
+    // const_cast can cause undefined behavior
+    // const_cast<std::string&>(name_) = rhs.name_;
+
+    // placement new also can cause undefined behavior
+    // this->~Bureaucrat();
+    // new (this)(Bureaucrat)(rhs);
+
     this->grade_ = rhs.grade_;
   }
   return *this;
