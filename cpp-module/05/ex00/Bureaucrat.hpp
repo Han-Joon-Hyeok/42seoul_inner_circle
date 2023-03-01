@@ -18,8 +18,6 @@ class Bureaucrat
 		void	upGrade(void);
 		void	downGrade(void);
 
-		void	introduce(void);
-
 		class GradeTooHighException : public std::exception {
 			public:
 				virtual const char* what() const throw();
