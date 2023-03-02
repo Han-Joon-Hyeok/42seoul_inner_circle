@@ -11,69 +11,73 @@
 #define CUT_TEXT "\033[0m"
 
 int main(void) {
-  // std::cout << std::string(50, '=') << std::endl;
+  std::cout << std::string(50, '=') << std::endl;
 
-  // // ShrubberyCreationForm (Success)
-  // try {
-  //   std::cout << GREEN_TEXT << "[ShrubberyCreationForm] Success case"
-  //             << CUT_TEXT << std::endl;
-  //   ShrubberyCreationForm sf("sf");
-  //   Bureaucrat b("b", 130);
+  // ShrubberyCreationForm (Success)
+  try {
+    std::cout << GREEN_TEXT << "[ShrubberyCreationForm] Success case"
+              << CUT_TEXT << std::endl;
+    ShrubberyCreationForm sf("sf");
+    Bureaucrat b("b", 130);
 
-  //   b.signForm(sf);
-  //   sf.beSigned(b);
-  //   sf.execute(b);
-  // } catch (std::exception& e) {
-  //   std::cout << e.what() << std::endl;
-  // }
+    b.signForm(sf);
+    sf.beSigned(b);
+    b.executeForm(sf);
+    sf.execute(b);
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-  // std::cout << std::string(50, '=') << std::endl;
+  std::cout << std::string(50, '=') << std::endl;
 
-  // // ShrubberyCreationForm (Fail)
-  // try {
-  //   std::cout << RED_TEXT << "[ShrubberyCreationForm] Fail case" << CUT_TEXT
-  //             << std::endl;
-  //   ShrubberyCreationForm sf("sf");
-  //   Bureaucrat b2("b2", 130);
+  // ShrubberyCreationForm (Fail)
+  try {
+    std::cout << RED_TEXT << "[ShrubberyCreationForm] Fail case" << CUT_TEXT
+              << std::endl;
+    ShrubberyCreationForm sf("sf");
+    Bureaucrat b2("b2", 130);
 
-  //   b2.signForm(sf);
-  //   sf.execute(b2); // throw AForm::NotSignedException
-  //   sf.beSigned(b2);
-  // } catch (std::exception& e) {
-  //   std::cout << e.what() << std::endl;
-  // }
+    b2.signForm(sf);
+    // sf.beSigned(b);
+    b2.executeForm(sf);
+    sf.execute(b2); // throw AForm::NotSignedException ([AForm] AForm is not signed yet)
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-  // std::cout << std::string(50, '=') << std::endl;
+  std::cout << std::string(50, '=') << std::endl;
 
-  // // RobotomyRequestForm (Success)
-  // try {
-  //   std::cout << GREEN_TEXT << "[RobotomyRequestForm] Success case" << CUT_TEXT
-  //             << std::endl;
-  //   RobotomyRequestForm rrf("rrf");
-  //   Bureaucrat b("b", 40);
+  // RobotomyRequestForm (Success)
+  try {
+    std::cout << GREEN_TEXT << "[RobotomyRequestForm] Success case" << CUT_TEXT
+              << std::endl;
+    RobotomyRequestForm rrf("rrf");
+    Bureaucrat b("b", 40);
 
-  //   b.signForm(rrf);
-  //   rrf.beSigned(b);
-  //   rrf.execute(b);
-  // } catch (std::exception& e) {
-  //   std::cout << e.what() << std::endl;
-  // }
+    b.signForm(rrf);
+    rrf.beSigned(b);
+    b.executeForm(rrf);
+    rrf.execute(b);
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-  // std::cout << std::string(50, '=') << std::endl;
+  std::cout << std::string(50, '=') << std::endl;
 
-  // // RobotomyRequestForm (Fail)
-  // try {
-  //   std::cout << GREEN_TEXT << "[RobotomyRequestForm] Fail case" << CUT_TEXT
-  //             << std::endl;
-  //   RobotomyRequestForm rrf("rrf");
-  //   Bureaucrat b("b", 50);
+  // RobotomyRequestForm (Fail)
+  try {
+    std::cout << RED_TEXT << "[RobotomyRequestForm] Fail case" << CUT_TEXT
+              << std::endl;
+    RobotomyRequestForm rrf("rrf");
+    Bureaucrat b("b", 50);
 
-  //   b.signForm(rrf);
-  //   rrf.beSigned(b);
-  //   rrf.execute(b);
-  // } catch (std::exception& e) {
-  //   std::cout << e.what() << std::endl;
-  // }
+    b.signForm(rrf);
+    rrf.beSigned(b);
+    b.executeForm(rrf);
+    rrf.execute(b); // throw AForm::GradeTooLowException ([AForm] Grade is too low)
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
   std::cout << std::string(50, '=') << std::endl;
 
@@ -86,6 +90,7 @@ int main(void) {
 
     b.signForm(ppf);
     ppf.beSigned(b);
+    b.executeForm(ppf);
     ppf.execute(b);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
@@ -102,6 +107,7 @@ int main(void) {
 
     b.signForm(ppf);
     ppf.beSigned(b);
+    b.executeForm(ppf);
     ppf.execute(b);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
