@@ -61,7 +61,11 @@ void Bureaucrat::signForm(AForm& form) {
 }
 
 void Bureaucrat::executeForm(AForm const& form) {
-  if (this->getGrade() > form.getExecuteGrade()) {
+  if (form.getIsSigned() == false) {
+    std::cout << this->getName() << " couldn't execute " << form.getName()
+              << " because " << form.getName() << " is not signed yet"
+              << std::endl;
+  } else if (this->getGrade() > form.getExecuteGrade()) {
     std::cout << this->getName() << " couldn't execute " << form.getName()
               << " because " << this->getName() << " grade is lower than form"
               << " (" << this->getName() << ": " << this->getGrade() << ", "
