@@ -6,7 +6,7 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 09:19:10 by joonhan           #+#    #+#              #
-#    Updated: 2023/03/02 13:26:44 by joonhan          ###   ########.fr        #
+#    Updated: 2023/03/02 13:43:58 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC_FILES				:=	main									\
 										Bureaucrat						\
 										AForm									\
 										ShrubberyCreationForm	\
-										RobotomyRequestForm
+										RobotomyRequestForm		\
+										PresidentialPardonForm
 
 SRCS						:=	$(addsuffix .cpp, $(SRC_FILES))
 

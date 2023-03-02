@@ -53,6 +53,15 @@ void AForm::beSigned(Bureaucrat& person) {
   }
 }
 
+void  AForm::checkRequirements(Bureaucrat const& person) const {
+  if (this->getIsSigned() == false) {
+    throw(AForm::NotSignedException());
+  }
+  if (person.getGrade() > this->getExecuteGrade()) {
+    throw(AForm::GradeTooLowException());
+  }
+}
+
 const char* AForm::GradeTooHighException::what() const throw() {
   return ("[AForm] Grade is too high");
 };

@@ -29,12 +29,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(
 }
 
 void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
-  if (this->getIsSigned() == false) {
-    throw(AForm::NotSignedException());
-  }
-  if (executor.getGrade() > this->getExecuteGrade()) {
-    throw(AForm::GradeTooLowException());
-  }
+  this->checkRequirements(executor);
 
   std::cout << "[RobotomyRequestForm] " << this->getName() << ": Drrr..."
             << std::endl;
