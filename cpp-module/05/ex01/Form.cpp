@@ -27,6 +27,7 @@ Form::~Form(void) {}
 
 Form& Form::operator=(Form const& rhs) {
   if (this != &rhs) {
+    this->setIsSigned(rhs.getIsSigned());
   }
   return *this;
 }
