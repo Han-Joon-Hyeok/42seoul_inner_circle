@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  if (ScalarConverter::isValidString(str) == false) {
+  if (ScalarConverter::isValidString(argv[1]) == false) {
     std::cout << "There is invalid character" << std::endl;
     exit(EXIT_FAILURE);
   }
