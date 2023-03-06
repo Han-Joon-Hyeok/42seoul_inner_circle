@@ -13,9 +13,7 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  std::string str(argv[1]);
-
-  if (ScalarConverter::isPrintableString(str) == false) {
+  if (ScalarConverter::isPrintableString(argv[1]) == false) {
     std::cout << "There is non printable character" << std::endl;
     exit(EXIT_FAILURE);
   }
@@ -25,7 +23,7 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  ScalarConverter::convert(str);
+  ScalarConverter::convert(argv[1]);
   std::cout << std::string(50, '=') << std::endl;
 
 }
