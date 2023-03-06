@@ -50,6 +50,14 @@ void ScalarConverter::printCharacter(const char* str) {
     return ;
   }
 
+  std::string converted(str);
+  if (converted == "-inff" || converted == "+inff" || converted == "inff" || \
+      converted == "-nan" || converted == "+nan" || converted == "nan" || \
+      converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
+    std::cout << "impossible" << std::endl;
+    return ;
+  }
+
   char* pos = NULL;
   std::strtod(str, &pos);
   double value = std::strtod(str, &pos);
