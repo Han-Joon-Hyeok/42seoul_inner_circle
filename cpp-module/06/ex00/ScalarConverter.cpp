@@ -80,6 +80,12 @@ void ScalarConverter::printInt(const char* str) {
     return;
   }
 
+  if (std::strlen(str) == 1 &&
+      std::isdigit(static_cast<char>(str[0])) == false) {
+    std::cout << static_cast<int>(str[0]) << std::endl;
+    return;
+  }
+
   char* pos = NULL;
   long long value = std::strtoll(str, &pos, 10);
   if (value > INT_MAX || value < INT_MIN) {
