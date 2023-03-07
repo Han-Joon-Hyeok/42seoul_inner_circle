@@ -66,7 +66,7 @@ void ScalarConverter::printCharacter(const char* str) {
 
   if (std::strlen(str) == 1 && std::isprint(static_cast<char>(str[0]))) {
     std::cout << str[0] << std::endl;
-  } else if (std::isprint(static_cast<char>(str[0])) == false) {
+  } else if (std::isprint(static_cast<char>(value)) == false) {
     std::cout << "Non displayable" << std::endl;
   } else {
     std::cout << static_cast<char>(value) << std::endl;
