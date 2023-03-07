@@ -59,6 +59,11 @@ void ScalarConverter::printCharacter(const char* str) {
 
   long long value = std::strtol(str, NULL, 10);
 
+  if (value < CHAR_MIN || value > CHAR_MAX) {
+    std::cout << "overflow" << std::endl;
+    return ;
+  }
+
   if (std::strlen(str) == 1 && std::isprint(static_cast<char>(str[0]))) {
     std::cout << str[0] << std::endl;
   } else if (std::isprint(static_cast<char>(str[0])) == false) {
