@@ -1,5 +1,6 @@
 #include "ScalarConverter.hpp"
 
+#include <cmath>
 #include <iostream>
 
 ScalarConverter::ScalarConverter(void) {}
@@ -18,6 +19,7 @@ void ScalarConverter::convert(const char* str) {
   std::cout << str << std::endl;
   printCharacter(str);
   printInt(str);
+  printFloat(str);
 }
 
 bool ScalarConverter::isPrintableString(const char* str) {
@@ -48,6 +50,7 @@ void ScalarConverter::printCharacter(const char* str) {
 
   std::string converted(str);
   if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-inf" || converted == "+inf" || converted == "inf" ||
       converted == "-nan" || converted == "+nan" || converted == "nan" ||
       converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
     std::cout << "impossible" << std::endl;
@@ -72,6 +75,7 @@ void ScalarConverter::printInt(const char* str) {
 
   std::string converted(str);
   if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-inf" || converted == "+inf" || converted == "inf" ||
       converted == "-nan" || converted == "+nan" || converted == "nan" ||
       converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
     std::cout << "impossible" << std::endl;
@@ -79,7 +83,6 @@ void ScalarConverter::printInt(const char* str) {
   }
 
   char* pos = NULL;
-  std::strtod(str, &pos);
   long long value = std::strtoll(str, &pos, 10);
   if (value > INT_MAX || value < INT_MIN) {
     std::cout << "overflow" << std::endl;
@@ -88,9 +91,21 @@ void ScalarConverter::printInt(const char* str) {
   }
 }
 
-// void  ScalarConverter::printFloat(const char* str) {
+void ScalarConverter::printFloat(const char* str) {
+  std::cout << "float: ";
 
-// }
+  float intPart;
+  float fractPart;
+  float value = std::strtof(str, NULL);
+
+  fractPart = modf(value, &intPart);
+  if (fractPart == 0) {
+    std::cout << intPart << ".0";
+  } else {
+    std::cout << value;
+  }
+  std::cout << "f" << std::endl;
+}
 
 // void  ScalarConverter::printDouble(const char* str) {
 
