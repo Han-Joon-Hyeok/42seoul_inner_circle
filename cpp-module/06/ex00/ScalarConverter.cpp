@@ -61,10 +61,11 @@ void ScalarConverter::printCharacter(const char* str) {
 
   if (value < CHAR_MIN || value > CHAR_MAX) {
     std::cout << "overflow" << std::endl;
-    return ;
+    return;
   }
 
-  if (std::strlen(str) == 1 && std::isprint(static_cast<char>(str[0]))) {
+  if (std::strlen(str) == 1 && std::isprint(static_cast<int>(str[0])) &&
+      std::isdigit(str[0]) == false) {
     std::cout << str[0] << std::endl;
   } else if (std::isprint(static_cast<char>(value)) == false) {
     std::cout << "Non displayable" << std::endl;
