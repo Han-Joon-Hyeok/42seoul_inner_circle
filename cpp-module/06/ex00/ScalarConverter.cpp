@@ -57,13 +57,11 @@ void ScalarConverter::printCharacter(const char* str) {
     return;
   }
 
-  char* pos = NULL;
-  std::strtod(str, &pos);
-  double value = std::strtod(str, &pos);
+  long long value = std::strtol(str, NULL, 10);
 
-  if (std::strlen(str) == 1 && std::isprint(value) == true) {
+  if (std::strlen(str) == 1 && std::isprint(static_cast<char>(str[0]))) {
     std::cout << str[0] << std::endl;
-  } else if (std::isprint(value) == false) {
+  } else if (std::isprint(static_cast<char>(str[0])) == false) {
     std::cout << "Non displayable" << std::endl;
   } else {
     std::cout << static_cast<char>(value) << std::endl;
