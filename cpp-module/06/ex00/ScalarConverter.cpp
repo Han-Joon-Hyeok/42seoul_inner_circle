@@ -16,10 +16,10 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 }
 
 void ScalarConverter::convert(const char* str) {
-  std::cout << str << std::endl;
   printCharacter(str);
   printInt(str);
   printFloat(str);
+  printDouble(str);
 }
 
 bool ScalarConverter::isPrintableString(const char* str) {
@@ -98,6 +98,15 @@ void ScalarConverter::printFloat(const char* str) {
   float fractPart;
   float value = std::strtof(str, NULL);
 
+  std::string converted(str);
+  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
+      converted == "-inf" || converted == "+inf" || converted == "inf" ||
+      converted == "-nan" || converted == "+nan" || converted == "nan") {
+    std::cout << value << "f" << std::endl;
+    return;
+  }
+
   fractPart = modf(value, &intPart);
   if (fractPart == 0) {
     std::cout << intPart << ".0";
@@ -107,6 +116,27 @@ void ScalarConverter::printFloat(const char* str) {
   std::cout << "f" << std::endl;
 }
 
-// void  ScalarConverter::printDouble(const char* str) {
+void ScalarConverter::printDouble(const char* str) {
+  std::cout << "double: ";
 
-// }
+  double intPart;
+  double fractPart;
+  double value = std::strtod(str, NULL);
+  std::string converted(str);
+
+  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
+      converted == "-inf" || converted == "+inf" || converted == "inf" ||
+      converted == "-nan" || converted == "+nan" || converted == "nan") {
+    std::cout << value << std::endl;
+    return;
+  }
+
+  fractPart = modf(value, &intPart);
+  if (fractPart == 0) {
+    std::cout << intPart << ".0";
+  } else {
+    std::cout << value;
+  }
+  std::cout << std::endl;
+}
