@@ -17,6 +17,7 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 void ScalarConverter::convert(const char* str) {
   std::cout << str << std::endl;
   printCharacter(str);
+  printInt(str);
 }
 
 bool ScalarConverter::isPrintableString(const char* str) {
@@ -45,38 +46,52 @@ bool ScalarConverter::isValidString(const char* str) {
 void ScalarConverter::printCharacter(const char* str) {
   std::cout << "char: ";
 
-  if (std::strlen(str) == 1) {
-    std::cout << str[0] << std::endl;
-    return ;
-  }
-
   std::string converted(str);
-  if (converted == "-inff" || converted == "+inff" || converted == "inff" || \
-      converted == "-nan" || converted == "+nan" || converted == "nan" || \
+  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-nan" || converted == "+nan" || converted == "nan" ||
       converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
     std::cout << "impossible" << std::endl;
-    return ;
+    return;
   }
 
   char* pos = NULL;
   std::strtod(str, &pos);
   double value = std::strtod(str, &pos);
 
-  if (std::isprint(value) == false) {
+  if (std::strlen(str) == 1 && std::isprint(value) == true) {
+    std::cout << str[0] << std::endl;
+  } else if (std::isprint(value) == false) {
     std::cout << "Non displayable" << std::endl;
   } else {
     std::cout << static_cast<char>(value) << std::endl;
   }
 }
 
-// void  ScalarConverter::printInt(const std::string& str) {
+void ScalarConverter::printInt(const char* str) {
+  std::cout << "int: ";
+
+  std::string converted(str);
+  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
+      converted == "-nan" || converted == "+nan" || converted == "nan" ||
+      converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
+    std::cout << "impossible" << std::endl;
+    return;
+  }
+
+  char* pos = NULL;
+  std::strtod(str, &pos);
+  long long value = std::strtoll(str, &pos, 10);
+  if (value > INT_MAX || value < INT_MIN) {
+    std::cout << "overflow" << std::endl;
+  } else {
+    std::cout << value << std::endl;
+  }
+}
+
+// void  ScalarConverter::printFloat(const char* str) {
 
 // }
 
-// void  ScalarConverter::printFloat(const std::string& str) {
-
-// }
-
-// void  ScalarConverter::printDouble(const std::string& str) {
+// void  ScalarConverter::printDouble(const char* str) {
 
 // }
