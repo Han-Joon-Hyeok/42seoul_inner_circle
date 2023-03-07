@@ -142,6 +142,12 @@ void ScalarConverter::printDouble(const char* str) {
     return;
   }
 
+  if (std::strlen(str) == 1 &&
+      std::isdigit(static_cast<char>(str[0])) == false) {
+    std::cout << static_cast<double>(str[0]) << ".0" << std::endl;
+    return;
+  }
+
   fractPart = modf(value, &intPart);
   if (fractPart == 0) {
     std::cout << intPart << ".0";
