@@ -112,7 +112,8 @@ void ScalarConverter::printFloat(const char* str) {
   if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
       converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
       converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan") {
+      converted == "-nan" || converted == "+nan" || converted == "nan" ||
+      value == INFINITY || value == -INFINITY) {
     std::cout << value << "f" << std::endl;
     return;
   }
@@ -143,7 +144,8 @@ void ScalarConverter::printDouble(const char* str) {
   if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
       converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
       converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan") {
+      converted == "-nan" || converted == "+nan" || converted == "nan" ||
+      value == INFINITY || value == -INFINITY) {
     std::cout << value << std::endl;
     return;
   }
