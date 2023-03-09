@@ -21,6 +21,8 @@ int main(void) {
     std::cout << GREEN_TEXT << "Serialize Data to uintptr_t" << CUT_TEXT
               << std::endl;
     std::cout << "s1 address(serialized): " << s1 << std::endl;
+    std::cout << "age : " << (reinterpret_cast<Data*>(s1))->age << std::endl;
+    std::cout << "name: " << (reinterpret_cast<Data*>(s1))->name << std::endl;
 
     std::cout << std::string(50, '=') << std::endl;
 
