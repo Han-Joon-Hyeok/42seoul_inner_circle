@@ -3,81 +3,20 @@
 
 #include "whatever.hpp"
 
-#define RED_TEXT "\033[31m"
-#define GREEN_TEXT "\033[32m"
-#define YELLOW_TEXT "\033[33m"
-#define CUT_TEXT "\033[0m"
-
 int main(void) {
-  std::cout << std::string(50, '=') << std::endl;
-  std::cout << GREEN_TEXT << "SWAP TEST" << CUT_TEXT << std::endl;
+  int a = 2;
+  int b = 3;
 
-  {
-    std::cout << YELLOW_TEXT << "int" << CUT_TEXT << std::endl;
+  ::swap(a, b);
+  std::cout << "a = " << a << ", b = " << b << std::endl;
+  std::cout << "min( a, b ) = " << ::min(a, b) << std::endl;
+  std::cout << "max( a, b ) = " << ::max(a, b) << std::endl;
 
-    int num1 = 42;
-    int num2 = 24;
+  std::string c = "chaine1";
+  std::string d = "chaine2";
 
-    std::cout << "num1: " << num1 << ", num2: " << num2 << std::endl;
-    ::swap(num1, num2);
-    std::cout << "num1: " << num1 << ", num2: " << num2 << std::endl;
-  }
-
-  {
-    std::cout << YELLOW_TEXT << "string" << CUT_TEXT << std::endl;
-    std::string str1 = "hello";
-    std::string str2 = "world";
-
-    std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
-    ::swap(str1, str2);
-    std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
-  }
-
-  std::cout << std::string(50, '=') << std::endl;
-
-  std::cout << GREEN_TEXT << "MIN TEST" << CUT_TEXT << std::endl;
-
-  {
-    std::cout << YELLOW_TEXT << "int" << CUT_TEXT << std::endl;
-
-    int num1 = 42;
-    int num2 = 24;
-
-    std::cout << "num1: " << num1 << ", num2: " << num2 << std::endl;
-    std::cout << "min: " << ::min(num1, num2) << std::endl;
-  }
-
-  {
-    std::cout << YELLOW_TEXT << "string" << CUT_TEXT << std::endl;
-    std::string str1 = "hi";
-    std::string str2 = "ha";
-
-    std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
-    std::cout << "min: " << ::min(str1, str2) << std::endl;
-  }
-
-  std::cout << std::string(50, '=') << std::endl;
-
-  std::cout << GREEN_TEXT << "MAX TEST" << CUT_TEXT << std::endl;
-
-  {
-    std::cout << YELLOW_TEXT << "int" << CUT_TEXT << std::endl;
-
-    int num1 = 42;
-    int num2 = 24;
-
-    std::cout << "num1: " << num1 << ", num2: " << num2 << std::endl;
-    std::cout << "max: " << ::max(num1, num2) << std::endl;
-  }
-
-  {
-    std::cout << YELLOW_TEXT << "string" << CUT_TEXT << std::endl;
-    std::string str1 = "hi";
-    std::string str2 = "ha";
-
-    std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
-    std::cout << "max: " << ::max(str1, str2) << std::endl;
-  }
-
-
+  ::swap(c, d);
+  std::cout << "c = " << c << ", d = " << d << std::endl;
+  std::cout << "min( c, d ) = " << ::min(c, d) << std::endl;
+  std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
 }
