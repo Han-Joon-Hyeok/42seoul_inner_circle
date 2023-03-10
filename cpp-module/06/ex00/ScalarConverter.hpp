@@ -14,15 +14,15 @@ class ScalarConverter {
   static double getValue(void);
 
   static void convert(const char* str);
-  static void  printCharacter(const char* str);
-  static void  printInt(const char* str);
-  static void  printFloat(const char* str);
-  static void  printDouble(const char* str);
+  static void printCharacter(const char* str, long long l_value,
+                             double d_value);
+  static void printInt(const char* str);
+  static void printFloat(const char* str);
+  static void printDouble(const char* str);
 
   static bool isPrintableString(const char* str);
   static bool isValidString(const char* str);
 };
-
 
 std::ostream& operator<<(std::ostream& out, const ScalarConverter& rhs);
 

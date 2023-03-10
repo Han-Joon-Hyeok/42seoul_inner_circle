@@ -16,7 +16,10 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 }
 
 void ScalarConverter::convert(const char* str) {
-  printCharacter(str);
+  long long l_value = std::strtol(str, NULL, 10);
+  double d_value = std::strtod(str, NULL);
+
+  printCharacter(str, l_value, d_value);
   printInt(str);
   printFloat(str);
   printDouble(str);
@@ -45,21 +48,16 @@ bool ScalarConverter::isValidString(const char* str) {
   return (true);
 }
 
-void ScalarConverter::printCharacter(const char* str) {
+void ScalarConverter::printCharacter(const char* str, long long l_value,
+                                     double d_value) {
   std::cout << "char: ";
 
-  std::string converted(str);
-  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
-      converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan" ||
-      converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
+  if (std::isnan(d_value) || std::isinf(d_value)) {
     std::cout << "impossible" << std::endl;
     return;
   }
 
-  long long value = std::strtol(str, NULL, 10);
-
-  if (value < CHAR_MIN || value > CHAR_MAX) {
+  if (l_value < CHAR_MIN || l_value > CHAR_MAX) {
     std::cout << "overflow" << std::endl;
     return;
   }
@@ -67,10 +65,10 @@ void ScalarConverter::printCharacter(const char* str) {
   if (std::strlen(str) == 1 && std::isprint(static_cast<int>(str[0])) &&
       std::isdigit(str[0]) == false) {
     std::cout << str[0] << std::endl;
-  } else if (std::isprint(static_cast<char>(value)) == false) {
+  } else if (std::isprint(static_cast<char>(l_value)) == false) {
     std::cout << "Non displayable" << std::endl;
   } else {
-    std::cout << static_cast<char>(value) << std::endl;
+    std::cout << static_cast<char>(l_value) << std::endl;
   }
 }
 
