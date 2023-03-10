@@ -8,4 +8,12 @@ void swap(T& x, T& y) {
   y = temp;
 }
 
+template <typename T>
+T min(T x, T y) {
+  if (x > y) {
+    return (y);
+  }
+  return (x);
+}
+
 #endif
