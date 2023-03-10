@@ -18,11 +18,12 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 void ScalarConverter::convert(const char* str) {
   long long l_value = std::strtol(str, NULL, 10);
   double d_value = std::strtod(str, NULL);
+  float f_value = std::strtof(str, NULL);
 
   printCharacter(str, l_value, d_value);
-  printInt(str);
-  printFloat(str);
-  printDouble(str);
+  printInt(str, l_value, d_value);
+  printFloat(str, f_value);
+  printDouble(str, d_value);
 }
 
 bool ScalarConverter::isPrintableString(const char* str) {
@@ -72,14 +73,11 @@ void ScalarConverter::printCharacter(const char* str, long long l_value,
   }
 }
 
-void ScalarConverter::printInt(const char* str) {
+void ScalarConverter::printInt(const char* str, long long l_value,
+                               double d_value) {
   std::cout << "int: ";
 
-  std::string converted(str);
-  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
-      converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan" ||
-      converted == "-nanf" || converted == "+nanf" || converted == "nanf") {
+  if (std::isnan(d_value) || std::isinf(d_value)) {
     std::cout << "impossible" << std::endl;
     return;
   }
@@ -90,29 +88,21 @@ void ScalarConverter::printInt(const char* str) {
     return;
   }
 
-  char* pos = NULL;
-  long long value = std::strtoll(str, &pos, 10);
-  if (value > INT_MAX || value < INT_MIN) {
+  if (l_value > INT_MAX || l_value < INT_MIN) {
     std::cout << "overflow" << std::endl;
   } else {
-    std::cout << value << std::endl;
+    std::cout << l_value << std::endl;
   }
 }
 
-void ScalarConverter::printFloat(const char* str) {
+void ScalarConverter::printFloat(const char* str, float f_value) {
   std::cout << "float: ";
 
   float intPart;
   float fractPart;
-  float value = std::strtof(str, NULL);
 
-  std::string converted(str);
-  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
-      converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
-      converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan" ||
-      value == INFINITY || value == -INFINITY) {
-    std::cout << value << "f" << std::endl;
+  if (std::isnan(f_value) || std::isinf(f_value)) {
+    std::cout << f_value << "f" << std::endl;
     return;
   }
 
@@ -122,29 +112,20 @@ void ScalarConverter::printFloat(const char* str) {
     return;
   }
 
-  fractPart = modf(value, &intPart);
+  fractPart = modf(f_value, &intPart);
   if (fractPart == 0) {
     std::cout << intPart << ".0";
   } else {
-    std::cout << value;
+    std::cout << f_value;
   }
   std::cout << "f" << std::endl;
 }
 
-void ScalarConverter::printDouble(const char* str) {
+void ScalarConverter::printDouble(const char* str, double d_value) {
   std::cout << "double: ";
 
-  double intPart;
-  double fractPart;
-  double value = std::strtod(str, NULL);
-  std::string converted(str);
-
-  if (converted == "-inff" || converted == "+inff" || converted == "inff" ||
-      converted == "-nanf" || converted == "+nanf" || converted == "nanf" ||
-      converted == "-inf" || converted == "+inf" || converted == "inf" ||
-      converted == "-nan" || converted == "+nan" || converted == "nan" ||
-      value == INFINITY || value == -INFINITY) {
-    std::cout << value << std::endl;
+  if (std::isnan(d_value) || std::isinf(d_value)) {
+    std::cout << d_value << std::endl;
     return;
   }
 
@@ -154,11 +135,14 @@ void ScalarConverter::printDouble(const char* str) {
     return;
   }
 
-  fractPart = modf(value, &intPart);
+  double intPart;
+  double fractPart;
+
+  fractPart = modf(d_value, &intPart);
   if (fractPart == 0) {
     std::cout << intPart << ".0";
   } else {
-    std::cout << value;
+    std::cout << d_value;
   }
   std::cout << std::endl;
 }

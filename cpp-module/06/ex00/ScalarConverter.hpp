@@ -16,9 +16,9 @@ class ScalarConverter {
   static void convert(const char* str);
   static void printCharacter(const char* str, long long l_value,
                              double d_value);
-  static void printInt(const char* str);
-  static void printFloat(const char* str);
-  static void printDouble(const char* str);
+  static void printInt(const char* str, long long l_value, double d_value);
+  static void printFloat(const char* str, float f_value);
+  static void printDouble(const char* str, double d_value);
 
   static bool isPrintableString(const char* str);
   static bool isValidString(const char* str);
