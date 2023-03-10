@@ -5,27 +5,6 @@
 
 ScalarConverter::ScalarConverter(void) {}
 
-ScalarConverter::ScalarConverter(const ScalarConverter& src) { (void)src; }
-
-ScalarConverter::~ScalarConverter(void) {}
-
-ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
-  if (this != &rhs) {
-  }
-  return *this;
-}
-
-void ScalarConverter::convert(const char* str) {
-  long long l_value = std::strtol(str, NULL, 10);
-  double d_value = std::strtod(str, NULL);
-  float f_value = std::strtof(str, NULL);
-
-  printCharacter(str, l_value, d_value);
-  printInt(str, l_value, d_value);
-  printFloat(str, f_value);
-  printDouble(str, d_value);
-}
-
 bool ScalarConverter::isPrintableString(const char* str) {
   for (int idx = 0; idx < static_cast<int>(std::strlen(str)); idx += 1) {
     if (std::isprint(str[idx]) == false) {
@@ -47,6 +26,17 @@ bool ScalarConverter::isValidString(const char* str) {
     return (false);
   }
   return (true);
+}
+
+void ScalarConverter::convert(const char* str) {
+  long long l_value = std::strtol(str, NULL, 10);
+  double d_value = std::strtod(str, NULL);
+  float f_value = std::strtof(str, NULL);
+
+  printCharacter(str, l_value, d_value);
+  printInt(str, l_value, d_value);
+  printFloat(str, f_value);
+  printDouble(str, d_value);
 }
 
 void ScalarConverter::printCharacter(const char* str, long long l_value,
@@ -91,7 +81,7 @@ void ScalarConverter::printInt(const char* str, long long l_value,
   if (l_value > INT_MAX || l_value < INT_MIN) {
     std::cout << "overflow" << std::endl;
   } else {
-    std::cout << l_value << std::endl;
+    std::cout << static_cast<int>(l_value) << std::endl;
   }
 }
 
