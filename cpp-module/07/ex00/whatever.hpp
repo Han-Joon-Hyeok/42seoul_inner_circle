@@ -16,4 +16,12 @@ T min(T x, T y) {
   return (x);
 }
 
+template <typename T>
+T max(T x, T y) {
+  if (x > y) {
+    return (x);
+  }
+  return (y);
+}
+
 #endif

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "whatever.hpp"
 
@@ -8,6 +9,7 @@
 #define CUT_TEXT "\033[0m"
 
 int main(void) {
+  std::cout << std::string(50, '=') << std::endl;
   std::cout << GREEN_TEXT << "SWAP TEST" << CUT_TEXT << std::endl;
 
   {
@@ -31,6 +33,7 @@ int main(void) {
     std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
   }
 
+  std::cout << std::string(50, '=') << std::endl;
 
   std::cout << GREEN_TEXT << "MIN TEST" << CUT_TEXT << std::endl;
 
@@ -51,6 +54,29 @@ int main(void) {
 
     std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
     std::cout << "min: " << ::min(str1, str2) << std::endl;
+  }
+
+  std::cout << std::string(50, '=') << std::endl;
+
+  std::cout << GREEN_TEXT << "MAX TEST" << CUT_TEXT << std::endl;
+
+  {
+    std::cout << YELLOW_TEXT << "int" << CUT_TEXT << std::endl;
+
+    int num1 = 42;
+    int num2 = 24;
+
+    std::cout << "num1: " << num1 << ", num2: " << num2 << std::endl;
+    std::cout << "max: " << ::max(num1, num2) << std::endl;
+  }
+
+  {
+    std::cout << YELLOW_TEXT << "string" << CUT_TEXT << std::endl;
+    std::string str1 = "hi";
+    std::string str2 = "ha";
+
+    std::cout << "str1: " << str1 << ", str2: " << str2 << std::endl;
+    std::cout << "max: " << ::max(str1, str2) << std::endl;
   }
 
 
