@@ -4,12 +4,10 @@
 #include <string>
 
 class ScalarConverter {
- public:
+ private:
   ScalarConverter(void);
-  ScalarConverter(const ScalarConverter& src);
-  ~ScalarConverter(void);
-  ScalarConverter& operator=(ScalarConverter const& rhs);
 
+ public:
   static void setValue(const double value);
   static double getValue(void);
 
