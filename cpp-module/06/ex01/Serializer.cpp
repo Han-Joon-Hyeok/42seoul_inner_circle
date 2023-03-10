@@ -2,18 +2,6 @@
 
 #include <iostream>
 
-Serializer::Serializer(void) {}
-
-Serializer::Serializer(const Serializer& src) { (void)src; }
-
-Serializer::~Serializer(void) {}
-
-Serializer& Serializer::operator=(Serializer const& rhs) {
-  if (this != &rhs) {
-  }
-  return *this;
-}
-
 uintptr_t Serializer::serialize(Data* ptr) {
   return (reinterpret_cast<uintptr_t>(ptr));
 }
