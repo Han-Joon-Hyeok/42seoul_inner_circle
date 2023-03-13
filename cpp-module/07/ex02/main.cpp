@@ -1,33 +1,42 @@
 #include <iostream>
 
-#include "iter.hpp"
+#include "Array.hpp"
 
-#define ARRAY_SIZE 10
-
-void printInt(int num) { std::cout << "num: " << num << std::endl; }
+#define ARRAY_SIZE 5
 
 int main(void) {
+
+  // Error case: when n is negative value
   std::cout << std::string(50, '=') << std::endl;
 
-  {
-    int num_arr[ARRAY_SIZE];
-
-    for (int idx = 0; idx < ARRAY_SIZE; idx += 1) {
-      num_arr[idx] = idx;
-    }
-
-    ::iter(num_arr, sizeof(num_arr) / sizeof(*num_arr), printInt);
+  try {
+    Array<int> int_arr(-1); // invalid argument
+  } catch(std::exception &e) {
+    std::cout << e.what() << std::endl;
   }
 
   std::cout << std::string(50, '=') << std::endl;
 
-  {
-    std::string str_arr[ARRAY_SIZE];
-
-    for (int idx = 0; idx < ARRAY_SIZE; idx += 1) {
-      str_arr[idx] = "hello " + std::to_string(idx);
-    }
-
-    ::iter(str_arr, ARRAY_SIZE, ::print<std::string&>);
+  // Error case: when index is out of range
+  try {
+    Array<std::string> str_arr(ARRAY_SIZE);
+    std::cout << str_arr[ARRAY_SIZE] << std::endl; // index is out of range
+  } catch(std::exception &e) {
+    std::cout << e.what() << std::endl;
   }
+
+  std::cout << std::string(50, '=') << std::endl;
+
+  // Success case
+  try {
+    Array<std::string> str_arr(ARRAY_SIZE);
+    for (int idx = 0; idx < ARRAY_SIZE; idx += 1) {
+      str_arr.setValue("HELLO idx: " + std::to_string(idx), idx);
+    }
+    std::cout << str_arr[0] << std::endl;
+  } catch(std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::string(50, '=') << std::endl;
 }

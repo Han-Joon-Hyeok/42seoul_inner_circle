@@ -6,11 +6,11 @@
 #    By: joonhan <joonhan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 09:19:10 by joonhan           #+#    #+#              #
-#    Updated: 2023/03/03 14:40:04 by joonhan          ###   ########.fr        #
+#    Updated: 2023/03/13 14:06:50 by joonhan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						:=	iter
+NAME 						:=	array
 
 SRC_FILES				:=	main
 
