@@ -29,12 +29,21 @@ Array<T>::Array(unsigned int n) {
 template <class T>
 Array<T>::~Array(void) {
   delete[] this->array_;
+  this->array_ = NULL;
+  size_ = 0;
 };
 
 // Copy constructor
 template <class T>
-Array<T>::Array(const Array<T>& src) {
-  *this = src;
+Array<T>::Array(const Array<T>& src) : size_(src.size_) {
+  try {
+    this->array_ = new T[size_]();
+    for (unsigned int idx = 0; idx < size_; idx += 1) {
+      array_[idx] = T(src.array_[idx]);
+    }
+  } catch(std::bad_alloc &ba) {
+    std::cout << ba.what() << std::endl;
+  }
 };
 
 // Copy assignment
@@ -43,10 +52,10 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs) {
   if (this != &rhs) {
     delete[] this->array_;
     try {
-      this->array_ = new T[rhs.size()]();
-      size_ = rhs.size();
-      for (unsigned int index = 0; index < rhs.size(); index += 1) {
-        this->setValue(rhs[index], index);
+      size_ = rhs.size_;
+      this->array_ = new T[size_]();
+      for (unsigned int idx = 0; idx < size_; idx += 1) {
+        this->array_[idx] = T(rhs[idx]);
       }
     } catch (const std::bad_alloc& ba) {
       std::cerr << "bad alloc occurs" << ba.what() << '\n';
@@ -56,23 +65,12 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs) {
 };
 
 template <class T>
-void Array<T>::setValue(const T& value, const unsigned int index) {
-  if (static_cast<int>(index) < 0) {
-    throw(std::invalid_argument("Negative value is unavailable"));
-  }
-  if (index >= this->size()) {
-    throw(std::out_of_range("Index is out of range"));
-  }
-  this->array_[index] = value;
-};
-
-template <class T>
 unsigned int Array<T>::size(void) const {
   return (this->size_);
 };
 
 template <class T>
-const T& Array<T>::operator[](const unsigned int index) const {
+T& Array<T>::operator[](const unsigned int index) const {
   if (index >= this->size()) {
     throw(std::out_of_range("Index is out of range"));
   }
