@@ -37,6 +37,7 @@ Array<T>::~Array(void) {
 template <typename T>
 Array<T>::Array(const Array<T>& src) : size_(src.size_) {
   try {
+    std::cout << "Copy constructor called" << std::endl;
     this->array_ = new T[size_]();
     for (unsigned int idx = 0; idx < size_; idx += 1) {
       array_[idx] = T(src.array_[idx]);
@@ -52,6 +53,7 @@ Array<T>& Array<T>::operator=(const Array<T>& rhs) {
   if (this != &rhs) {
     delete[] this->array_;
     try {
+      std::cout << "Copy assignment operator called" << std::endl;
       size_ = rhs.size_;
       this->array_ = new T[size_]();
       for (unsigned int idx = 0; idx < size_; idx += 1) {
@@ -70,9 +72,17 @@ unsigned int Array<T>::size(void) const {
 };
 
 template <typename T>
-T& Array<T>::operator[](const unsigned int index) const {
+T& Array<T>::operator[](unsigned int index) {
   if (index >= this->size()) {
     throw(std::out_of_range("Index is out of range"));
   }
-  return (array_[index]);
+  return (this->array_[index]);
+};
+
+template <typename T>
+const T& Array<T>::operator[](unsigned int index) const {
+  if (index >= this->size()) {
+    throw(std::out_of_range("Index is out of range"));
+  }
+  return (this->array_[index]);
 };

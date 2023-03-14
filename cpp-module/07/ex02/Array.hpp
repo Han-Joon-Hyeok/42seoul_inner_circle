@@ -18,7 +18,8 @@ class Array {
 
   unsigned int size(void) const;
 
-  T& operator[](const unsigned int index) const;
+  T& operator[](unsigned int index);
+  const T& operator[](unsigned int index) const;
 };
 
 #include "Array.tpp"

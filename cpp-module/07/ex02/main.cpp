@@ -65,7 +65,9 @@ int main(void) {
       str_arr[idx] = "HELLO idx: " + std::to_string(idx);
     }
 
-    Array<std::string> copy_arr = str_arr;
+    Array<std::string> copy_arr;
+
+    copy_arr = str_arr;
     for (int idx = 0; idx < ARRAY_SIZE; idx += 1) {
       std::cout << copy_arr[idx] << std::endl;
     }
@@ -74,6 +76,17 @@ int main(void) {
   }
 
   std::cout << std::string(50, '=') << std::endl;
+
+  {
+    const Array<int> arr(5);
+    // arr[0] = 1; // Can't modify const object
+  }
+  {
+    Array<int> arr(5);
+    std::cout << arr[0] << std::endl;
+    arr[0] = 1; // Can modify non-const object
+    std::cout << arr[0] << std::endl;
+  }
 }
 
 // #include <iostream>
