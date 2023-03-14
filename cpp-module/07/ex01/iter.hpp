@@ -5,7 +5,7 @@
 #include <string>
 
 // Allow reference type argument
-template <class T>
+template <typename T>
 void iter(T* ptr, std::size_t length, void (*func)(T&)) {
   for (std::size_t idx = 0; idx < length; idx += 1) {
     func(ptr[idx]);
@@ -13,7 +13,7 @@ void iter(T* ptr, std::size_t length, void (*func)(T&)) {
 }
 
 // Ignore reference type argument
-template <class T>
+template <typename T>
 void iter(T* ptr, std::size_t length, void (*func)(T)) {
   for (std::size_t idx = 0; idx < length; idx += 1) {
     func(ptr[idx]);
@@ -21,13 +21,13 @@ void iter(T* ptr, std::size_t length, void (*func)(T)) {
 }
 
 // Allow reference type argument
-template <class T>
+template <typename T>
 void print(T& value) {
   std::cout << value << std::endl;
 }
 
 // Ignore reference type argument
-template <class T>
+template <typename T>
 void print(T value) {
   std::cout << value << std::endl;
 }
