@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-template <class T>
+template <typename T>
 class Array {
  private:
   unsigned int size_;
