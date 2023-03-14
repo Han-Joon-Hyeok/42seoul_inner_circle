@@ -4,15 +4,29 @@
 #include <iostream>
 #include <string>
 
-// Allow reference type argument
+// Return nothing
 template <typename T>
-void iter(T* ptr, std::size_t length, T (*func)(T&)) {
+void iter(T* ptr, std::size_t length, void (*func)(T)) {
   for (std::size_t idx = 0; idx < length; idx += 1) {
     func(ptr[idx]);
   }
 }
 
-// Ignore reference type argument
+template <typename T>
+void iter(T* ptr, std::size_t length, void (*func)(T&)) {
+  for (std::size_t idx = 0; idx < length; idx += 1) {
+    func(ptr[idx]);
+  }
+}
+
+template <typename T>
+void iter(T* ptr, std::size_t length, void (*func)(const T&)) {
+  for (std::size_t idx = 0; idx < length; idx += 1) {
+    func(ptr[idx]);
+  }
+}
+
+// Return T : Argument is value type
 template <typename T>
 void iter(T* ptr, std::size_t length, T (*func)(T)) {
   for (std::size_t idx = 0; idx < length; idx += 1) {
@@ -20,19 +34,45 @@ void iter(T* ptr, std::size_t length, T (*func)(T)) {
   }
 }
 
-// Allow reference type argument
 template <typename T>
-void print(T& value) {
+void iter(T* ptr, std::size_t length, const T (*func)(const T)) {
+  for (std::size_t idx = 0; idx < length; idx += 1) {
+    func(ptr[idx]);
+  }
+}
+
+// Return T : Argument is reference type
+template <typename T>
+void iter(T* ptr, std::size_t length, T (*func)(T&)) {
+  for (std::size_t idx = 0; idx < length; idx += 1) {
+    func(ptr[idx]);
+  }
+}
+
+template <typename T>
+void iter(T* ptr, std::size_t length, const T (*func)(const T&)) {
+  for (std::size_t idx = 0; idx < length; idx += 1) {
+    func(ptr[idx]);
+  }
+}
+
+// Test function template
+template <typename T>
+void printValue(T value) {
   std::cout << value << std::endl;
 }
 
-// Ignore reference type argument
 template <typename T>
-void print(T value) {
+void printValue(T& value) {
+  std::cout << value << std::endl;
+}
+
+template <typename T>
+void printValue(const T& value) {
   std::cout << value << std::endl;
 }
 
 // instantiated function template
-template void print(const std::string& value);
+template void printValue(const std::string& value);
 
 #endif
