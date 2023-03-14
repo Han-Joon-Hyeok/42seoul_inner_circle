@@ -16,10 +16,9 @@ class Array {
   Array(const Array<T>& src);
   Array<T>& operator=(Array<T> const& rhs);
 
-  void setValue(const T& value, const unsigned int index);
   unsigned int size(void) const;
 
-  const T& operator[](const unsigned int index) const;
+  T& operator[](const unsigned int index) const;
 };
 
 #include "Array.tpp"
