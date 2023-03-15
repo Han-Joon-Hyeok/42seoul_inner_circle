@@ -28,9 +28,11 @@ Array<T>::Array(unsigned int n) {
 // Destructor
 template <typename T>
 Array<T>::~Array(void) {
-  delete[] this->array_;
-  this->array_ = NULL;
-  size_ = 0;
+  if (this->array_ != NULL) {
+    delete[] this->array_;
+    this->array_ = NULL;
+    size_ = 0;
+  }
 };
 
 // Copy constructor
@@ -42,7 +44,7 @@ Array<T>::Array(const Array<T>& src) : size_(src.size_) {
     for (unsigned int idx = 0; idx < size_; idx += 1) {
       array_[idx] = T(src.array_[idx]);
     }
-  } catch(std::bad_alloc &ba) {
+  } catch (std::bad_alloc& ba) {
     std::cout << ba.what() << std::endl;
   }
 };
@@ -51,7 +53,12 @@ Array<T>::Array(const Array<T>& src) : size_(src.size_) {
 template <typename T>
 Array<T>& Array<T>::operator=(const Array<T>& rhs) {
   if (this != &rhs) {
-    delete[] this->array_;
+    if (rhs.array_ == NULL) {
+      return;
+    }
+    if (this->array_ != NULL) {
+      delete[] this->array_;
+    }
     try {
       std::cout << "Copy assignment operator called" << std::endl;
       size_ = rhs.size_;
