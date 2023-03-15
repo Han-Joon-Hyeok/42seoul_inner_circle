@@ -4,53 +4,25 @@
 #include <iostream>
 #include <string>
 
-// Return nothing
+// Non-const T pointer
+// Function pointer get an argument as non-const reference
 template <typename T>
 void iter(T* ptr, std::size_t length, void (*func)(T)) {
+  if (ptr == NULL || func == NULL) {
+    return ;
+  }
   for (std::size_t idx = 0; idx < length; idx += 1) {
     func(ptr[idx]);
   }
 }
 
+// const T pointer
+// Function pointer get an argument as const reference
 template <typename T>
-void iter(T* ptr, std::size_t length, void (*func)(T&)) {
-  for (std::size_t idx = 0; idx < length; idx += 1) {
-    func(ptr[idx]);
+void iter(const T* ptr, std::size_t length, void (*func)(const T&)) {
+  if (ptr == NULL || func == NULL) {
+    return ;
   }
-}
-
-template <typename T>
-void iter(T* ptr, std::size_t length, void (*func)(const T&)) {
-  for (std::size_t idx = 0; idx < length; idx += 1) {
-    func(ptr[idx]);
-  }
-}
-
-// Return T : Argument is value type
-template <typename T>
-void iter(T* ptr, std::size_t length, T (*func)(T)) {
-  for (std::size_t idx = 0; idx < length; idx += 1) {
-    func(ptr[idx]);
-  }
-}
-
-template <typename T>
-void iter(T* ptr, std::size_t length, const T (*func)(const T)) {
-  for (std::size_t idx = 0; idx < length; idx += 1) {
-    func(ptr[idx]);
-  }
-}
-
-// Return T : Argument is reference type
-template <typename T>
-void iter(T* ptr, std::size_t length, T (*func)(T&)) {
-  for (std::size_t idx = 0; idx < length; idx += 1) {
-    func(ptr[idx]);
-  }
-}
-
-template <typename T>
-void iter(T* ptr, std::size_t length, const T (*func)(const T&)) {
   for (std::size_t idx = 0; idx < length; idx += 1) {
     func(ptr[idx]);
   }
@@ -58,21 +30,8 @@ void iter(T* ptr, std::size_t length, const T (*func)(const T&)) {
 
 // Test function template
 template <typename T>
-void printValue(T value) {
-  std::cout << value << std::endl;
-}
-
-template <typename T>
-void printValue(T& value) {
-  std::cout << value << std::endl;
-}
-
-template <typename T>
 void printValue(const T& value) {
   std::cout << value << std::endl;
 }
-
-// instantiated function template
-template void printValue(const std::string& value);
 
 #endif
