@@ -28,6 +28,11 @@ int main(void) {
       str_arr[idx] = "hello " + std::to_string(idx);
     }
 
-    ::iter(str_arr, ARRAY_SIZE, ::printValue<std::string&>);
+    ::iter(str_arr, ARRAY_SIZE, ::printValue<std::string>);
+  }
+
+  {
+    const int *arr = new int[5];
+    ::iter(arr, 5, ::printValue<int>);
   }
 }
