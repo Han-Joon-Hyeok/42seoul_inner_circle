@@ -6,7 +6,6 @@
 class Span {
  private:
   Span(void);
-
   unsigned int max_size_;
   std::set<unsigned int> set_;
 
