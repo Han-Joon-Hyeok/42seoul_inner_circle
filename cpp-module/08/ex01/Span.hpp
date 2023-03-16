@@ -15,10 +15,15 @@ class Span {
   Span& operator=(Span const& rhs);
 
   void addNumber(unsigned int n);
+  bool isAbleToSpan(void) const;
 
   unsigned int shortestSpan(void);
   unsigned int longestSpan(void);
   class MaxSizeException : public std::exception {
+   public:
+    virtual const char* what() const throw();
+  };
+  class UnableToSpanException : public std::exception {
    public:
     virtual const char* what() const throw();
   };
