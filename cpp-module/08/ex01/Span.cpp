@@ -1,10 +1,12 @@
 #include "Span.hpp"
 
+#include <algorithm>
 #include <iostream>
 
-Span::Span(unsigned int n) : max_size_(n) {
+Span::Span(unsigned int n) {
   std::cout << "Successfully created vector" << std::endl;
-  std::cout << "Max size is: " << n
+  vec_.reserve(n);
+  std::cout << "Max size is: " << vec_.capacity()
             << " / Current size: " << vec_.size() << std::endl;
 
 }
@@ -24,17 +26,15 @@ Span::~Span(void) {}
 // }
 
 void Span::addNumber(unsigned int n) {
-  if (this->getMaxSize() == vec_.size()) {
+  if (vec_.capacity() == vec_.size()) {
     throw(Span::MaxSizeException());
   }
   vec_.push_back(n);
   std::cout << "Current size: " << this->vec_.size() << std::endl;
 }
 
-unsigned int Span::getMaxSize(void) const { return (max_size_); }
-
 // unsigned int Span::shortestSpan(void) {
-
+//   std::vector<unsigned int>::iterator
 // }
 
 // unsigned int Span::longestSpan(void) {

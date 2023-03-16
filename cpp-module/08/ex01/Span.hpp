@@ -6,7 +6,6 @@
 class Span {
  private:
   Span(void);
-  unsigned int max_size_;
   std::vector<unsigned int> vec_;
 
  public:
@@ -16,7 +15,6 @@ class Span {
   Span& operator=(Span const& rhs);
 
   void addNumber(unsigned int n);
-  unsigned int getMaxSize(void) const;
 
   unsigned int shortestSpan(void);
   unsigned int longestSpan(void);
