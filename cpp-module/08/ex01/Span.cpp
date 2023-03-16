@@ -2,15 +2,10 @@
 
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 
 Span::Span(unsigned int n) {
-  try {
-    vec_.reserve(n);
-    std::cout << "Max size is: " << vec_.capacity()
-              << " / Current size: " << vec_.size() << std::endl;
-  } catch (std::length_error& le) {
-    std::cout << le.what() << std::endl;
-  }
+  this->max_size_ = n;
 }
 
 // Span::Span(const Span& src)
@@ -28,25 +23,19 @@ Span::~Span(void) {}
 // }
 
 void Span::addNumber(unsigned int n) {
-  if (vec_.capacity() == vec_.size()) {
+  if (this->max_size_ == this->set_.size()) {
     throw(Span::MaxSizeException());
   }
-  vec_.push_back(n);
-  std::cout << "Current size: " << this->vec_.size() << std::endl;
+  set_.insert(n);
+  std::cout << "Current size: " << this->set_.size() << std::endl;
 }
 
-// unsigned int Span::shortestSpan(void) {
-//   if (isAbleToSpan() == false) {
-//     throw(Span::UnableToSpanException());
-//   }
-//   return (1);
-// }
-
-bool Span::isAbleToSpan(void) const {
-  if (vec_.size() == 0 || vec_.size() == 1) {
-    return (false);
+unsigned int Span::shortestSpan(void) {
+  if (this->set_.size() <= 1) {
+    throw(Span::UnableToSpanException());
   }
-  return (true);
+
+  return (1);
 }
 
 // unsigned int Span::longestSpan(void) {

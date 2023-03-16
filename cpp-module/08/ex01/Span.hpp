@@ -1,12 +1,14 @@
 #ifndef Span_HPP
 #define Span_HPP
 
-#include <vector>
+#include <set>
 
 class Span {
  private:
   Span(void);
-  std::vector<unsigned int> vec_;
+
+  unsigned int max_size_;
+  std::set<unsigned int> set_;
 
  public:
   Span(unsigned int n);
@@ -15,7 +17,6 @@ class Span {
   Span& operator=(Span const& rhs);
 
   void addNumber(unsigned int n);
-  bool isAbleToSpan(void) const;
 
   unsigned int shortestSpan(void);
   unsigned int longestSpan(void);
