@@ -54,7 +54,7 @@ template <typename T>
 Array<T>& Array<T>::operator=(const Array<T>& rhs) {
   if (this != &rhs) {
     if (rhs.array_ == NULL) {
-      return;
+      return (*this);
     }
     if (this->array_ != NULL) {
       delete[] this->array_;
