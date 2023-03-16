@@ -19,22 +19,29 @@ int main(void) {
   }
 
   try {
-    std::vector<int>::iterator iter = easyfind(vec, CONTAINER_SIZE - 4);
+    std::vector<int>::iterator iter = ::easyfind(vec, CONTAINER_SIZE - 4);
     std::cout << "Find value is : " << *iter << std::endl;
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
 
   try {
-    std::deque<int>::iterator iter = easyfind(deque, CONTAINER_SIZE - 2);
+    std::deque<int>::iterator iter = ::easyfind(deque, CONTAINER_SIZE - 2);
     std::cout << "Find value is : " << *iter << std::endl;
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
 
   try {
-    std::list<int>::iterator iter = easyfind(lst, CONTAINER_SIZE + 100);
+    std::list<int>::iterator iter = ::easyfind(lst, CONTAINER_SIZE + 100);
     std::cout << "Find value is : " << *iter << std::endl;
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  try {
+    const std::vector<int> c_vec(4);
+    ::easyfind(c_vec, 3);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
