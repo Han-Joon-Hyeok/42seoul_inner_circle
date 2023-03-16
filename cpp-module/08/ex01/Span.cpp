@@ -49,9 +49,16 @@ unsigned int Span::shortestSpan(void) {
   return (*(std::min_element(diff_vec.begin(), diff_vec.end())));
 }
 
-// unsigned int Span::longestSpan(void) {
+unsigned int Span::longestSpan(void) {
+  if (this->set_.size() <= 1) {
+    throw(Span::UnableToSpanException());
+  }
 
-// }
+  std::set<unsigned int>::iterator begin = this->set_.begin();
+  std::set<unsigned int>::iterator end = this->set_.end();
+
+  return (*(--end) - *(begin));
+}
 
 const char* Span::MaxSizeException::what() const throw() {
   return ("Can't add more elements.");

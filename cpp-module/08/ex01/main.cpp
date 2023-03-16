@@ -24,7 +24,7 @@ int main(void) {
     sp.addNumber(11);
     sp.shortestSpan();
     std::cout << sp.shortestSpan() << std::endl;
-    // std::cout << sp.longestSpan() << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
