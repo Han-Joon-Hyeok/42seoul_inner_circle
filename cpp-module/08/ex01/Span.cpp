@@ -5,10 +5,13 @@
 
 Span::Span(unsigned int n) {
   std::cout << "Successfully created vector" << std::endl;
-  vec_.reserve(n);
-  std::cout << "Max size is: " << vec_.capacity()
-            << " / Current size: " << vec_.size() << std::endl;
-
+  try {
+    vec_.reserve(n);
+    std::cout << "Max size is: " << vec_.capacity()
+              << " / Current size: " << vec_.size() << std::endl;
+  } catch (std::length_error& le) {
+    std::cout << le.what() << std::endl;
+  }
 }
 
 // Span::Span(const Span& src)
