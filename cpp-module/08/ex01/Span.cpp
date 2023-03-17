@@ -17,14 +17,12 @@ Span::Span(const Span& src)
 
 Span::~Span(void) {}
 
-Span& Span::operator=(Span const& rhs)
-{
-	if (this != &rhs)
-	{
+Span& Span::operator=(Span const& rhs) {
+  if (this != &rhs) {
     this->max_size_ = rhs.max_size_;
     this->set_ = rhs.set_;
-	}
-	return *this;
+  }
+  return *this;
 }
 
 void Span::addNumber(unsigned int n) {
@@ -46,7 +44,7 @@ unsigned int Span::shortestSpan(void) {
   std::transform(diff_vec.begin(), diff_vec.end(), diff_vec.begin(),
                  AbsoluteValue());
 
-  return (*(std::min_element(diff_vec.begin(), diff_vec.end())));
+  return (*(std::min_element(diff_vec.begin() + 1, diff_vec.end())));
 }
 
 unsigned int Span::longestSpan(void) {
