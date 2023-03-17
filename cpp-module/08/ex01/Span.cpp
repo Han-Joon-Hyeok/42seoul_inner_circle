@@ -12,19 +12,20 @@ class AbsoluteValue {
 
 Span::Span(unsigned int n) { this->max_size_ = n; }
 
-// Span::Span(const Span& src)
-// {
-// }
+Span::Span(const Span& src)
+    : max_size_(src.max_size_), set_(src.set_.begin(), src.set_.end()) {}
 
 Span::~Span(void) {}
 
-// Span& Span::operator=(Span const& rhs)
-// {
-// 	if (this != &rhs)
-// 	{
-// 	}
-// 	return *this;
-// }
+Span& Span::operator=(Span const& rhs)
+{
+	if (this != &rhs)
+	{
+    this->max_size_ = rhs.max_size_;
+    this->set_ = rhs.set_;
+	}
+	return *this;
+}
 
 void Span::addNumber(unsigned int n) {
   if (this->max_size_ == this->set_.size()) {
