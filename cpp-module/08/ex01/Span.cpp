@@ -32,7 +32,6 @@ void Span::addNumber(unsigned int n) {
     throw(Span::MaxSizeException());
   }
   this->set_.insert(n);
-  std::cout << "Current size: " << this->set_.size() << std::endl;
 }
 
 unsigned int Span::shortestSpan(void) {
