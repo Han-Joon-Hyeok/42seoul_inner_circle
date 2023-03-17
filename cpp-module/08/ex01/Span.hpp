@@ -17,6 +17,16 @@ class Span {
 
   void addNumber(unsigned int n);
 
+  template <typename InputIt>
+  void addNumbers(InputIt first, InputIt last) {
+    if (std::distance(first, last) + this->set_.size() > this->max_size_) {
+      throw MaxSizeException();
+    }
+    for (InputIt it = first; it != last; ++it) {
+      addNumber(*it);
+    }
+  }
+
   unsigned int shortestSpan(void);
   unsigned int longestSpan(void);
   class MaxSizeException : public std::exception {
