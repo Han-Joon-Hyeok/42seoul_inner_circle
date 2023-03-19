@@ -19,13 +19,14 @@ class MutantStack {
   MutantStack(void);
   MutantStack(const MutantStack<T>& src);
   ~MutantStack(void);
-  MutantStack<T>& operator=(MutantStack<T> const& rhs);
+  MutantStack<T, Container>& operator=(MutantStack<T> const& rhs);
 
   bool empty(void) const;
   size_type size(void) const;
   value_type& top(void);
   const T& top(void) const;
   void push(const T& value);
+  void pop(void);
 };
 
 #include "MutantStack.tpp"

@@ -1,66 +1,35 @@
 #include <iostream>
-
-#include "MutantStack.hpp"
 #include <stack>
 
+#include "MutantStack.hpp"
+
 int main(void) {
-  std::stack stack;
-  srand(time(NULL));
+  MutantStack<int> mstack;
 
-  // Subject sample test case
-  try {
-    Span sp = Span(5);
-    sp.addNumber(6);
-    sp.addNumber(3);
-    sp.addNumber(17);
-    sp.addNumber(9);
-    sp.addNumber(11);
-    sp.shortestSpan();
-    std::cout << sp.shortestSpan() << std::endl;
-    std::cout << sp.longestSpan() << std::endl;
-  } catch (std::exception& e) {
-    std::cout << e.what() << std::endl;
-  }
+  mstack.push(5);
+  mstack.push(17);
 
-  // // Error: MaxSizeException
-  // try {
-  //   Span sp = Span(5);
-  //   sp.addNumber(6);
-  //   sp.addNumber(3);
-  //   sp.addNumber(17);
-  //   sp.addNumber(9);
-  //   sp.addNumber(11);
-  //   sp.addNumber(11);   // Exception: can't add more elements.
-  // } catch (std::exception& e) {
-  //   std::cout << e.what() << std::endl;
+  std::cout << mstack.top() << std::endl;
+
+  mstack.pop();
+
+  std::cout << mstack.size() << std::endl;
+
+  mstack.push(3);
+  mstack.push(5);
+  mstack.push(737);
+  mstack.push(0);
+
+  // MutantStack<int>::iterator it = mstack.begin();
+  // MutantStack<int>::iterator ite = mstack.end();
+
+  // ++it;
+  // --it;
+
+  // while (it != ite) {
+  //   std::cout << *it << std::endl;
+  //   ++it;
   // }
 
-  // // Span class with 50,000 numbers
-  // try {
-  //   Span sp(MAX_VALUE);
-  //   for (int idx = 0; idx < MAX_VALUE; idx += 1) {
-  //     sp.addNumber(rand());
-  //   }
-  //   std::cout << sp.shortestSpan() << std::endl;
-  //   std::cout << sp.longestSpan() << std::endl;
-  // } catch (const std::exception& e) {
-  //   std::cerr << e.what() << '\n';
-  // }
-
-  // addNumbers using range of iterators
-  // try {
-  //   std::deque<int> v;
-
-  //   for (int idx = 0; idx < MAX_VALUE; idx += 1) {
-  //     v.push_back(idx);
-  //   }
-
-  //   Span sp(MAX_VALUE);
-  //   sp.addNumbers(v.begin(), v.end());
-
-  //   std::cout << sp.shortestSpan() << std::endl;
-  //   std::cout << sp.longestSpan() << std::endl;
-  // } catch (std::exception& e) {
-  //   std::cerr << e.what() << '\n';
-  // }
+  // std::stack<int> s(mstack);
 }
