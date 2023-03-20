@@ -21,12 +21,22 @@ class MutantStack {
   ~MutantStack(void);
   MutantStack<T, Container>& operator=(MutantStack<T> const& rhs);
 
+  // Member functions
   bool empty(void) const;
   size_type size(void) const;
   value_type& top(void);
   const T& top(void) const;
   void push(const T& value);
   void pop(void);
+
+  // Iterator
+  typedef typename Container::iterator iterator;
+  typedef typename Container::const_iterator const_iterator;
+
+  iterator begin();
+  iterator end();
+  const_iterator begin() const;
+  const_iterator end() const;
 };
 
 #include "MutantStack.tpp"

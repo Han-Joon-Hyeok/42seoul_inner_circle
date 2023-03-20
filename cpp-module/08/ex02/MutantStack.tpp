@@ -1,8 +1,6 @@
 #ifndef MutantStack_TPP
 #define MutantStack_TPP
 
-// #include "MutantStack.hpp"
-
 template <typename T, typename Container>
 MutantStack<T, Container>::MutantStack(void) { }
 
@@ -13,8 +11,7 @@ template <typename T, typename Container>
 MutantStack<T, Container>::MutantStack(const MutantStack<T>& src) : c(src.c) { }
 
 template <typename T, typename Container>
-MutantStack<T, Container>& MutantStack<T, Container>::operator=(
-    MutantStack<T> const& rhs) {
+MutantStack<T, Container>& MutantStack<T, Container>::operator=(MutantStack<T> const& rhs) {
   if (this != &rhs) {
     this->c = rhs.c;
   }
@@ -52,6 +49,24 @@ void MutantStack<T, Container>::pop(void) {
   c.pop_back();
 }
 
-#include "MutantStack.tpp"
+template <typename T, typename Container>
+typename MutantStack<T, Container>::iterator MutantStack<T, Container>::begin(void) {
+  return (c.begin());
+}
+
+template <typename T, typename Container>
+typename MutantStack<T, Container>::iterator MutantStack<T, Container>::end(void) {
+  return (c.end());
+}
+
+template <typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::begin(void) const {
+  return (c.begin());
+}
+
+template <typename T, typename Container>
+typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::end(void) const {
+  return (c.end());
+}
 
 #endif
