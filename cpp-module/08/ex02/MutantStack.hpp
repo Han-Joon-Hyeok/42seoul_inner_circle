@@ -1,37 +1,19 @@
 #ifndef MutantStack_HPP
 #define MutantStack_HPP
 
-#include <deque>
+#include <stack>
 
-template <typename T, typename Container = std::deque<T> >
-class MutantStack {
- public:
-  typedef typename Container::value_type 				value_type;
-  typedef typename Container::reference 				reference;
-  typedef typename Container::const_reference 	const_reference;
-  typedef typename Container::size_type 				size_type;
-  typedef					 Container 										container_type;
-
- protected:
-  Container c;
-
+template <typename T>
+class MutantStack : public std::stack<T> {
  public:
   MutantStack(void);
-  MutantStack(const MutantStack<T>& src);
+  MutantStack(const MutantStack& src);
   ~MutantStack(void);
-  MutantStack<T, Container>& operator=(MutantStack<T> const& rhs);
-
-  // Member functions
-  bool empty(void) const;
-  size_type size(void) const;
-  value_type& top(void);
-  const T& top(void) const;
-  void push(const T& value);
-  void pop(void);
+  MutantStack& operator=(MutantStack const& rhs);
 
   // Iterator
-  typedef typename Container::iterator iterator;
-  typedef typename Container::const_iterator const_iterator;
+  typedef typename MutantStack<T>::stack::container_type::iterator        iterator;
+  typedef typename MutantStack<T>::stack::container_type::const_iterator  const_iterator;
 
   iterator begin();
   iterator end();

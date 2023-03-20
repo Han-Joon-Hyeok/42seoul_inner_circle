@@ -37,7 +37,13 @@ int main(void) {
       ++it;
     }
 
-    // std::stack<int> s(mstack);
+    std::cout << "===========Iterating copied stack elements===========" << std::endl;
+    std::stack<int> s(mstack);
+
+    while (s.empty() == false) {
+      std::cout << s.top() << std::endl;
+      s.pop();
+    }
   }
   {
     std::cout << "===========std::list version===========" << std::endl;
@@ -58,8 +64,8 @@ int main(void) {
     list.push_back(3);
     list.push_back(4);
 
-    std::list<int>::iterator it = list.begin();   // Start from stack bottom
-    std::list<int>::iterator ite = list.end();    // Start from stack top
+    std::list<int>::iterator it = list.begin();
+    std::list<int>::iterator ite = list.end();
 
     ++it;
     --it;
@@ -71,6 +77,13 @@ int main(void) {
       ++it;
     }
 
-    // std::stack<int> s(list);
+    std::cout << "===========Iterating copied list elements===========" << std::endl;
+
+    std::list<int> l(list);
+
+    while (l.size() > 0) {
+      std::cout << l.back() << std::endl;
+      l.pop_back();
+    }
   }
 }

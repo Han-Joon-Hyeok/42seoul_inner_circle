@@ -1,72 +1,43 @@
 #ifndef MutantStack_TPP
 #define MutantStack_TPP
 
-template <typename T, typename Container>
-MutantStack<T, Container>::MutantStack(void) { }
+template <typename T>
+MutantStack<T>::MutantStack(void) { }
 
-template <typename T, typename Container>
-MutantStack<T, Container>::~MutantStack(void) { }
+template <typename T>
+MutantStack<T>::~MutantStack(void) { }
 
-template <typename T, typename Container>
-MutantStack<T, Container>::MutantStack(const MutantStack<T>& src) : c(src.c) { }
+template <typename T>
+MutantStack<T>::MutantStack(const MutantStack<T>& src) {
+  *this = src;
+}
 
-template <typename T, typename Container>
-MutantStack<T, Container>& MutantStack<T, Container>::operator=(MutantStack<T> const& rhs) {
+template <typename T>
+MutantStack<T>& MutantStack<T>::operator=(MutantStack<T> const& rhs) {
   if (this != &rhs) {
-    this->c = rhs.c;
+    *this = rhs;
   }
   return (*this);
 }
 
-template <typename T, typename Container>
-bool MutantStack<T, Container>::empty(void) const {
-  return (c.empty());
+template <typename T>
+typename MutantStack<T>::stack::container_type::iterator MutantStack<T>::begin(void) {
+  return (this->c.begin());
 }
 
-template <typename T, typename Container>
-typename MutantStack<T, Container>::size_type MutantStack<T, Container>::size()
-    const {
-  return (c.size());
+template <typename T>
+typename MutantStack<T>::stack::container_type::iterator MutantStack<T>::end(void) {
+  return (this->c.end());
 }
 
-template <typename T, typename Container>
-typename MutantStack<T, Container>::value_type& MutantStack<T, Container>::top() {
-  return (c.back());
+template <typename T>
+typename MutantStack<T>::stack::container_type::const_iterator MutantStack<T>::begin(void) const {
+  return (this->c.begin());
 }
 
-template <typename T, typename Container>
-const T& MutantStack<T, Container>::top() const {
-  return (c.back());
-}
-
-template <typename T, typename Container>
-void MutantStack<T, Container>::push(const T& value) {
-  c.push_back(value);
-}
-
-template <typename T, typename Container>
-void MutantStack<T, Container>::pop(void) {
-  c.pop_back();
-}
-
-template <typename T, typename Container>
-typename MutantStack<T, Container>::iterator MutantStack<T, Container>::begin(void) {
-  return (c.begin());
-}
-
-template <typename T, typename Container>
-typename MutantStack<T, Container>::iterator MutantStack<T, Container>::end(void) {
-  return (c.end());
-}
-
-template <typename T, typename Container>
-typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::begin(void) const {
-  return (c.begin());
-}
-
-template <typename T, typename Container>
-typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::end(void) const {
-  return (c.end());
+template <typename T>
+typename MutantStack<T>::stack::container_type::const_iterator MutantStack<T>::end(void) const {
+  return (this->c.end());
 }
 
 #endif
