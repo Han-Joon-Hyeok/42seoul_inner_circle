@@ -24,6 +24,25 @@ int main(void) {
     std::cout << e.what() << std::endl;
   }
 
+  // // Error: No element
+  // try {
+  //   Span sp = Span(5);
+  //   std::cout << sp.shortestSpan() << std::endl;
+  //   std::cout << sp.longestSpan() << std::endl;
+  // } catch (std::exception& e) {
+  //   std::cout << e.what() << std::endl;
+  // }
+
+  // // Error: One element
+  // try {
+  //   Span sp = Span(5);
+  //   sp.addNumber(3);
+  //   std::cout << sp.shortestSpan() << std::endl;
+  //   std::cout << sp.longestSpan() << std::endl;
+  // } catch (std::exception& e) {
+  //   std::cout << e.what() << std::endl;
+  // }
+
   // // Error: MaxSizeException
   // try {
   //   Span sp = Span(5);
