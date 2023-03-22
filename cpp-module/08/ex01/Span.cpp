@@ -5,11 +5,6 @@
 #include <numeric>
 #include <vector>
 
-class AbsoluteValue {
- public:
-  int operator()(int x) const { return std::abs(x); }
-};
-
 Span::Span(unsigned int n) { this->max_size_ = n; }
 
 Span::Span(const Span& src)
@@ -41,8 +36,6 @@ unsigned int Span::shortestSpan(void) {
   std::vector<long long> diff_vec(this->set_.size());
 
   std::adjacent_difference(copy_vec.begin(), copy_vec.end(), diff_vec.begin());
-  std::transform(diff_vec.begin(), diff_vec.end(), diff_vec.begin(),
-                 AbsoluteValue());
 
   return (*(std::min_element(diff_vec.begin() + 1, diff_vec.end())));
 }
