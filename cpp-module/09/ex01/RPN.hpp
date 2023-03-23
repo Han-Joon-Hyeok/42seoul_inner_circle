@@ -3,6 +3,14 @@
 
 #include <stack>
 
+enum EOperatorType {
+  PLUS,
+  MINUS,
+  MULTIPLY,
+  DIVIDE,
+  ERROR
+};
+
 class RPN
 {
   private:
@@ -16,6 +24,7 @@ class RPN
 
     void calculate(const std::string& expr);
     bool isArithmeticOperator(char c);
+    EOperatorType getOperatorType(char c);
 };
 
 #endif
