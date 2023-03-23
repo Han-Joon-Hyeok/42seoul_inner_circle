@@ -14,12 +14,13 @@ class BitcoinExchange {
   ~BitcoinExchange(void);
   BitcoinExchange& operator=(BitcoinExchange const& rhs);
 
-  static void parseLine(std::string& line);
-  static bool isValidHeader(std::ifstream& infile);
-};
+  void parseLine(std::string& line);
+  bool isValidHeader(std::ifstream& infile);
+  void validateDateFormat(std::string& date);
 
-std::string ft_strtrim(std::string& str);
-std::pair<std::string, double> ft_split(std::string& str, char delimiter);
+  std::string ft_strtrim(std::string& str);
+  std::pair<std::string, double> splitKeyPair(std::string& str, char delimiter);
+};
 
 class InvalidInput : public std::exception {
  public:

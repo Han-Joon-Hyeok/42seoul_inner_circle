@@ -9,6 +9,8 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
+  BitcoinExchange ex;
+
   std::ifstream infile;
 
   infile.open(argv[1]);
@@ -17,14 +19,14 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
-  if (BitcoinExchange::isValidHeader(infile) == false) {
+  if (ex.isValidHeader(infile) == false) {
     std::cerr << "Error: header format should be: [date | value]" << std::endl;
     return (EXIT_FAILURE);
   }
 
   std::string line;
   while (std::getline(infile, line)) {
-    BitcoinExchange::parseLine(line);
+    ex.parseLine(line);
   }
 
   return (EXIT_SUCCESS);
