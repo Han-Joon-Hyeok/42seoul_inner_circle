@@ -79,9 +79,13 @@ void BitcoinExchange::parseLine(std::string& line) {
     float balance;
 
     pair = splitKeyPair(line, '|');
-    // it = this->chart_.upper_bound(pair.first);
-    // balance = (pair.second) * (it->second);
-    // std::cout << pair.first << " => " << pair.second << " = " << balance << std::endl;
+    it = this->chart_.find(pair.first);
+    if (it->first != pair.first) {
+      it = this->chart_.lower_bound(pair.first);
+      --it;
+    }
+    balance = (pair.second) * (it->second);
+    std::cout << pair.first << " => " << pair.second << " = " << balance << std::endl;
   } catch (std::exception& e) {
     (void)e;
   }
