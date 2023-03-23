@@ -30,13 +30,22 @@ void RPN::calculate(const std::string& expr) {
 
   for (; it != expr.end(); ++it) {
     if (std::isdigit(*it)) {
-      std::cout << *it << std::endl;
+      if (std::isdigit(*(it + 1))) {
+        std::cout << "Error: invalid expression => " << *it << *(it + 1) << std::endl;
+        return ;
+      }
+      this->stack_.push(static_cast<int>(*it) - '0');
     } else if (isArithmeticOperator(*it)) {
       std::cout << *it << std::endl;
     } else if (std::iswspace(*it) == false) {
       std::cout << "Error: invalid expression => " << *it << std::endl;
       return ;
     }
+  }
+
+  for (size_t size = this->stack_.size(); size > 0; --size) {
+    std::cout << this->stack_.top() << std::endl;
+    this->stack_.pop();
   }
 }
 
