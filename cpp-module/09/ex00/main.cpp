@@ -22,4 +22,10 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
+  std::string line;
+  while (std::getline(infile, line)) {
+    BitcoinExchange::parseLine(line);
+  }
+
+  return (EXIT_SUCCESS);
 }
