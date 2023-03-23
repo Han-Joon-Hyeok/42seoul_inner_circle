@@ -132,6 +132,14 @@ void BitcoinExchange::validateDateFormat(std::string& date) {
     std::cerr << "Error: invalid date format => " << date << std::endl;
 		throw (InvalidInput());
   }
+
+  std::stringstream ss2;
+
+  ss2 << std::put_time(&tm, "%Y-%m-%d");
+  if (date != ss2.str()) {
+    std::cerr << "Error: invalid date format => " << date << std::endl;
+		throw (InvalidInput());
+  }
 }
 
 std::string BitcoinExchange::ft_strtrim(std::string& str) {
