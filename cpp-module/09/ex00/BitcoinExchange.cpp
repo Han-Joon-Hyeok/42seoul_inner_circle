@@ -42,19 +42,20 @@ BitcoinExchange::BitcoinExchange(const std::string& file) {
   }
 }
 
-// BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
-// {
-// }
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) : chart_(src.chart_.begin(), src.chart_.end())
+{
+}
 
 BitcoinExchange::~BitcoinExchange(void) {}
 
-// BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs)
-// {
-// 	if (this != &rhs)
-// 	{
-// 	}
-// 	return *this;
-// }
+BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs)
+{
+	if (this != &rhs)
+	{
+    this->chart_ = rhs.chart_;
+	}
+	return *this;
+}
 
 bool BitcoinExchange::isValidHeader(std::ifstream& infile, const std::string& first, const std::string& second) {
   std::string line;
