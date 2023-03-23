@@ -15,6 +15,7 @@ class RPN
     RPN& operator=(RPN const& rhs);
 
     void calculate(const std::string& expr);
+    bool isArithmeticOperator(char c);
 };
 
 #endif

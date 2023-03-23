@@ -9,7 +9,8 @@ int main(int argc, char** argv) {
   }
 
   RPN rpn;
-  
+
+  rpn.calculate(std::string(argv[1]));
 
   return (EXIT_SUCCESS);
 }
