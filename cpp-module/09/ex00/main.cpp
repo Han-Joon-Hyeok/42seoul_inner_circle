@@ -17,4 +17,9 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
+  if (BitcoinExchange::isValidHeader(infile) == false) {
+    std::cerr << "Error: header format should be: [date | value]" << std::endl;
+    return (EXIT_FAILURE);
+  }
+
 }
