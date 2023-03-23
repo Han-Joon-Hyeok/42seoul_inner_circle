@@ -12,8 +12,8 @@ BitcoinExchange::BitcoinExchange(const std::string& file) {
 	std::string line;
 	std::string date;
 	std::string value;
-  double d_value;
-  std::pair<std::string, double> pair;
+  float d_value;
+  std::pair<std::string, float> pair;
 
   infile.open(file);
   if (infile.is_open() == false) {
@@ -74,21 +74,26 @@ bool BitcoinExchange::isValidHeader(std::ifstream& infile, const std::string& fi
 
 void BitcoinExchange::parseLine(std::string& line) {
   try {
-    std::pair<std::string, double> pair;
+    std::pair<std::string, float> pair;
+    std::map<std::string, float>::iterator it;
+    float balance;
 
     pair = splitKeyPair(line, '|');
+    // it = this->chart_.upper_bound(pair.first);
+    // balance = (pair.second) * (it->second);
+    // std::cout << pair.first << " => " << pair.second << " = " << balance << std::endl;
   } catch (std::exception& e) {
     (void)e;
   }
 }
 
-std::pair<std::string, double> BitcoinExchange::splitKeyPair(std::string& str,
+std::pair<std::string, float> BitcoinExchange::splitKeyPair(std::string& str,
                                                              char delimiter) {
   std::string key;
   std::string value;
-  double d_value;
+  float d_value;
   std::stringstream ss(str);
-  std::pair<std::string, double> pair;
+  std::pair<std::string, float> pair;
 
   d_value = 0;
   std::getline(ss, key, delimiter);
