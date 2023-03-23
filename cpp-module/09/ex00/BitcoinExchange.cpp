@@ -1,12 +1,46 @@
 #include "BitcoinExchange.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 
-BitcoinExchange::BitcoinExchange(void) {}
+BitcoinExchange::BitcoinExchange(const std::string& file) {
+	std::ifstream infile;
+	std::string line;
+	std::string date;
+	std::string value;
+  double d_value;
+  std::pair<std::string, double> pair;
+
+  infile.open(file);
+  if (infile.is_open() == false) {
+		std::cerr << "Error: can't open " << file << std::endl;
+		exit(EXIT_FAILURE);
+	}
+  try {
+    std::getline(infile, line);
+    while (std::getline(infile, line)) {
+      std::stringstream ss(line);
+
+      std::getline(ss, date, ',');
+      std::getline(ss, value, '\n');
+      std::stringstream ss2(value);
+
+      this->validateDateFormat(date);
+      if ((ss2 >> d_value) && (ss2.peek() == EOF)) {
+        pair = std::make_pair(date, d_value);
+        this->chart_.insert(pair);
+      } else {
+        throw (std::runtime_error(""));
+      }
+    }
+  } catch (std::exception& e) {
+		std::cerr << "Error: invalid data found in DB file => " << file << std::endl;
+  }
+}
 
 // BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
 // {
@@ -22,17 +56,17 @@ BitcoinExchange::~BitcoinExchange(void) {}
 // 	return *this;
 // }
 
-bool BitcoinExchange::isValidHeader(std::ifstream& infile) {
+bool BitcoinExchange::isValidHeader(std::ifstream& infile, const std::string& first, const std::string& second) {
   std::string line;
 
   std::getline(infile, line, '|');
   line = ft_strtrim(line);
-  if (line != "date") {
+  if (line != first) {
     return (false);
   }
   std::getline(infile, line, '\n');
   line = ft_strtrim(line);
-  if (line != "value") {
+  if (line != second) {
     return (false);
   }
   return (true);

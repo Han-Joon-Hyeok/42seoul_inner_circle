@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
-  BitcoinExchange ex;
+  BitcoinExchange ex("data.csv");
 
   std::ifstream infile;
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     return (EXIT_FAILURE);
   }
 
-  if (ex.isValidHeader(infile) == false) {
+  if (ex.isValidHeader(infile, "date", "value") == false) {
     std::cerr << "Error: header format should be: [date | value]" << std::endl;
     return (EXIT_FAILURE);
   }
