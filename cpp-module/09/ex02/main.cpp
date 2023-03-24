@@ -12,6 +12,20 @@ int main(int argc, char** argv) {
   try
   {
     PmergeMe merge(argc, argv);
+    std::clock_t start;
+    std::clock_t end;
+
+    std::cout << "Before  : " << merge << std::endl;
+    start = std::clock();
+    merge.listMergeInsertionSort();
+    end = std::clock();
+    std::cout << "After   : " << merge << std::endl;
+    merge.printResult(start, end, "list");
+
+    start = std::clock();
+    merge.vectorMergeInsertionSort();
+    end = std::clock();
+    merge.printResult(start, end, "vector");
   }
   catch(const std::exception& e)
   {

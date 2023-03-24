@@ -1,8 +1,10 @@
 #include "PmergeMe.hpp"
 
-#include <cstdlib>
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
+
+// const int kInsertionSortThreshold = 16;
 
 PmergeMe::PmergeMe(int argc, char** argv) {
   long long converted = 0;
@@ -15,7 +17,8 @@ PmergeMe::PmergeMe(int argc, char** argv) {
       throw(PmergeMe::InvalidInput());
     }
     if (converted < 0) {
-      std::cout << "Error: can't get negative value => " << converted << std::endl;
+      std::cout << "Error: can't get negative value => " << converted
+                << std::endl;
       throw(PmergeMe::InvalidInput());
     }
     this->list_.push_back(converted);
@@ -27,8 +30,6 @@ PmergeMe::PmergeMe(int argc, char** argv) {
 
   this->vector_.reserve(this->list_.size());
   std::copy(this->list_.begin(), this->list_.end(), this->vector_.begin());
-
-  std::cout << "Before  : " << *this << std::endl;
 }
 
 PmergeMe::PmergeMe(const PmergeMe& src)
@@ -44,6 +45,10 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
   return *this;
 }
 
+void PmergeMe::listMergeInsertionSort(void) {}
+
+void PmergeMe::vectorMergeInsertionSort(void) {}
+
 bool PmergeMe::hasDuplicatedNumber(std::list<ssize_t> list) {
   std::list<ssize_t>::iterator it = list.begin();
 
@@ -58,6 +63,16 @@ bool PmergeMe::hasDuplicatedNumber(std::list<ssize_t> list) {
   }
 
   return (false);
+}
+
+void PmergeMe::printResult(std::clock_t start, std::clock_t end,
+                           const std::string& type) {
+  double diff = (double)(end - start) / CLOCKS_PER_SEC;
+
+  std::cout.precision(5);
+  std::cout << std::fixed << "Time to process a range of   "
+            << this->list_.size() << " elements with std::" << type << " : "
+            << diff << " us" << std::endl;
 }
 
 std::list<ssize_t>::const_iterator PmergeMe::getListIterator(void) const {

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <list>
+#include <ctime>
 
 class PmergeMe
 {
@@ -19,8 +20,21 @@ class PmergeMe
 
     bool hasDuplicatedNumber(std::list<ssize_t> list);
 
-    void vectorMergeInsertionSort();
-    void listMergeInsertionSort();
+    template <typename T>
+    void insertion_sort(T first, T last) {
+      for (T i = first; i != last; ++i) {
+        T j = i;
+        while (j != i && *j < *(j - 1)) {
+          std::swap(*j, *(j - 1));
+          --j;
+        }
+      }
+    }
+
+    void vectorMergeInsertionSort(void);
+    void listMergeInsertionSort(void);
+
+    void printResult(std::clock_t start, std::clock_t end, const std::string& type);
 
     std::list<ssize_t>::const_iterator getListIterator(void) const;
     std::list<ssize_t>::const_iterator getListEndIterator(void) const;
