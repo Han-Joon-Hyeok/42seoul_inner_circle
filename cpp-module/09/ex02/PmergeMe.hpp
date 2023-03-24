@@ -22,10 +22,15 @@ class PmergeMe
     void vectorMergeInsertionSort();
     void listMergeInsertionSort();
 
+    std::list<ssize_t>::const_iterator getListIterator(void) const;
+    std::list<ssize_t>::const_iterator getListEndIterator(void) const;
+
     class InvalidInput : public std::exception {
       public:
         virtual const char* what(void) const throw();
     };
 };
+
+std::ostream& operator<<(std::ostream &out, const PmergeMe& rhs);
 
 #endif
