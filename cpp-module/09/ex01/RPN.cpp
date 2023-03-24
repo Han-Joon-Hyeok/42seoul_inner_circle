@@ -49,7 +49,7 @@ void RPN::calculate(const std::string& expr) {
           break;
         case DIVIDE:
           if (num2 == 0) {
-            std::cout << "Error: can't divide by 0 => " << num1 << "/" << num2
+            std::cout << "Error: can't divide by 0 => " << num1 << " / " << num2
                       << std::endl;
             return;
           }
@@ -64,6 +64,10 @@ void RPN::calculate(const std::string& expr) {
       std::cout << "Error: invalid expression => " << *it << std::endl;
       return;
     }
+  }
+  if (this->stack_.size() != 1) {
+    std::cout << "Error: stack size is not 1 => " << expr << std::endl;
+    return ;
   }
   std::cout << this->stack_.top() << std::endl;
 }
