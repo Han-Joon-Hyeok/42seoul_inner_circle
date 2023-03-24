@@ -27,8 +27,15 @@ void RPN::calculate(const std::string& expr) {
   for (; it != expr.end(); ++it) {
     if (std::isdigit(*it)) {
       if (std::isdigit(*(it + 1))) {
-        std::cout << "Error: number can be only [0 ~ 9] => " << *it << *(it + 1)
-                  << std::endl;
+        size_t idx = 1;
+        for (; it + idx != expr.end(); idx += 1) {
+          if (std::isdigit(*(it + idx)) == false) {
+            break ;
+          }
+        }
+        std::cout << "Error: number can be only [0 ~ 9] => ";
+        std::copy(it, it + idx, std::ostream_iterator<char>(std::cout));
+        std::cout << std::endl;
         return;
       }
       this->stack_.push(static_cast<int>(*it) - '0');
