@@ -8,8 +8,8 @@
 class PmergeMe
 {
   private:
-    std::vector<ssize_t> vector_;
-    std::list<ssize_t> list_;
+    std::vector<size_t> vector_;
+    std::list<size_t> list_;
 
     PmergeMe(void);
   public:
@@ -18,26 +18,28 @@ class PmergeMe
     ~PmergeMe(void);
     PmergeMe& operator=(PmergeMe const& rhs);
 
-    bool hasDuplicatedNumber(std::list<ssize_t> list);
+    bool hasDuplicatedNumber(std::list<size_t> list);
 
     template <typename T>
     void insertion_sort(T first, T last) {
       for (T i = first; i != last; ++i) {
         T j = i;
-        while (j != i && *j < *(j - 1)) {
-          std::swap(*j, *(j - 1));
+        while (j != i && *j < *std::prev(j)) {
+          std::iter_swap(j, std::prev(j));
           --j;
         }
       }
     }
 
     void vectorMergeInsertionSort(void);
+
+    void recursiveListSort(std::list<size_t>::iterator first, std::list<size_t>::iterator last);
     void listMergeInsertionSort(void);
 
     void printResult(std::clock_t start, std::clock_t end, const std::string& type);
 
-    std::list<ssize_t>::const_iterator getListIterator(void) const;
-    std::list<ssize_t>::const_iterator getListEndIterator(void) const;
+    std::list<size_t>::const_iterator getListIterator(void) const;
+    std::list<size_t>::const_iterator getListEndIterator(void) const;
 
     class InvalidInput : public std::exception {
       public:

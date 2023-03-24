@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 
-// const int kInsertionSortThreshold = 16;
+const int kInsertionSortThreshold = 2;
 
 PmergeMe::PmergeMe(int argc, char** argv) {
   long long converted = 0;
@@ -45,15 +45,33 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
   return *this;
 }
 
-void PmergeMe::listMergeInsertionSort(void) {}
+void PmergeMe::recursiveListSort(std::list<size_t>::iterator first,
+                                 std::list<size_t>::iterator last) {
+  if (std::distance(first, last) < kInsertionSortThreshold) {
+    insertion_sort(first, last);
+    return;
+  }
+
+  std::list<size_t>::iterator middle = first;
+  std::advance(middle, std::distance(first, last) / 2);
+
+  recursiveListSort(first, middle);
+  recursiveListSort(middle, last);
+
+  std::inplace_merge(first, middle, last);
+}
+
+void PmergeMe::listMergeInsertionSort(void) {
+  recursiveListSort(this->list_.begin(), this->list_.end());
+}
 
 void PmergeMe::vectorMergeInsertionSort(void) {}
 
-bool PmergeMe::hasDuplicatedNumber(std::list<ssize_t> list) {
-  std::list<ssize_t>::iterator it = list.begin();
+bool PmergeMe::hasDuplicatedNumber(std::list<size_t> list) {
+  std::list<size_t>::iterator it = list.begin();
 
   for (; it != list.end(); ++it) {
-    std::list<ssize_t>::iterator next = std::next(it);
+    std::list<size_t>::iterator next = std::next(it);
     for (; next != list.end(); ++next) {
       if (*it == *next) {
         std::cout << "Error: found duplicated number => " << *it << std::endl;
@@ -75,19 +93,19 @@ void PmergeMe::printResult(std::clock_t start, std::clock_t end,
             << diff << " us" << std::endl;
 }
 
-std::list<ssize_t>::const_iterator PmergeMe::getListIterator(void) const {
+std::list<size_t>::const_iterator PmergeMe::getListIterator(void) const {
   return (this->list_.begin());
 }
 
-std::list<ssize_t>::const_iterator PmergeMe::getListEndIterator(void) const {
+std::list<size_t>::const_iterator PmergeMe::getListEndIterator(void) const {
   return (this->list_.end());
 }
 
 const char* PmergeMe::InvalidInput::what(void) const throw() { return (""); }
 
 std::ostream& operator<<(std::ostream& out, const PmergeMe& rhs) {
-  std::list<ssize_t>::const_iterator it = rhs.getListIterator();
-  std::list<ssize_t>::const_iterator ite = rhs.getListEndIterator();
+  std::list<size_t>::const_iterator it = rhs.getListIterator();
+  std::list<size_t>::const_iterator ite = rhs.getListEndIterator();
 
   for (; it != ite; ++it) {
     out << *it << " ";
