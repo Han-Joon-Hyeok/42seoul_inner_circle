@@ -18,44 +18,54 @@ RPN& RPN::operator=(RPN const& rhs) {
 
 void RPN::calculate(const std::string& expr) {
   std::string::const_iterator it;
+  double num1;
+  double num2;
+  double result;
 
   it = expr.begin();
 
   for (; it != expr.end(); ++it) {
     if (std::isdigit(*it)) {
       if (std::isdigit(*(it + 1))) {
-        std::cout << "Error: invalid expression => " << *it << *(it + 1)
+        std::cout << "Error: number can be only [0 ~ 9] => " << *it << *(it + 1)
                   << std::endl;
         return;
       }
       this->stack_.push(static_cast<int>(*it) - '0');
     } else if (isArithmeticOperator(*it)) {
+      num2 = this->stack_.top();
+      this->stack_.pop();
+      num1 = this->stack_.top();
+      this->stack_.pop();
       switch (getOperatorType(*it)) {
         case PLUS:
-          std::cout << *it << std::endl;
+          result = num1 + num2;
           break;
         case MINUS:
-          std::cout << *it << std::endl;
+          result = num1 - num2;
           break;
         case MULTIPLY:
-          std::cout << *it << std::endl;
+          result = num1 * num2;
           break;
         case DIVIDE:
-          std::cout << *it << std::endl;
+          if (num2 == 0) {
+            std::cout << "Error: can't divide by 0 => " << num1 << "/" << num2
+                      << std::endl;
+            return;
+          }
+          result = num1 / num2;
           break;
         default:
-          break;
+          std::cout << "Error: invalid operator => " << *it << std::endl;
+          return;
       }
+      this->stack_.push(result);
     } else if (std::iswspace(*it) == false) {
       std::cout << "Error: invalid expression => " << *it << std::endl;
       return;
     }
   }
-
-  for (size_t size = this->stack_.size(); size > 0; --size) {
-    std::cout << this->stack_.top() << std::endl;
-    this->stack_.pop();
-  }
+  std::cout << this->stack_.top() << std::endl;
 }
 
 bool RPN::isArithmeticOperator(char c) {

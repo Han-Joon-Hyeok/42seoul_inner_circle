@@ -14,7 +14,7 @@ enum EOperatorType {
 class RPN
 {
   private:
-    std::stack<unsigned int> stack_;
+    std::stack<double> stack_;
 
   public:
     RPN(void);
