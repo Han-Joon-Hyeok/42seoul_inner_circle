@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    std::cerr << "Error: argument should be passed only one." << std::endl;
+    std::cout << "Error: argument should be passed only one." << std::endl;
     return (EXIT_FAILURE);
   }
 
