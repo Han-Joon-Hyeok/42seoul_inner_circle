@@ -22,8 +22,8 @@ class PmergeMe
 
     template <typename T>
     void insertion_sort(T first, T last) {
-      for (T i = first; i != last; ++i) {
-        T j = i;
+      for (T i = ++first; i != last; ++i) {
+        T j = --i;
         while (j != i && *j < *std::prev(j)) {
           std::iter_swap(j, std::prev(j));
           --j;
