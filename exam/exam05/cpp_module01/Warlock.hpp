@@ -1,33 +1,34 @@
-#ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+#ifndef Warlock_HPP
+#define Warlock_HPP
 
 #include <string>
-#include <list>
+#include <map>
 
 class ASpell;
 class ATarget;
 
-class Warlock
-{
-public:
-	Warlock(const std::string &name, const std::string &title);
-	~Warlock(void);
+class Warlock {
+	private:
+		Warlock(void);
+		Warlock(const Warlock& src);
+		Warlock& operator=(const Warlock& rhs);
 
-	const std::string &getName(void) const;
-	const std::string &getTitle(void) const;
-	void setTitle(const std::string &title);
-	void introduce(void) const;
+		std::string name_;
+		std::string title_;
+		std::map<std::string, ASpell*> spells_;
 
-	void learnSpell(ASpell *spell);
-	void forgetSpell(const std::string &spell);
-	void launchSpell(const std::string &spell, const ATarget &target);
+	public:
+		Warlock(const std::string& name, const std::string& title);
+		~Warlock(void);
 
-private:
-	Warlock(void);
+		const std::string& getName(void) const;
+		const std::string& getTitle(void) const;
+		void setTitle(const std::string& title);
+		void introduce(void) const;
 
-	std::string name_;
-	std::string title_;
-	std::list<ASpell *> spells_;
+		void learnSpell(ASpell* spell);
+		void forgetSpell(std::string name); // const std::string& or std::string
+		void launchSpell(std::string name, const ATarget& target);
 };
 
 #endif

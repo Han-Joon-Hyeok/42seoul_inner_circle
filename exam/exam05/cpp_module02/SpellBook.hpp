@@ -1,22 +1,26 @@
-#ifndef SPELLBOOK_HPP
-#define SPELLBOOK_HPP
+#ifndef SpellBook_HPP
+#define SpellBook_HPP
 
 #include <string>
-#include <list>
-#include "ASpell.hpp"
+#include <map>
 
-class SpellBook
-{
-public:
-	SpellBook(void);
-	~SpellBook(void);
+class ASpell;
 
-	void learnSpell(ASpell *spell);
-	void forgetSpell(const std::string &spell);
-	ASpell *createSpell(const std::string &spell);
+class SpellBook {
+	private:
+		SpellBook(const SpellBook& src);
+		SpellBook& operator=(const SpellBook& rhs);
 
-private:
-	std::list<ASpell *> spells_;
+		std::map<std::string, ASpell*> spells_;
+
+	public:
+		SpellBook(void);
+		~SpellBook(void);
+
+		void learnSpell(ASpell* spell);
+		void forgetSpell(const std::string& spell);
+		ASpell* createSpell(const std::string& spell);
+
 };
 
 #endif

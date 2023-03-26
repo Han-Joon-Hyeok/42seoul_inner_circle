@@ -1,21 +1,26 @@
-#ifndef TARGET_GENERATOR_HPP
-#define TARGET_GENERATOR_HPP
+#ifndef TargetGenerator_HPP
+#define TargetGenerator_HPP
 
+#include <string>
 #include <list>
-#include "ATarget.hpp"
 
-class TargetGenerator
-{
-public:
-	TargetGenerator(void);
-	~TargetGenerator(void);
+class ATarget;
 
-	void learnTargetType(ATarget *target);
-	void forgetTargetType(const std::string &type);
-	ATarget *createTarget(const std::string &type);
+class TargetGenerator {
+	private:
+		TargetGenerator(const TargetGenerator& src);
+		TargetGenerator& operator=(const TargetGenerator& rhs);
 
-private:
-	std::list<ATarget *> targets_;
+		std::list<ATarget*> targets_;
+
+	public:
+		TargetGenerator(void);
+		~TargetGenerator(void);
+
+		void learnTargetType(ATarget* target);
+		void forgetTargetType(const std::string& target);
+		ATarget* createTarget(const std::string& target);
+
 };
 
 #endif

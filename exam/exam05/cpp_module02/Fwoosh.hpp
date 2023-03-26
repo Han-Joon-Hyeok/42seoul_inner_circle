@@ -1,7 +1,5 @@
-#ifndef FWOOSH_HPP
-#define FWOOSH_HPP
-
-#include <string>
+#ifndef Fwoosh_HPP
+#define Fwoosh_HPP
 
 #include "ASpell.hpp"
 
@@ -9,8 +7,7 @@ class Fwoosh : public ASpell {
 	public:
 		Fwoosh(void);
 		virtual ~Fwoosh(void);
-
-		virtual Fwoosh *clone(void) const;
+		virtual ASpell* clone(void) const;
 };
 
 #endif
