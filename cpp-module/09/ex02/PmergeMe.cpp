@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <iterator>
 
 PmergeMe::PmergeMe(int argc, char** argv) {
   long long converted = 0;
@@ -65,7 +66,27 @@ void PmergeMe::listMergeInsertionSort(void) {
   recursiveListSort(this->list_.begin(), this->list_.end());
 }
 
-void PmergeMe::vectorMergeInsertionSort(void) {}
+
+void PmergeMe::recursiveVectorSort(std::vector<size_t>::iterator first,
+                                 std::vector<size_t>::iterator last) {
+  if (std::distance(first, last) < this->threshold_) {
+    insertion_sort(first, last);
+    return;
+  }
+
+  std::vector<size_t>::iterator middle = first;
+  std::advance(middle, std::distance(first, last) / 2);
+
+  recursiveVectorSort(first, middle);
+  recursiveVectorSort(middle, last);
+
+  std::merge(first, middle, middle, last, std::inserter(this->vector_, this->vector_.begin()));
+  std::copy(this->vector_.begin(), this->vector_.end(), first);
+}
+
+void PmergeMe::vectorMergeInsertionSort(void) {
+  recursiveVectorSort(this->vector_.begin(), this->vector_.end());
+}
 
 bool PmergeMe::hasDuplicatedNumber(std::list<size_t> list) {
   std::list<size_t>::iterator it = list.begin();

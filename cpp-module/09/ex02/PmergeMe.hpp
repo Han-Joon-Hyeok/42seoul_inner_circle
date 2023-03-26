@@ -23,8 +23,8 @@ class PmergeMe
 
     template <typename T>
     void insertion_sort(T first, T last) {
-      for (T i = ++first; i != last; ++i) {
-        T j = --i;
+      for (T i = first; i != last; ++i) {
+        T j = i;
         while (j != i && *j < *std::prev(j)) {
           std::iter_swap(j, std::prev(j));
           --j;
@@ -33,9 +33,10 @@ class PmergeMe
     }
 
     void vectorMergeInsertionSort(void);
+    void recursiveVectorSort(std::vector<size_t>::iterator first, std::vector<size_t>::iterator last);
 
-    void recursiveListSort(std::list<size_t>::iterator first, std::list<size_t>::iterator last);
     void listMergeInsertionSort(void);
+    void recursiveListSort(std::list<size_t>::iterator first, std::list<size_t>::iterator last);
 
     void printResult(std::clock_t start, std::clock_t end, const std::string& type);
 
