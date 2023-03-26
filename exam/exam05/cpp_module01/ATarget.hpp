@@ -1,24 +1,26 @@
-#ifndef A_TARGET_HPP
-#define A_TARGET_HPP
+#ifndef ATarget_HPP
+#define ATarget_HPP
 
 #include <string>
 
 class ASpell;
 
-class ATarget
-{
-public:
-	ATarget(const std::string &type);
-	~ATarget(void);
+class ATarget {
+	private:
+		ATarget(void);
 
-	const std::string &getType(void) const;
-	virtual ATarget *clone(void) const = 0;
-	void getHitBySpell(const ASpell& spell) const;
+	protected:
+		std::string type_;
 
-protected:
-	ATarget(void);
+	public:
+		ATarget(const std::string& type);
+		virtual ~ATarget(void);
+		ATarget(const ATarget& src);
+		ATarget& operator=(const ATarget& rhs);
 
-	std::string type_;
+		const std::string& getType(void) const;
+		virtual ATarget* clone(void) const = 0;
+		void getHitBySpell(const ASpell& spell) const;
 };
 
 #endif

@@ -1,13 +1,13 @@
-#include "Brickwall.hpp"
+#include "BrickWall.hpp"
 #include <iostream>
 
-Brickwall::Brickwall(void) : ATarget("Inconspicuous Red-brick Wall") {}
-
-Brickwall::~Brickwall(void)
-{
+BrickWall::BrickWall(void) : ATarget("Inconspicuous Red-brick Wall") {
 }
 
-Brickwall *Brickwall::clone(void) const
-{
-	return (new Brickwall());
+BrickWall::~BrickWall(void) {
 }
+
+ATarget* BrickWall::clone(void) const {
+	return (new BrickWall());
+}
+

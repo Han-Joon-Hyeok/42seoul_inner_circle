@@ -1,43 +1,43 @@
 #include "TargetGenerator.hpp"
+#include "ATarget.hpp"
 #include <iostream>
 
-TargetGenerator::TargetGenerator(void) {}
-
-TargetGenerator::~TargetGenerator(void)
-{
+TargetGenerator::TargetGenerator(void) {
 }
 
-void TargetGenerator::learnTargetType(ATarget *target)
-{
-	std::list<ATarget *>::iterator iter = targets_.begin();
-	while (iter != targets_.end()) {
-		ATarget *find = *iter;
-		if (find == target) {
-			return ;
-		}
-	}
-	targets_.push_back(target);
-}
-
-void TargetGenerator::forgetTargetType(const std::string &type)
-{
-	std::list<ATarget *>::iterator iter = targets_.begin();
-	while (iter != targets_.end()) {
-		ATarget *find = *iter;
-		if (find->getType() == type) {
-			targets_.erase(iter);
-			return ;
-		}
+TargetGenerator::~TargetGenerator(void) {
+	std::list<ATarget*>::iterator it = targets_.begin();
+	while (it != targets_.end()) {
+		delete *it;
+		it++;
 	}
 }
 
-ATarget *TargetGenerator::createTarget(const std::string &type)
-{
-	std::list<ATarget *>::iterator iter = targets_.begin();
-	while (iter != targets_.end()) {
-		ATarget *find = *iter;
-		if (find->getType() == type) {
+void TargetGenerator::learnTargetType(ATarget* target) {
+	targets_.push_back(target->clone());
+}
+
+void TargetGenerator::forgetTargetType(const std::string& target) {
+	std::list<ATarget*>::iterator it = targets_.begin();
+	while (it != targets_.end()) {
+		ATarget* find = *it;
+		if (find->getType() == target) {
+			targets_.erase(it);
+			delete find;
+			return ;
+		}
+		it++;
+	}
+}
+
+ATarget* TargetGenerator::createTarget(const std::string& target) {
+	std::list<ATarget*>::iterator it = targets_.begin();
+	while (it != targets_.end()) {
+		ATarget* find = *it;
+		if (find->getType() == target) {
 			return (find->clone());
 		}
+		it++;
 	}
+	return (NULL);
 }
