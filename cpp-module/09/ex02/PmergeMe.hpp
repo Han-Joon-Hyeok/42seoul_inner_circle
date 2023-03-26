@@ -10,6 +10,7 @@ class PmergeMe
   private:
     std::vector<size_t> vector_;
     std::list<size_t> list_;
+    int threshold_;
 
     PmergeMe(void);
   public:

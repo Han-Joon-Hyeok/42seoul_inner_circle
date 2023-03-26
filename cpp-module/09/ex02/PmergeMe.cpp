@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <iostream>
 
-const int kInsertionSortThreshold = 2;
-
 PmergeMe::PmergeMe(int argc, char** argv) {
   long long converted = 0;
   char* stop = NULL;
@@ -28,6 +26,8 @@ PmergeMe::PmergeMe(int argc, char** argv) {
     throw(PmergeMe::InvalidInput());
   }
 
+  this->threshold_ = this->list_.size() / 3;
+
   this->vector_.reserve(this->list_.size());
   std::copy(this->list_.begin(), this->list_.end(), this->vector_.begin());
 }
@@ -47,7 +47,7 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
 
 void PmergeMe::recursiveListSort(std::list<size_t>::iterator first,
                                  std::list<size_t>::iterator last) {
-  if (std::distance(first, last) < kInsertionSortThreshold) {
+  if (std::distance(first, last) < this->threshold_) {
     insertion_sort(first, last);
     return;
   }
