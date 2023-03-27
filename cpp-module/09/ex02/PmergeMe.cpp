@@ -21,12 +21,7 @@ PmergeMe::PmergeMe(int argc, char** argv) {
       throw(PmergeMe::InvalidInput());
     }
     this->list_.push_back(converted);
-    this->vector_.push_back(converted);
   }
-
-  // if (hasDuplicatedNumber(this->list_) == true) {
-  //   throw(PmergeMe::InvalidInput());
-  // }
 
   this->threshold_ = this->list_.size() / 3;
 
@@ -87,22 +82,6 @@ void PmergeMe::recursiveVectorSort(std::vector<size_t>::iterator first,
 
 void PmergeMe::vectorMergeInsertionSort(void) {
   recursiveVectorSort(this->vector_.begin(), this->vector_.end());
-}
-
-bool PmergeMe::hasDuplicatedNumber(std::list<size_t> list) {
-  std::list<size_t>::iterator it = list.begin();
-
-  for (; it != list.end(); ++it) {
-    std::list<size_t>::iterator next = std::next(it);
-    for (; next != list.end(); ++next) {
-      if (*it == *next) {
-        std::cout << "Error: found duplicated number => " << *it << std::endl;
-        return (true);
-      }
-    }
-  }
-
-  return (false);
 }
 
 std::string PmergeMe::showVector(void) {

@@ -20,8 +20,6 @@ class PmergeMe
     ~PmergeMe(void);
     PmergeMe& operator=(PmergeMe const& rhs);
 
-    bool hasDuplicatedNumber(std::list<size_t> list);
-
     template <typename T>
     void insertion_sort(T first, T last) {
       for (T it = std::next(first); it != last; ++it) {
