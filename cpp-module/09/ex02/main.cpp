@@ -14,16 +14,18 @@ int main(int argc, char** argv) {
     PmergeMe merge(argc, argv);
     std::clock_t start;
     std::clock_t end;
+    std::list<size_t> list = merge.getList();
+    std::vector<size_t> vector = merge.getVector();
 
-    std::cout << "Before  : " << merge.showList() << std::endl;
+    std::cout << "Before  : " << merge.showElements(list) << std::endl;
     start = std::clock();
-    merge.listMergeInsertionSort();
+    merge.mergeInsertionSort(list);
     end = std::clock();
-    std::cout << "After   : " << merge.showList() << std::endl;
+    std::cout << "After   : " << merge.showElements(list) << std::endl;
     merge.printResult(start, end, "list");
 
     start = std::clock();
-    merge.vectorMergeInsertionSort();
+    merge.mergeInsertionSort(vector);
     end = std::clock();
     merge.printResult(start, end, "vector");
   }
