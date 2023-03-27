@@ -23,9 +23,9 @@ PmergeMe::PmergeMe(int argc, char** argv) {
     this->list_.push_back(converted);
   }
 
-  if (hasDuplicatedNumber(this->list_) == true) {
-    throw(PmergeMe::InvalidInput());
-  }
+  // if (hasDuplicatedNumber(this->list_) == true) {
+  //   throw(PmergeMe::InvalidInput());
+  // }
 
   this->threshold_ = this->list_.size() / 3;
 
@@ -48,7 +48,7 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
 
 void PmergeMe::recursiveListSort(std::list<size_t>::iterator first,
                                  std::list<size_t>::iterator last) {
-  if (std::distance(first, last) < this->threshold_) {
+  if (std::distance(first, last) <= this->threshold_) {
     insertion_sort(first, last);
     return;
   }

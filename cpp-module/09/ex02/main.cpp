@@ -22,10 +22,10 @@ int main(int argc, char** argv) {
     std::cout << "After   : " << merge << std::endl;
     merge.printResult(start, end, "list");
 
-    start = std::clock();
-    merge.vectorMergeInsertionSort();
-    end = std::clock();
-    merge.printResult(start, end, "vector");
+    // start = std::clock();
+    // merge.vectorMergeInsertionSort();
+    // end = std::clock();
+    // merge.printResult(start, end, "vector");
   }
   catch(const std::exception& e)
   {

@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <ctime>
+#include <iostream>
 
 class PmergeMe
 {
@@ -23,11 +24,10 @@ class PmergeMe
 
     template <typename T>
     void insertion_sort(T first, T last) {
-      for (T i = first; i != last; ++i) {
-        T j = i;
-        while (j != i && *j < *std::prev(j)) {
-          std::iter_swap(j, std::prev(j));
-          --j;
+      for (T it = std::next(first); it != last; ++it) {
+        T insert_point = std::upper_bound(first, it, *it);
+        if (it != insert_point) {
+          std::rotate(insert_point, it, std::next(it));
         }
       }
     }
