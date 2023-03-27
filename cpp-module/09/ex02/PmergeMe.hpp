@@ -34,21 +34,18 @@ class PmergeMe
 
     void vectorMergeInsertionSort(void);
     void recursiveVectorSort(std::vector<size_t>::iterator first, std::vector<size_t>::iterator last);
+    std::string showVector(void);
 
     void listMergeInsertionSort(void);
     void recursiveListSort(std::list<size_t>::iterator first, std::list<size_t>::iterator last);
+    std::string showList(void);
 
     void printResult(std::clock_t start, std::clock_t end, const std::string& type);
-
-    std::list<size_t>::const_iterator getListIterator(void) const;
-    std::list<size_t>::const_iterator getListEndIterator(void) const;
 
     class InvalidInput : public std::exception {
       public:
         virtual const char* what(void) const throw();
     };
 };
-
-std::ostream& operator<<(std::ostream &out, const PmergeMe& rhs);
 
 #endif

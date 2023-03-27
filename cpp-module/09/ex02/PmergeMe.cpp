@@ -21,6 +21,7 @@ PmergeMe::PmergeMe(int argc, char** argv) {
       throw(PmergeMe::InvalidInput());
     }
     this->list_.push_back(converted);
+    this->vector_.push_back(converted);
   }
 
   // if (hasDuplicatedNumber(this->list_) == true) {
@@ -104,6 +105,24 @@ bool PmergeMe::hasDuplicatedNumber(std::list<size_t> list) {
   return (false);
 }
 
+std::string PmergeMe::showVector(void) {
+  std::vector<size_t>::iterator it = this->vector_.begin();
+  std::string result;
+  for (; it != this->vector_.end(); ++it) {
+    result += std::to_string(*it) + " ";
+  }
+  return (result);
+}
+
+std::string PmergeMe::showList(void) {
+  std::list<size_t>::iterator it = this->list_.begin();
+  std::string result;
+  for (; it != this->list_.end(); ++it) {
+    result += std::to_string(*it) + " ";
+  }
+  return (result);
+}
+
 void PmergeMe::printResult(std::clock_t start, std::clock_t end,
                            const std::string& type) {
   double diff = (double)(end - start) / CLOCKS_PER_SEC;
@@ -114,23 +133,4 @@ void PmergeMe::printResult(std::clock_t start, std::clock_t end,
             << diff << " us" << std::endl;
 }
 
-std::list<size_t>::const_iterator PmergeMe::getListIterator(void) const {
-  return (this->list_.begin());
-}
-
-std::list<size_t>::const_iterator PmergeMe::getListEndIterator(void) const {
-  return (this->list_.end());
-}
-
 const char* PmergeMe::InvalidInput::what(void) const throw() { return (""); }
-
-std::ostream& operator<<(std::ostream& out, const PmergeMe& rhs) {
-  std::list<size_t>::const_iterator it = rhs.getListIterator();
-  std::list<size_t>::const_iterator ite = rhs.getListEndIterator();
-
-  for (; it != ite; ++it) {
-    out << *it << " ";
-  }
-
-  return (out);
-}
