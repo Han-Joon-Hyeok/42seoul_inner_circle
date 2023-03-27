@@ -62,10 +62,9 @@ void PmergeMe::listMergeInsertionSort(void) {
   recursiveListSort(this->list_.begin(), this->list_.end());
 }
 
-
 void PmergeMe::recursiveVectorSort(std::vector<size_t>::iterator first,
                                  std::vector<size_t>::iterator last) {
-  if (std::distance(first, last) < this->threshold_) {
+  if (std::distance(first, last) <= this->threshold_) {
     insertion_sort(first, last);
     return;
   }
@@ -76,8 +75,7 @@ void PmergeMe::recursiveVectorSort(std::vector<size_t>::iterator first,
   recursiveVectorSort(first, middle);
   recursiveVectorSort(middle, last);
 
-  std::merge(first, middle, middle, last, std::inserter(this->vector_, this->vector_.begin()));
-  std::copy(this->vector_.begin(), this->vector_.end(), first);
+  std::inplace_merge(first, middle, last);
 }
 
 void PmergeMe::vectorMergeInsertionSort(void) {
