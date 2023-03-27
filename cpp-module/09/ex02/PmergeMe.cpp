@@ -26,7 +26,7 @@ PmergeMe::PmergeMe(int argc, char** argv) {
   this->threshold_ = this->list_.size() / 3;
 
   this->vector_.reserve(this->list_.size());
-  std::copy(this->list_.begin(), this->list_.end(), this->vector_.begin());
+  std::copy(this->list_.begin(), this->list_.end(), std::back_inserter(this->vector_));
 }
 
 PmergeMe::PmergeMe(const PmergeMe& src)
