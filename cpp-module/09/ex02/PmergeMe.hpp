@@ -25,7 +25,7 @@ class PmergeMe {
     for (T it = std::next(first); it != last; ++it) {
       T insert_point = std::upper_bound(first, it, *it);
       if (std::distance(first, it) > std::distance(first, insert_point)) {
-        std::rotate(insert_point, it, std::next(it));
+        std::iter_swap(it, insert_point);
       }
     }
   }
