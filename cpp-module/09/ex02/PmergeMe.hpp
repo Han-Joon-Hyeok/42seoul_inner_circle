@@ -31,19 +31,48 @@ class PmergeMe {
   }
 
   template <typename BidIt>
-  void recursiveMergeInsertionSort(BidIt begin, BidIt end) {
-    if (std::distance(begin, end) <= this->threshold_) {
-      insertion_sort(begin, end);
+  void mergeAndSort(BidIt first, BidIt middle, BidIt last) {
+    typedef typename BidIt::value_type value_type;
+    typedef typename BidIt::difference_type difference_type; // equal to std::ptrdiff_t(long)
+
+    difference_type len1 = std::distance(first, middle);
+    difference_type len2 = std::distance(middle, last);
+
+    std::vector<value_type> v1(len1);
+    std::vector<value_type> v2(len2);
+
+    std::copy(first, middle, v1.begin());
+    std::copy(middle, last, v2.begin());
+
+    typename std::vector<value_type>::iterator it1 = v1.begin();
+    typename std::vector<value_type>::iterator it2 = v2.begin();
+
+    while (it1 != v1.end() && it2 != v2.end()) {
+      if (*it1 < *it2) {
+        *first++ = *it1++;
+      } else {
+        *first++ = *it2++;
+      }
+    }
+
+    std::copy(it1, v1.end(), first);
+    std::copy(it2, v2.end(), std::next(first, len1));
+  }
+
+  template <typename BidIt>
+  void recursiveMergeInsertionSort(BidIt first, BidIt last) {
+    if (std::distance(first, last) <= this->threshold_) {
+      insertion_sort(first, last);
       return;
     }
 
-    BidIt middle = begin;
-    std::advance(middle, std::distance(begin, end) / 2);
+    BidIt middle = first;
+    std::advance(middle, std::distance(first, last) / 2);
 
-    recursiveMergeInsertionSort(begin, middle);
-    recursiveMergeInsertionSort(middle, end);
+    recursiveMergeInsertionSort(first, middle);
+    recursiveMergeInsertionSort(middle, last);
 
-    std::inplace_merge(begin, middle, end);
+    mergeAndSort(first, middle, last);
   }
 
   template <typename C>
