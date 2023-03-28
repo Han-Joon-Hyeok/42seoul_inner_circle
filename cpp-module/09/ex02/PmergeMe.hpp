@@ -32,31 +32,44 @@ class PmergeMe {
 
   template <typename BidIt>
   void mergeAndSort(BidIt first, BidIt middle, BidIt last) {
-    typedef typename BidIt::value_type value_type;
-    typedef typename BidIt::difference_type difference_type;   // equal to std::ptrdiff_t(long)
+    typedef typename std::iterator_traits<BidIt>::value_type value_type;
+    typedef typename std::iterator_traits<BidIt>::difference_type difference_type;
 
-    difference_type len1 = std::distance(first, middle);
-    difference_type len2 = std::distance(middle, last);
+    // Calculate the size of the left and right halves
+    difference_type left_size = std::distance(first, middle);
+    difference_type right_size = std::distance(middle, last);
 
-    std::vector<value_type> v1(len1);
-    std::vector<value_type> v2(len2);
+    // Create temporary vectors to store the left and right halves of the range
+    std::vector<value_type> left;
+    std::vector<value_type> right;
 
-    std::copy(first, middle, v1.begin());
-    std::copy(middle, last, v2.begin());
+    left.reserve(left_size);
+    right.reserve(right_size);
 
-    typename std::vector<value_type>::iterator it1 = v1.begin();
-    typename std::vector<value_type>::iterator it2 = v2.begin();
+    // Copy the left and right halves into the temporary vectors
+    std::copy(first, middle, std::back_inserter(left));
+    std::copy(middle, last, std::back_inserter(right));
 
-    while (it1 != v1.end() && it2 != v2.end()) {
-      if (*it1 < *it2) {
-        *first++ = *it1++;
-      } else {
-        *first++ = *it2++;
-      }
+    // Merge the left and right halves back into the original range
+    typename std::vector<value_type>::iterator left_it = left.begin();
+    typename std::vector<value_type>::iterator right_it = right.begin();
+
+    while (left_it != left.end() && right_it != right.end()) {
+        if (*left_it <= *right_it) {
+            *first++ = *left_it++;
+        } else {
+            *first++ = *right_it++;
+        }
     }
 
-    std::copy(it1, v1.end(), first);
-    std::copy(it2, v2.end(), std::next(first, len1));
+    // Copy leftovers to the origin container
+    if (left_it != left.end()) {
+      std::copy(left_it, left.end(), first);
+    }
+
+    if (right_it != right.end()) {
+      std::copy(right_it, right.end(), first);
+    }
   }
 
   template <typename BidIt>
