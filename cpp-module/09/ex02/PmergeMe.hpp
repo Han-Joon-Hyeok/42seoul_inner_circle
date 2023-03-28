@@ -24,7 +24,7 @@ class PmergeMe {
   void insertion_sort(T first, T last) {
     for (T it = std::next(first); it != last; ++it) {
       T insert_point = std::upper_bound(first, it, *it);
-      if (it != insert_point) {
+      if (std::distance(first, it) > std::distance(first, insert_point)) {
         std::rotate(insert_point, it, std::next(it));
       }
     }
@@ -33,7 +33,8 @@ class PmergeMe {
   template <typename BidIt>
   void mergeAndSort(BidIt first, BidIt middle, BidIt last) {
     typedef typename BidIt::value_type value_type;
-    typedef typename BidIt::difference_type difference_type; // equal to std::ptrdiff_t(long)
+    typedef typename BidIt::difference_type
+        difference_type;   // equal to std::ptrdiff_t(long)
 
     difference_type len1 = std::distance(first, middle);
     difference_type len2 = std::distance(middle, last);
