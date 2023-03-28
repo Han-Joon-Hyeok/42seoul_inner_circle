@@ -30,7 +30,7 @@ void RPN::calculate(const std::string& expr) {
         size_t idx = 1;
         for (; it + idx != expr.end(); idx += 1) {
           if (std::isdigit(*(it + idx)) == false) {
-            break ;
+            break;
           }
         }
         std::cout << "Error: number can be only [0 ~ 9] => ";
@@ -40,6 +40,10 @@ void RPN::calculate(const std::string& expr) {
       }
       this->stack_.push(static_cast<int>(*it) - '0');
     } else if (isArithmeticOperator(*it)) {
+      if (this->stack_.size() <= 1) {
+        std::cout << "Error: stack size need to be more than 2 => " << expr << std::endl;
+        return ;
+      }
       num2 = this->stack_.top();
       this->stack_.pop();
       num1 = this->stack_.top();
@@ -74,7 +78,7 @@ void RPN::calculate(const std::string& expr) {
   }
   if (this->stack_.size() != 1) {
     std::cout << "Error: stack size is not 1 => " << expr << std::endl;
-    return ;
+    return;
   }
   std::cout << this->stack_.top() << std::endl;
 }
