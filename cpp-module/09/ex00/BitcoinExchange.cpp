@@ -134,6 +134,8 @@ void BitcoinExchange::validateDateFormat(std::string& date) {
 		throw (InvalidInput());
   }
 
+  // 2022-03-04abcd 와 같은 케이스를 방지하기 위해 put_time 결과값과 비교함
+
   std::stringstream ss2;
 
   ss2 << std::put_time(&tm, "%Y-%m-%d");
