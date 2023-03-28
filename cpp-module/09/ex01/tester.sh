@@ -40,4 +40,7 @@ echo -e '\n./RPN "42 2 -"'
 echo -e '\n./RPN "4 2424 -"'
 ./RPN "4 2424 -"
 
+echo -e '\n./RPN "-4 2 +"'
+./RPN "-4 2 +"
+
 echo -e ""
