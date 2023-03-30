@@ -1,25 +1,25 @@
 #include "BitcoinExchange.hpp"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 
 BitcoinExchange::BitcoinExchange(const std::string& file) {
-	std::ifstream infile;
-	std::string line;
-	std::string date;
-	std::string value;
+  std::ifstream infile;
+  std::string line;
+  std::string date;
+  std::string value;
   double d_value;
   std::pair<std::string, double> pair;
 
   infile.open(file);
   if (infile.is_open() == false) {
-		std::cerr << "Error: can't open " << file << std::endl;
-		exit(EXIT_FAILURE);
-	}
+    std::cout << "Error: can't open " << file << std::endl;
+    exit(EXIT_FAILURE);
+  }
   try {
     std::getline(infile, line);
     while (std::getline(infile, line)) {
@@ -34,30 +34,30 @@ BitcoinExchange::BitcoinExchange(const std::string& file) {
         pair = std::make_pair(date, d_value);
         this->chart_.insert(pair);
       } else {
-        throw (std::runtime_error(""));
+        throw(std::runtime_error(""));
       }
     }
   } catch (std::exception& e) {
-		std::cerr << "Error: invalid data found in DB file => " << file << std::endl;
+    std::cout << "Error: invalid data found in DB file => " << file
+              << std::endl;
   }
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) : chart_(src.chart_.begin(), src.chart_.end())
-{
-}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
+    : chart_(src.chart_.begin(), src.chart_.end()) {}
 
 BitcoinExchange::~BitcoinExchange(void) {}
 
-BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs)
-{
-	if (this != &rhs)
-	{
+BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs) {
+  if (this != &rhs) {
     this->chart_ = rhs.chart_;
-	}
-	return *this;
+  }
+  return *this;
 }
 
-bool BitcoinExchange::isValidHeader(std::ifstream& infile, const std::string& first, const std::string& second) {
+bool BitcoinExchange::isValidHeader(std::ifstream& infile,
+                                    const std::string& first,
+                                    const std::string& second) {
   std::string line;
 
   std::getline(infile, line, '|');
@@ -83,10 +83,16 @@ void BitcoinExchange::parseLine(std::string& line) {
     it = this->chart_.find(pair.first);
     if (it->first != pair.first) {
       it = this->chart_.lower_bound(pair.first);
+      if (it == this->chart_.begin() && it->first != pair.first) {
+        std::cout << "Error: there is no date in DB => " << pair.first << std::endl;
+        throw (InvalidInput());
+      }
       --it;
     }
     balance = (pair.second) * (it->second);
-    std::cout << pair.first << " => " << pair.second << " = " << balance << std::endl;
+    std::cout << std::setprecision(10);
+    std::cout << pair.first << " => " << pair.second << " = " << balance
+              << std::endl;
   } catch (std::exception& e) {
     (void)e;
   }
@@ -108,65 +114,67 @@ std::pair<std::string, double> BitcoinExchange::splitKeyPair(std::string& str,
   std::getline(ss, value, '\n');
   std::stringstream ss2(ft_strtrim(value));
   if ((ss2 >> d_value) && (ss2.peek() == EOF)) {
-		if (d_value < 0) {
-    	std::cerr << "Error: not a positive number. => " <<  ss2.str() << std::endl;
-			throw (InvalidInput());
-		}
-		if (d_value > 1000) {
-    	std::cerr << "Error: too large a number. => " <<  ss2.str() << std::endl;
-			throw (InvalidInput());
-		}
+    if (d_value < 0) {
+      std::cout << "Error: not a positive number. => " << ss2.str()
+                << std::endl;
+      throw(InvalidInput());
+    }
+    if (d_value > 1000) {
+      std::cout << "Error: too large a number. => " << ss2.str() << std::endl;
+      throw(InvalidInput());
+    }
     pair = std::make_pair(key, d_value);
   } else {
-    std::cerr << "Error: invalid value format => " <<  ss2.str() << std::endl;
-		throw (InvalidInput());
+    std::cout << "Error: invalid value format => " << ss2.str() << std::endl;
+    throw(InvalidInput());
   }
   return (pair);
 }
 
 void BitcoinExchange::validateDateFormat(const std::string& date) {
+
   std::string::const_iterator it;
 
   it = date.begin();
   // Year
   for (; *it != '-'; ++it) {
     if (std::isdigit(*it) == false) {
-      std::cerr << "Error: Invalid date format. => " << date << std::endl;
-      throw (InvalidInput());
+      std::cout << "Error: Invalid date format. => " << date << std::endl;
+      throw(InvalidInput());
     }
   }
   if (*(it++) != '-') {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
 
   // Month
   if ((*it == '0' || *(it) == '1') == false) {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
   ++it;
   if ((*std::prev(it) == '0' && *it == '0') || std::isdigit(*it) == false) {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
   ++it;
 
   if (*it != '-') {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
 
   ++it;
   // Day
   if (*it < '0' || *it > '3') {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
   ++it;
   if ((*std::prev(it) == '0' && *it == '0') || *it < '0' || *it > '9') {
-    std::cerr << "Error: Invalid date format. => " << date << std::endl;
-    throw (InvalidInput());
+    std::cout << "Error: Invalid date format. => " << date << std::endl;
+    throw(InvalidInput());
   }
 }
 
