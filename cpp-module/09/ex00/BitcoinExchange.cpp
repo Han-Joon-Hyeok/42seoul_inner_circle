@@ -84,8 +84,9 @@ void BitcoinExchange::parseLine(std::string& line) {
     if (it->first != pair.first) {
       it = this->chart_.lower_bound(pair.first);
       if (it == this->chart_.begin() && it->first != pair.first) {
-        std::cout << "Error: there is no date in DB => " << pair.first << std::endl;
-        throw (InvalidInput());
+        std::cout << "Error: there is no date in DB => " << pair.first
+                  << std::endl;
+        throw(InvalidInput());
       }
       --it;
     }
@@ -132,7 +133,6 @@ std::pair<std::string, double> BitcoinExchange::splitKeyPair(std::string& str,
 }
 
 void BitcoinExchange::validateDateFormat(const std::string& date) {
-
   std::string::const_iterator it;
 
   it = date.begin();
@@ -154,7 +154,8 @@ void BitcoinExchange::validateDateFormat(const std::string& date) {
     throw(InvalidInput());
   }
   ++it;
-  if ((*std::prev(it) == '0' && *it == '0') || std::isdigit(*it) == false) {
+  if ((*std::prev(it) == '0' && *it == '0') ||
+      (*std::prev(it) == '1' && *it > '2') || std::isdigit(*it) == false) {
     std::cout << "Error: Invalid date format. => " << date << std::endl;
     throw(InvalidInput());
   }
