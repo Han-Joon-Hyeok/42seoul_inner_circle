@@ -173,7 +173,7 @@ void BitcoinExchange::validateDateFormat(const std::string& date) {
     throw(InvalidInput());
   }
   ++it;
-  if ((*std::prev(it) == '0' && *it == '0') || *it < '0' || *it > '9') {
+  if ((*std::prev(it) == '0' && *it == '0') || (*std::prev(it) == '3' && *it > '1') || *it < '0' || *it > '9') {
     std::cout << "Error: Invalid date format. => " << date << std::endl;
     throw(InvalidInput());
   }
