@@ -6,7 +6,7 @@
 class BitcoinExchange {
  private:
   BitcoinExchange(void);
-  std::map<std::string, float> chart_;
+  std::map<std::string, double> chart_;
 
  public:
   BitcoinExchange(const std::string& file);
@@ -19,7 +19,7 @@ class BitcoinExchange {
   void validateDateFormat(const std::string& date);
 
   std::string ft_strtrim(std::string& str);
-  std::pair<std::string, float> splitKeyPair(std::string& str, char delimiter);
+  std::pair<std::string, double> splitKeyPair(std::string& str, char delimiter);
 };
 
 class InvalidInput : public std::exception {
