@@ -124,24 +124,49 @@ std::pair<std::string, float> BitcoinExchange::splitKeyPair(std::string& str,
   return (pair);
 }
 
-void BitcoinExchange::validateDateFormat(std::string& date) {
-  std::stringstream ss(date);
-  std::tm tm = {};
+void BitcoinExchange::validateDateFormat(const std::string& date) {
+  std::string::const_iterator it;
 
-  ss >> std::get_time(&tm, "%Y-%m-%d");
-  if (ss.fail()) {
-    std::cerr << "Error: invalid date format => " << date << std::endl;
-		throw (InvalidInput());
+  it = date.begin();
+  // Year
+  for (; *it != '-'; ++it) {
+    if (std::isdigit(*it) == false) {
+      std::cerr << "Error: Invalid date format. => " << date << std::endl;
+      throw (InvalidInput());
+    }
+  }
+  if (*(it++) != '-') {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
   }
 
-  // 2022-03-04abcd 와 같은 케이스를 방지하기 위해 put_time 결과값과 비교함
+  // Month
+  if ((*it == '0' || *(it) == '1') == false) {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
+  }
+  ++it;
+  if ((*std::prev(it) == '0' && *it == '0') || std::isdigit(*it) == false) {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
+  }
+  ++it;
 
-  std::stringstream ss2;
+  if (*it != '-') {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
+  }
 
-  ss2 << std::put_time(&tm, "%Y-%m-%d");
-  if (date != ss2.str()) {
-    std::cerr << "Error: invalid date format => " << date << std::endl;
-		throw (InvalidInput());
+  ++it;
+  // Day
+  if (*it < '0' || *it > '3') {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
+  }
+  ++it;
+  if ((*std::prev(it) == '0' && *it == '0') || *it < '0' || *it > '9') {
+    std::cerr << "Error: Invalid date format. => " << date << std::endl;
+    throw (InvalidInput());
   }
 }
 

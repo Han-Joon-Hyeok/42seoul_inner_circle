@@ -16,7 +16,7 @@ class BitcoinExchange {
 
   void parseLine(std::string& line);
   bool isValidHeader(std::ifstream& infile, const std::string& first, const std::string& second);
-  void validateDateFormat(std::string& date);
+  void validateDateFormat(const std::string& date);
 
   std::string ft_strtrim(std::string& str);
   std::pair<std::string, float> splitKeyPair(std::string& str, char delimiter);
