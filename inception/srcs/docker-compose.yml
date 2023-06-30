@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    image: nginx
+    ports:
+      - 443:443
+    restart: on-failure:3
+    volumes:
+      - wordpress_data:/var/www/html/wordpress
+    networks:
+      - my_server
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb
+    restart: on-failure:3
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - my_server
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress
+    restart: on-failure:3
+    volumes:
+      - wordpress_data:/var/www/html/wordpress
+    networks:
+      - my_server
+    env_file:
+      - .env
+
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/joonhan/data/wordpress
+      o: bind
+  mariadb_data:
+    driver: local # Save in host OS (Available for other volume plugin)
+    driver_opts:
+      type: none # File system type (like tmpfs, shm, ramfs)
+      device: /home/joonhan/data/mysql
+      o: bind
+
+networks:
+  my_server:
+    driver: bridge
