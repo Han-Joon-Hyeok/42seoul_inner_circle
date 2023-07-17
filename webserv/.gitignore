@@ -1,0 +1,6 @@
+*.o
+*.dSYM
+*.vscode
+.vscode/
+cute_webserv
+.DS_Store
