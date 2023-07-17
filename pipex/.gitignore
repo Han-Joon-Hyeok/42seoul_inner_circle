@@ -1,0 +1,8 @@
+infile
+outfile
+.vscode
+pipex
+*.out
+*.o
+*.a
+*.dSYM
