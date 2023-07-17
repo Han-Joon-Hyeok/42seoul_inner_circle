@@ -1,0 +1,18 @@
+SO           ./cub3D_map_tester/images/SO.xpm
+
+       WE ./cub3D_map_tester/images/WE.xpm
+
+  NO     ./cub3D_map_tester/images/NO.xpm
+
+F       00,    153,15
+EA ./cub3D_map_tester/images/EA.xpm
+
+C 255,255,255
+
+1111111
+1110001
+1100001
+10S0001
+1000001
+1000001
+1111111
