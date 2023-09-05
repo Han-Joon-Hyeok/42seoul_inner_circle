@@ -1,40 +1,41 @@
-#include <unistd.h>
-#include <stdbool.h>
-#include <strings.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <strings.h>
+#include <netdb.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-#include <fcntl.h>
 
-#define BUF_SIZE 4096
-#define BACK_LOG 128
+#define FATAL_ERROR "Fatal error\n"
+#define WRONG_NUMBER_ARG "Wrong number of arguments\n"
 
-typedef struct s_client
+#define ERROR -1
+#define BUFFER_SIZE 300000
+
+typedef struct s_node
 {
-    struct s_client *next;
-    int client_id;
-    int client_socket_fd;
-} t_client;
+    int fd;
+    int id;
+    struct s_node *next;
+} t_node;
 
 typedef struct s_list
 {
-    t_client *head;
-    t_client *tail;
-    size_t node_count;
+    int last_id;
+    t_node *head;
 } t_list;
 
-typedef enum
+void fatal_error(void)
 {
-    CLIENT,
-    SERVER
-} e_sock_type;
+    write(STDERR_FILENO, FATAL_ERROR, strlen(FATAL_ERROR));
+    exit(EXIT_FAILURE);
+}
 
-void ft_error_exit(char *msg)
+void wrong_arg_error(void)
 {
-    write(STDERR_FILENO, msg, strlen(msg));
-    write(STDERR_FILENO, "\n", 1);
+    write(STDERR_FILENO, WRONG_NUMBER_ARG, strlen(WRONG_NUMBER_ARG));
     exit(EXIT_FAILURE);
 }
 
@@ -45,314 +46,283 @@ void *ft_malloc(size_t size)
     ptr = malloc(size);
     if (ptr == NULL)
     {
-        ft_error_exit("Fatal error");
+        fatal_error();
     }
     return (ptr);
 }
 
-void setting_for_server_socket(struct sockaddr_in *serv_addr, char *port)
+void init_list(t_list *list)
 {
-    serv_addr->sin_family = AF_INET;
-    serv_addr->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    serv_addr->sin_port = htons(atoi(port));
+    list->last_id = 0;
+    list->head = NULL;
 }
 
-t_client *get_client_node(int fd, t_list client_list)
+t_node *get_last_node(t_list *list)
 {
-    t_client *curr_node;
+    t_node *node;
 
-    curr_node = client_list.head;
-    while (curr_node != NULL)
+    node = list->head;
+    while (node != NULL)
     {
-        if (curr_node->client_socket_fd == fd)
+        if (node->next == NULL)
         {
-            return (curr_node);
+            break;
         }
-        curr_node = curr_node->next;
+        node = node->next;
     }
-    return (NULL);
+    return (node);
 }
 
-void add_node_to_list(t_client *node, t_list *list)
+void lstadd_back(t_list *list, int fd)
 {
-    if (list->node_count == 0)
+    t_node *node;
+    t_node *last;
+
+    node = ft_malloc(sizeof(t_node));
+    node->fd = fd;
+    node->id = list->last_id;
+    node->next = NULL;
+    list->last_id += 1;
+
+    if (list->head == NULL)
     {
         list->head = node;
-        list->tail = node;
     }
     else
     {
-        list->tail->next = node;
-        list->tail = node;
+        last = get_last_node(list);
+        last->next = node;
     }
-    node->next = NULL;
-    list->node_count += 1;
 }
 
-void remove_node_from_list(t_client *node, t_list *list)
+void send_entrance(t_list *list)
 {
-    t_client *prev_node;
-    t_client *curr_node;
+    t_node *curr;
+    size_t len;
+    char buf[40];
 
-    prev_node = NULL;
-    curr_node = list->head;
-    while (curr_node != NULL)
+    curr = list->head;
+    len = sprintf(buf, "server: client %d just arrived\n", list->last_id);
+    while (curr != NULL)
     {
-        if (curr_node->client_id == node->client_id)
+        if (send(curr->fd, buf, len, 0) == ERROR)
         {
-            if (prev_node != NULL)
+            fatal_error();
+        }
+        curr = curr->next;
+    }
+}
+
+t_node *lst_remove(t_list *list, int fd)
+{
+    t_node *prev;
+    t_node *curr;
+
+    prev = NULL;
+    curr = list->head;
+    while (curr != NULL)
+    {
+        if (curr->fd == fd)
+        {
+            if (prev == NULL)
             {
-                prev_node->next = curr_node->next;
-                if (prev_node->next == NULL)
-                {
-                    list->tail = prev_node;
-                }
+                list->head = curr->next;
             }
             else
             {
-                list->head = curr_node->next;
+                prev->next = curr->next;
             }
-            list->node_count -= 1;
-            return;
+            break;
         }
-        prev_node = curr_node;
-        curr_node = curr_node->next;
+        prev = curr;
+        curr = curr->next;
+    }
+    return (curr);
+}
+
+void send_leave(t_list *list, int id)
+{
+    t_node *curr;
+    char buf[40];
+    size_t len;
+
+    curr = list->head;
+    len = sprintf(buf, "server: client %d just left\n", id);
+    while (curr != NULL)
+    {
+        if (send(curr->fd, buf, len, 0) == ERROR)
+        {
+            fatal_error();
+        }
+        curr = curr->next;
     }
 }
 
-void send_message_to_all_clients(int send_client_id, char *message, int recv_size, t_list *client_list, t_list *remove_list, e_sock_type type)
+t_node *get_node(t_list *list, int fd)
 {
-    char buf[20];
-    ssize_t send_bytes;
-    size_t buf_len;
-    size_t msg_len;
-    t_client *curr_node;
+    t_node *curr;
 
-    curr_node = client_list->head;
-    if (type == CLIENT)
+    curr = list->head;
+    while (curr != NULL)
     {
-        sprintf(buf, "client %d: ", send_client_id);
-        buf_len = strlen(buf);
-        write(STDOUT_FILENO, buf, buf_len);
-    }
-    if (recv_size == -1)
-    {
-        msg_len = strlen(message);
-        write(STDOUT_FILENO, message, msg_len);
-    }
-    else
-    {
-        write(STDOUT_FILENO, message, recv_size + 1);
-    }
-    while (curr_node != NULL)
-    {
-        if (type == CLIENT)
+        if (curr->fd == fd)
         {
-            send_bytes = send(curr_node->client_socket_fd, buf, buf_len, 0);
-            if (send_bytes == -1)
-            {
-                remove_node_from_list(curr_node, client_list);
-                add_node_to_list(curr_node, remove_list);
-                curr_node = curr_node->next;
-                continue;
-            }
+            break;
         }
-
-        if (recv_size == -1)
-        {
-            msg_len = strlen(message);
-            send_bytes = send(curr_node->client_socket_fd, message, msg_len, 0);
-        }
-        else
-        {
-            send_bytes = send(curr_node->client_socket_fd, message, recv_size + 1, 0);
-        }
-        if (send_bytes == -1)
-        {
-            remove_node_from_list(curr_node, client_list);
-            add_node_to_list(curr_node, remove_list);
-        }
-        curr_node = curr_node->next;
+        curr = curr->next;
     }
+    return (curr);
 }
 
-void clear_client_node(t_list *remove_list)
+void send_message(t_list *list, char *buf, ssize_t recv_size, int id)
 {
-    t_client *curr_node;
-    t_client *next_node;
+    int front;
+    int back;
+    int idx;
+    size_t len;
+    t_node *curr;
+    char *temp_buf;
+    char *send_buf;
 
-    curr_node = remove_list->head;
-    next_node = NULL;
-    while (curr_node != NULL)
-    {
-        next_node = curr_node->next;
-        close(curr_node->client_socket_fd);
-        free(curr_node);
-        curr_node = next_node;
-    }
-    remove_list->head = NULL;
-    remove_list->tail = NULL;
-    remove_list->node_count = 0;
-}
-
-char *ft_strlcpy(char *dest, char *src, size_t dest_size)
-{
-    size_t idx;
-
+    front = 0;
+    back = 0;
     idx = 0;
-    while (idx < dest_size)
+    while (front < recv_size)
     {
-        dest[idx] = src[idx];
-        idx += 1;
-    }
-    dest[idx] = '\0';
-    return (dest);
-}
+        if (buf[front] == '\n')
+        {
+            temp_buf = ft_malloc(sizeof(char) * (front - back + 2));
+            send_buf = ft_malloc(sizeof(char) * (front - back + 20));
+            while (back <= front)
+            {
+                temp_buf[idx++] = buf[back++];
+            }
+            temp_buf[idx] = '\0';
+            len = sprintf(send_buf, "client %d: %s", id, temp_buf);
 
-char *extract_client_message(char *buf, ssize_t recv_size)
-{
-    char *ptr;
+            curr = list->head;
+            while (curr != NULL)
+            {
+                if (curr->id != id)
+                {
+                    if (send(curr->fd, send_buf, len, 0) == ERROR)
+                    {
+                        fatal_error();
+                    }
+                }
+                curr = curr->next;
+            }
 
-    ptr = malloc(sizeof(char) * (recv_size + 1));
-    if (ptr == NULL)
-    {
-        ft_error_exit("Fatal error");
+            free(temp_buf);
+            free(send_buf);
+            idx = 0;
+        }
+        front += 1;
     }
-    ft_strlcpy(ptr, buf, recv_size);
-    return (ptr);
 }
 
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        ft_error_exit("Wrong number of arguments");
+        wrong_arg_error();
     }
 
-    int opt;
-    int server_fd;
-    struct sockaddr_in serv_addr, client_addr;
+    int port;
 
+    port = atoi(argv[1]);
+
+    int server_fd, conn_fd;
+    socklen_t len;
+    struct sockaddr_in servaddr, cli;
+
+    // socket create and verification
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_fd == -1)
+    if (server_fd == ERROR)
     {
-        ft_error_exit("Fatal error");
+        fatal_error();
     }
 
-    fcntl(server_fd, F_SETFL, O_NONBLOCK);
-    opt = 1;
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1)
+    bzero(&servaddr, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(2130706433);
+    servaddr.sin_port = htons(port);
+
+    if ((bind(server_fd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) == ERROR)
     {
-        ft_error_exit("Fatal error");
+        fatal_error();
     }
 
-    bzero(&serv_addr, sizeof(serv_addr));
-    setting_for_server_socket(&serv_addr, argv[1]);
-    if (bind(server_fd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
+    if (listen(server_fd, 128) == ERROR)
     {
-        ft_error_exit("Fatal error");
-    }
-
-    if (listen(server_fd, BACK_LOG) == -1)
-    {
-        ft_error_exit("Fatal error");
+        fatal_error();
     }
 
     int max_fd;
-    fd_set read_set, read_copy;
-    int event_counts;
-    int client_socket;
-    t_client *client_node;
+    int events;
+    char buf[BUFFER_SIZE];
+    fd_set read_origin, read_copy;
     t_list client_list;
-    t_list remove_list;
+    t_node *node;
     ssize_t recv_size;
-    char *client_message;
-    char buf[BUF_SIZE];
-    unsigned int client_addr_size;
 
-    FD_ZERO(&read_set);
-    FD_SET(server_fd, &read_set);
     max_fd = server_fd;
+    FD_ZERO(&read_origin);
+    FD_SET(server_fd, &read_origin);
+    read_copy = read_origin;
+    init_list(&client_list);
+    len = sizeof(cli);
 
-    client_list.head = NULL;
-    client_list.tail = NULL;
-    client_list.node_count = 0;
-    remove_list.head = NULL;
-    remove_list.tail = NULL;
-    remove_list.node_count = 0;
-
-    while (true)
+    while (42)
     {
-        read_copy = read_set;
-
-        event_counts = select(max_fd + 1, &read_copy, NULL, NULL, NULL);
-        if (event_counts == -1)
+        events = select(max_fd + 1, &read_origin, NULL, NULL, NULL);
+        if (events == ERROR)
         {
-            ft_error_exit("Fatal error");
+            fatal_error();
         }
-        else if (event_counts == 0)
+        else if (events == 0)
         {
             continue;
         }
 
-        for (int idx = 0; idx < max_fd + 1; idx += 1)
+        if (FD_ISSET(server_fd, &read_origin))
         {
-            if (FD_ISSET(idx, &read_copy))
+            conn_fd = accept(server_fd, (struct sockaddr *)&cli, &len);
+            if (conn_fd == ERROR)
             {
-                // Client tries to establish TCP connection
-                if (idx == server_fd)
+                fatal_error();
+            }
+            if (max_fd < conn_fd)
+            {
+                max_fd = conn_fd;
+            }
+            send_entrance(&client_list);
+            lstadd_back(&client_list, conn_fd);
+            FD_SET(conn_fd, &read_copy);
+        }
+        else
+        {
+            for (int fd = 3; fd <= max_fd; fd += 1)
+            {
+                if (FD_ISSET(fd, &read_origin))
                 {
-                    client_addr_size = sizeof(client_addr);
-                    client_socket = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_size);
-
-                    if (client_socket == -1)
+                    recv_size = recv(fd, buf, BUFFER_SIZE, 0);
+                    if (recv_size == 0)
                     {
-                        ft_error_exit("Fatal error");
-                    }
-                    if (client_socket > max_fd)
-                    {
-                        max_fd = client_socket;
-                    }
-                    FD_SET(client_socket, &read_set);
-                    fcntl(client_socket, F_SETFL, O_NONBLOCK);
-                    client_node = ft_malloc(sizeof(t_client));
-                    if (client_list.node_count == 0)
-                    {
-                        client_node->client_id = 0;
+                        node = lst_remove(&client_list, fd);
+                        send_leave(&client_list, node->id);
+                        FD_CLR(fd, &read_copy);
+                        free(node);
+                        close(fd);
                     }
                     else
                     {
-                        client_node->client_id = client_list.tail->client_id + 1;
+                        node = get_node(&client_list, fd);
+                        send_message(&client_list, buf, recv_size, node->id);
                     }
-                    client_node->client_socket_fd = client_socket;
-                    add_node_to_list(client_node, &client_list);
-                    sprintf(buf, "server: client %d just arrived\n", client_node->client_id);
-                    send_message_to_all_clients(client_node->client_id, buf, -1, &client_list, &remove_list, SERVER);
-                }
-                // Client sends message
-                else
-                {
-                    client_node = get_client_node(idx, client_list);
-                    recv_size = recv(idx, buf, BUF_SIZE, 0);
-                    if (recv_size == 0)
-                    {
-                        sprintf(buf, "server: client %d just left\n", client_node->client_id);
-                        send_message_to_all_clients(client_node->client_id, buf, -1, &client_list, &remove_list, SERVER);
-                        remove_node_from_list(client_node, &client_list);
-                        add_node_to_list(client_node, &remove_list);
-                        FD_CLR(idx, &read_set);
-                        continue;
-                    }
-                    client_message = extract_client_message(buf, recv_size);
-                    send_message_to_all_clients(client_node->client_id, client_message, recv_size, &client_list, &remove_list, CLIENT);
-                    free(client_message);
                 }
             }
         }
-
-        if (remove_list.node_count > 0)
-        {
-            clear_client_node(&remove_list);
-        }
+        read_origin = read_copy;
     }
 }
