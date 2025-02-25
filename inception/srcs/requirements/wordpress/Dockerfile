@@ -1,5 +1,5 @@
 # Base image
-FROM alpine:3.16
+FROM alpine:3.20
 
 # Install necessary packages
 RUN apk add --no-cache \
