@@ -10,6 +10,7 @@ services:
     restart: on-failure:3
     volumes:
       - wordpress_data:/var/www/html/wordpress
+      - nextjs_data:/var/www/html/nextjs_static
     networks:
       - my_server
 
@@ -64,6 +65,14 @@ services:
     networks:
       - my_server
 
+  nextjs:
+    container_name: nextjs
+    image: nextjs
+    build: ./requirements/bonus/nextjs
+    volumes:
+      - nextjs_data:/nextjs_static
+    restart: on-failure:3
+
 volumes:
   wordpress_data:
     driver: local
@@ -72,12 +81,21 @@ volumes:
       # device: /home/joonhan/data/wordpress
       device: ../data/wordpress
       o: bind
+
   mariadb_data:
     driver: local # Save in host OS (Available for other volume plugin)
     driver_opts:
       type: none # File system type (like tmpfs, shm, ramfs)
       # device: /home/joonhan/data/mysql
       device: ../data/mysql
+      o: bind
+
+  nextjs_data:
+    driver: local # Save in host OS (Available for other volume plugin)
+    driver_opts:
+      type: none # File system type (like tmpfs, shm, ramfs)
+      # device: /home/joonhan/data/nextjs
+      device: ../data/nextjs
       o: bind
 
 networks:
