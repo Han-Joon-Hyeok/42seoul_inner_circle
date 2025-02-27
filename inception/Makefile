@@ -8,6 +8,11 @@ all: hosts
 	@mkdir -p /home/joonhan/data/wordpress
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
+dev:
+	@mkdir -p ./data/mysql
+	@mkdir -p ./data/wordpress
+	@docker compose -f ./srcs/docker-compose.yml up -d --build
+
 up:
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
