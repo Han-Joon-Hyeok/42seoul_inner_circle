@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx:
@@ -39,18 +39,30 @@ services:
     env_file:
       - .env
 
+  redis:
+    container_name: redis
+    image: redis
+    build: ./requirements/bonus/redis
+    depends_on:
+      - wordpress
+    restart: on-failure:3
+    networks:
+      - my_server
+
 volumes:
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/joonhan/data/wordpress
+      # device: /home/joonhan/data/wordpress
+      device: ../data/wordpress
       o: bind
   mariadb_data:
     driver: local # Save in host OS (Available for other volume plugin)
     driver_opts:
       type: none # File system type (like tmpfs, shm, ramfs)
-      device: /home/joonhan/data/mysql
+      # device: /home/joonhan/data/mysql
+      device: ../data/mysql
       o: bind
 
 networks:
