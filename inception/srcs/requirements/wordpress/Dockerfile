@@ -39,7 +39,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     mv wp-cli.phar /usr/bin/wp
 
 # Copy php-fpm configuration file
-COPY ./conf/www.conf /etc/php8/php-fpm.d/
+COPY ./conf/www.conf /etc/php83/php-fpm.d/
 
 RUN chmod +x /usr/bin/dumb-init
 COPY ./tools/entrypoint.sh /entrypoint.sh
@@ -47,8 +47,10 @@ COPY ./tools/entrypoint.sh /entrypoint.sh
 # Expose port 9000 for php-fpm
 EXPOSE 9000
 
+WORKDIR /var/www/html/wordpress
+
 # Start dumb-init for PID 1
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 # Start php-fpm in the foreground
-CMD ["/bin/sh", "entrypoint.sh"]
+CMD ["/bin/sh", "/entrypoint.sh"]
