@@ -6,17 +6,20 @@ NC := "\033[0m"
 all: hosts
 	@mkdir -p /home/joonhan/data/mysql
 	@mkdir -p /home/joonhan/data/wordpress
+	@mkdir -p /home/joonhan/data/nextjs
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 dev:
 	@mkdir -p ./data/mysql
 	@mkdir -p ./data/wordpress
+	@mkdir -p ./data/nextjs
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 up:
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
+	@rm -rf ./data/mysql/* ./data/wordpress/* ./data/nextjs/*
 	@docker compose -f ./srcs/docker-compose.yml down
 
 re: prune
