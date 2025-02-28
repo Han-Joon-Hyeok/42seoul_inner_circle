@@ -83,6 +83,35 @@ services:
     networks:
       - my_server
 
+  prometheus:
+    container_name: prometheus
+    image: prometheus
+    build: ./requirements/bonus/prometheus
+    ports:
+      - 9090:9090
+    restart: on-failure:3
+    networks:
+      - monitoring_server
+  grafana:
+    container_name: grafana
+    image: grafana
+    build: ./requirements/bonus/grafana
+    ports:
+      - 3000:3000
+    restart: on-failure:3
+    networks:
+      - monitoring_server
+
+  node-exporter:
+    container_name: node-exporter
+    image: node-exporter
+    build: ./requirements/bonus/node-exporter
+    ports:
+      - 9100:9100
+    restart: on-failure:3
+    networks:
+      - monitoring_server
+
 volumes:
   wordpress_data:
     driver: local
@@ -110,4 +139,6 @@ volumes:
 
 networks:
   my_server:
+    driver: bridge
+  monitoring_server:
     driver: bridge
